@@ -15,5 +15,5 @@
 - Static assets use WhiteNoise; only public image prefixes are served by the image endpoint. Sensitive documents and customer uploads do not share this endpoint.
 - No full-page cache yet: this avoids stale content and accidental caching of sessions/forms. Add a measured public-page caching layer after defining invalidation.
 
-Wagtail is the page editor; enquiry management currently uses Django admin, linked from Wagtail.
-This is not yet one fully unified custom dashboard.
+Wagtail manages both revisioned pages and enquiries through a permission-controlled SnippetViewSet; Django admin remains a legacy alternative. Brand settings also control nested menus, footer links, selected fonts, motion intensity, verification tokens and the enquiry launch switch.
+ImportedImage records preserve source identity when editors rename approved images. ParentalManyToManyField relations keep service/sector associations inside page revisions. Dedicated editorial groups and a publisher-approval workflow are configured by setup_roles.

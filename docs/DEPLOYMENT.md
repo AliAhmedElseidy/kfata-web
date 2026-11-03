@@ -2,9 +2,7 @@
 
 ## Current state
 
-No VPS inspection or deployment was possible from the authoring environment. The SSH connection to port 22 failed with `Network is unreachable` before authentication. No supplied password was used, saved or committed.
-
-An execution environment with authorized SSH access is required. Keep credentials in that environment's secure credential facility; do not put them in terminal arguments, repository files, chat transcripts or CI logs.
+The live review deployment uses /opt/kfata-web, independent kfata-web Compose services, loopback 8097, existing host Nginx and existing Certbot. See [HANDOVER.md](HANDOVER.md) for actual results, credential handoff, backups and remaining launch inputs. Indexing and enquiries stay disabled. The instructions below describe the operational procedure; they are not evidence of an unexecuted step.
 
 ## 1. Read-only inventory
 

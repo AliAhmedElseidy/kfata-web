@@ -1,41 +1,34 @@
-# Validation and remaining work
+# Validation — 2026-11-03
 
-## Verified in the authoring environment (2026-11-03)
+## Executed
 
-- Django system check: passed.
-- Migration drift check: no changes detected.
-- Fresh migrations: passed using a temporary SQLite database.
-- Initial content import and repeat import: passed; edited content preserved.
-- 16 Django tests: passed, including bilingual pages, draft protection, sitemap, metadata, CSRF, enquiry persistence when SMTP fails, invalid upload rejection, image re-encoding, throttling, admin edit screens, authorized/private attachment download, and image-free initialization.
-- Static collection with compressed manifest storage: passed (217 static files, 631 post-processed).
-- Python compilation and shell-script syntax: passed.
-- Production deployment system check: no errors; two intentional HSTS warnings for includeSubDomains/preload. They remain off until TLS and host scope are audited.
+- Baseline GitHub Actions on 02c7b2e passed. Actions on implementation commit 886100a passed, including its Docker build: https://github.com/AliAhmedElseidy/kfata-web/actions/runs/41693875195 . Workflow changes were not pushed: the available Git credential lacks workflow scope. PostgreSQL integration was executed on the VPS instead.
+- 21 Django tests passed on PostgreSQL 16 (48.778s) and SQLite (21.501s). Raw reports: [PostgreSQL](validation/postgresql.txt), [SQLite](validation/sqlite.txt). Coverage includes public pages/translation links, all generated published URLs, drafts, editor/publisher permissions, Wagtail enquiry screens, protected attachments, CSRF, honeypot, invalid upload rejection, image re-encoding, submission throttling, SMTP failure persistence, related projects, distinct filters, metadata and safe repeated initialization.
+- Fresh migrations, production migrations, `makemigrations --check --dry-run`, Django checks, compressed static collection and Docker image build passed. Production checks have only the two deliberately disabled HSTS includeSubDomains/preload warnings. App runs as UID 10001 under Gunicorn; Compose web/db are healthy and private volumes persist across web recreation.
+- Read-only VPS audit ran before mutation: Ubuntu 24.04, six CPUs, 11 GiB RAM, about 5.2 GiB available, 66 GiB free disk. Host Nginx owns 80/443; existing Certbot timer was reused. Existing Mailcow and ERPNext containers/networks were not stopped, reconfigured or pruned.
+- A record already pointed to 144.91.120.177; no AAAA record was returned. DNS/mail records were not changed. KFATA listens only on loopback 8097.
+- Public HTTPS works, certificate issuance and a real production renewal succeeded; the domain-specific deploy hook validated and reloaded Nginx. Staging ACME dry runs failed with connection reset/timeouts, so those were not counted as success.
+- Backup and isolated PostgreSQL/media restore passed. 26 published ContentPages and zero enquiries matched production. Restored /ar/, /en/ and /admin/login/ returned 200. `tar --diff` against the restored archive passed. Drill project is stopped with its separate volumes retained. Real enquiry records/private customer attachments did not exist; attachment access and re-encoding were exercised using synthetic Django test data.
+- Daily 03:15 Riyadh backup timer installed; completed local snapshots retain 14 days. One manual off-server copy on the owner's Windows computer was checked against both SHA-256 hashes. Recurring off-server transport is not configured.
+- Mailcow public endpoint returned 200 and ERPNext returned 302 before and after the work. Existing stacks were not restarted by this session.
 
-## Not verified / external blockers
+## Browser observations
 
-- Four initial project images were explicitly approved for this public GitHub repository on 2026-11-03 and are now included. The source PDFs and other unreviewed material remain excluded.
-- VPS access: SSH TCP connection returned `Network is unreachable` before authentication. Server inventory did not run.
-- DNS, TLS issuance/renewal, live domain, ingress routing and coexistence with Mailcow/ERPNext: unverified and unchanged.
-- Docker image/Compose runtime: Docker is not available in the authoring environment. CI includes an image build, but its result has not been observed yet.
-- PostgreSQL integration and backup restoration: not run locally.
-- Browser visual/interaction QA: preview infrastructure cannot launch this environment's Python runtime. No screenshots or browser results are claimed.
-- Mobile performance/Core Web Vitals: not measured.
-- Real SMTP, Google/Bing verification and production indexing: not configured.
+Real Codex in-app Chromium on the current Windows machine, unthrottled current network, live HTTPS origin. Screenshots are in [preview](preview/). Arabic RTL and English LTR, images, language switching, project navigation and the disabled enquiry notice were inspected. No broken loaded images or horizontal overflow were found at 360, 768 and 1440px.
 
-## Scope remaining before the requested full handover
+Local PerformanceObserver values, not Lighthouse scores or field data:
 
-This is an initial implementation, not the complete commissioned website.
+| Visit | Width | LCP |
+| --- | ---: | ---: |
+| Initial Arabic navigation (cache state not controlled) | 1280 | 2612ms |
+| Subsequent Arabic navigation | 360 | 1164ms |
+| Subsequent Arabic navigation | 768 | 756ms |
+| Subsequent Arabic navigation | 1440 | 808ms |
 
-- Review and import the rest of the company portfolio, project metadata and approved legal/public certificate content.
-- Confirm legal company spelling, contact data, original logo and contradictory profile statistics.
-- Complete privacy notice before accepting real enquiries; publish quality/safety/certificate/news/careers content only with approved information.
-- Unify enquiries fully into Wagtail if desired (currently linked Django admin).
-- Implement audited scanning/sanitization before enabling PDF customer uploads; currently only re-encoded JPEG/PNG are accepted.
-- Add remaining approved editor blocks/options: optional hero video, metrics, sector-related project selections, per-page social image, breadcrumb structured data, related projects, nested menus, editable footer navigation, font choices and animation intensity. These are not yet implemented.
-- Extend the initial introduction animation to the approved architectural-logo treatment after receiving the original logo.
-- Configure editorial publishing groups and test non-admin editing workflows.
-- Add measured cache strategy and stricter ingress abuse controls if traffic requires them.
-- Choose and test off-server backup storage, restore procedure, scheduling and retention.
-- Complete browser QA, accessibility and performance review, Docker/PostgreSQL validation and shared-server audit, then perform HTTPS deployment and live acceptance tests.
+No layout-shift entries were recorded in these inspected visits; this is a limited observation, not a certified CLS assessment. A representative INP distribution was not measured. Cold-cache slow-network mobile testing and real-user Core Web Vitals remain outstanding; the first observed LCP slightly exceeded 2.5 seconds. Do not claim all performance targets were met.
 
-Do not mark the project complete, production-ready or deployed until these checks and the agreed remaining scope are resolved.
+Core content/forms/links are server-rendered, and source code respects reduced motion and fails open if animation/storage APIs fail. A browser session with JavaScript disabled and an OS-level reduced-motion toggle was not separately executed. Keyboard Tab moved from the brand link to About KFATA with a visible focus outline; Enter navigation worked. Computed solid-color contrast ratios were 7.88:1 (gold/background), 8.63:1 (muted text/panel), and 15.72:1 (body text/background). Image-overlay contrast, full screen-reader and exhaustive keyboard audit remain outstanding. No formal accessibility certification is claimed.
+
+## Remaining launch blockers
+
+Approved company contact/retention/privacy information, original logo and source PDFs are missing. Enquiries and indexing remain off. Title-only/unsupported content remains draft, including empty sectors, quality/safety, certifications, news, careers and privacy. Customer PDF upload stays disabled. SMTP, account-level search verification, automated off-server backup transport and the remaining editorial source review must be completed with owner input. See [handover](HANDOVER.md).

@@ -5,12 +5,9 @@ Intended production origin: **https://kfata.elsaidy.org**.
 
 ## Delivery status
 
-This is the first implementation for review, **not a verified production deployment**.
-SSH to the supplied VPS was unavailable from the authoring environment (`Network is unreachable`).
-No server configuration, Mailcow, ERPNext, DNS or TLS configuration has been changed.
-The application tests and their results are documented in `docs/VALIDATION.md`.
-Browser QA and production performance measurements remain outstanding.
+The site is running on **https://kfata.elsaidy.org** with independent Docker/PostgreSQL services and valid HTTPS. This is a review deployment: indexing and real enquiry collection remain disabled until approved company contacts, privacy terms and source content are supplied.
 
+See [handover](docs/HANDOVER.md), [validation](docs/VALIDATION.md) and [content review](docs/CONTENT_REVIEW.md) for verified results and remaining external inputs. Mailcow and ERPNext were not restarted or reconfigured.
 ## Local development (Python 3.12)
 
 ```sh
@@ -27,7 +24,7 @@ python manage.py runserver
 The four approved initial project images are included; see `assets/README.md` for provenance. The importer also supports an image-free setup.
 
 Visit `/ar/`, `/en/`, `/admin/` (content), `/django-admin/home/enquiry/` (enquiries).
-The Wagtail sidebar links to enquiry management for users with the required permission.
+Enquiries are managed directly inside Wagtail; the legacy Django admin remains available for authorized administrators.
 Development uses SQLite and a console email backend; production requires PostgreSQL.
 Use `DATABASE_URL=sqlite:////tmp/kfata-dev.sqlite3` if the local workspace filesystem does not support SQLite locking correctly.
 

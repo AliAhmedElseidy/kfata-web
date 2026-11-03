@@ -9,12 +9,18 @@ exec 9>./operations-backup.lock
 flock -n 9 || { echo 'A KFATA backup is already running.' >&2; exit 1; }
 # Stop only KFATA writers for a consistent database/files snapshot.
 was_running="$(docker compose ps --status running --services web)"
+web_image="$(docker inspect --format '{{.Image}}' "$(docker compose ps --all -q web)")"
 restore_web() { if [ "$was_running" = web ]; then docker compose start web >/dev/null; fi; }
 trap restore_web EXIT
 docker compose stop web >/dev/null
 docker compose exec -T db sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > "$backup_dir/database.dump"
 docker compose run --rm --no-deps -T web tar -C /app -czf - media private-media > "$backup_dir/files.tar.gz"
-git rev-parse HEAD > "$backup_dir/commit.txt"
+if [ -f operations/deployed-commit ]; then
+    cat operations/deployed-commit > "$backup_dir/commit.txt"
+else
+    git rev-parse HEAD > "$backup_dir/commit.txt"
+fi
+printf '%s\n' "$web_image" > "$backup_dir/image-id.txt"
 (cd "$backup_dir" && sha256sum database.dump files.tar.gz > SHA256SUMS)
 touch "$backup_dir/.complete"
 # Retain 14 days of completed local snapshots; never follow paths outside the backup root.

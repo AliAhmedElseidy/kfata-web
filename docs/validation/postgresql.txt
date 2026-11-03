@@ -1,0 +1,17 @@
+ Container kfata-web-db-1  Running
+Found 21 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+.Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+....KFATA roles configured. Assign accounts deliberately; superusers manage users and groups.
+...........Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+.Enquiry notification failed for enquiry 3
+....
+----------------------------------------------------------------------
+Ran 21 tests in 48.778s
+
+OK
+Destroying test database for alias 'default'...

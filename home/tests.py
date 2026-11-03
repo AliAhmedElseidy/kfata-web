@@ -126,6 +126,7 @@ class WebsiteTests(TestCase):
         self.assertNotContains(self.client.get('/quote/'),'<form')
         self.assertEqual(self.client.post('/quote/',self.valid_data()).status_code,503)
         self.assertFalse(Enquiry.objects.exists())
+        self.assertContains(self.client.get('/quote/?lang=en'),'href="/en/projects/"')
 
     def test_editor_draft_and_publisher_permissions(self):
         from django.contrib.auth.models import Group

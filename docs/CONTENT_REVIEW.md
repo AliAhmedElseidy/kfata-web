@@ -17,3 +17,6 @@ Sources: the two company PDFs supplied in the conversation, visually reviewed as
 - No Google/Bing verification or submissions, DNS changes, GPT/Gemini discovery submissions or guaranteed indexing claims have occurred.
 
 The user explicitly approved publication of the four initial extracted project images to this public GitHub repository on 2026-11-03. This resolves the earlier automatic-review block for these files only; source PDFs and additional unreviewed images/documents remain excluded.
+
+
+2026-11-03 follow-up: the original PDFs were not present in this environment. Public Arabic legal spelling is withheld in favor of KFATA. Empty sector pages/indexes were unpublished; legal, quality, certificate, news and careers drafts remain unpublished. Real enquiry collection and indexing are disabled. The infrastructure is live; see HANDOVER.md for the exact operational state.

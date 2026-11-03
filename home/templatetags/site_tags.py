@@ -10,8 +10,9 @@ def cards(locale, kind, count=6):
     return ContentPage.objects.live().public().filter(locale=locale, kind=kind).select_related('hero_image').order_by('-first_published_at')[:count]
 
 @register.simple_tag
-def navigation(page):
-    return ContentPage.objects.live().public().filter(locale=page.locale, depth=3).order_by('path')
+def navigation(page=None, language='ar'):
+    locale = {'locale':page.locale} if page else {'locale__language_code':language}
+    return ContentPage.objects.live().public().filter(depth=3, **locale).order_by('path')
 
 @register.simple_tag
 def organization_json(brand, lang):
