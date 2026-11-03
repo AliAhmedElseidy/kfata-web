@@ -1,0 +1,1 @@
+{% load site_tags %}<section class="section reveal"><div class="section-title"><p class="eyebrow">SELECTED / KFATA</p><h2>{{ value.title }}</h2></div>{% cards page.locale value.kind value.count as entries %}<div class="project-grid">{% for item in entries %}{% include 'home/card.html' %}{% endfor %}</div></section>

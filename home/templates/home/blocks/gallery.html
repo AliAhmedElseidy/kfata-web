@@ -1,0 +1,1 @@
+{% load wagtailimages_tags %}<section class="section reveal">{% if value.title %}<h2>{{ value.title }}</h2>{% endif %}<div class="gallery">{% for item in value.images %}<figure>{% image item.image width-1200 loading='lazy' %}{% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}</figure>{% endfor %}</div></section>
