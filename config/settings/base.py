@@ -216,3 +216,6 @@ MIDDLEWARE += ['home.middleware.IndexingMiddleware']
 CACHES = {'default': {'BACKEND': 'django.core.cache.backends.db.DatabaseCache', 'LOCATION': 'kfata_cache'}}
 
 TRUSTED_PROXY_NETWORKS = [v.strip() for v in os.environ.get('TRUSTED_PROXY_NETWORKS', '').split(',') if v.strip()]
+ENQUIRY_RETENTION_DAYS = int(os.environ.get('ENQUIRY_RETENTION_DAYS','90'))
+if ENQUIRY_RETENTION_DAYS < 1:
+    raise ValueError('ENQUIRY_RETENTION_DAYS must be positive.')

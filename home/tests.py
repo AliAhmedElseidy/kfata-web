@@ -23,7 +23,7 @@ class WebsiteTests(TestCase):
     def setUp(self):
         cache.clear()
     def test_public_pages_and_languages(self):
-        for url in ['/ar/','/en/','/ar/projects/','/en/services/','/ar/projects/anb-golden-belt/','/quote/?lang=ar','/quote/?lang=en']:
+        for url in ['/ar/','/en/','/ar/projects/','/en/services/','/ar/projects/residential-villas/','/quote/?lang=ar','/quote/?lang=en']:
             with self.subTest(url=url):
                 r=self.client.get(url)
                 self.assertEqual(r.status_code,200)
@@ -154,12 +154,59 @@ class WebsiteTests(TestCase):
         self.assertEqual(Enquiry.objects.count(),1)
 
     def test_related_projects_and_structured_data(self):
+        parent=ContentPage.objects.get(slug='projects',locale__language_code='en')
+        peer=ContentPage(title='Related test project',slug='related-test',locale=parent.locale,kind='project',sector='Banking')
+        parent.add_child(instance=peer);peer.save_revision().publish()
         r=self.client.get('/en/projects/anb-new-tower/')
         self.assertContains(r,'Related projects')
         self.assertContains(r,'BreadcrumbList')
-        self.assertContains(r,'ANB — Al Hizam Al Thahabi')
+        self.assertContains(r,'Related test project')
+        self.assertNotContains(r,'ANB — Al Hizam Al Thahabi')
         r=self.client.get('/en/projects/')
         self.assertEqual(len(r.context['sectors']),len(set(r.context['sectors'])))
+
+    def test_source_import_preserves_edits_and_keeps_extra_projects_draft(self):
+        call_command('import_profile_drafts',verbosity=0)
+        total=Page.objects.count()
+        self.assertEqual(ContentPage.objects.filter(slug='school-muzahmiyah').count(),2)
+        self.assertFalse(ContentPage.objects.filter(slug='school-muzahmiyah',live=True).exists())
+        self.assertEqual(self.client.get('/ar/projects/anb-golden-belt/').status_code,404)
+        brand=BrandSettings.load();logo=brand.logo_id;self.assertIsNotNone(logo)
+        page=ContentPage.objects.get(slug='about',locale__language_code='ar')
+        page.body=[('heading',{'title':'Owner content','eyebrow':'','text':'<p>Keep this copy.</p>'})]
+        page.save_revision().publish()
+        call_command('import_profile_drafts',verbosity=0)
+        self.assertEqual(Page.objects.count(),total)
+        self.assertContains(self.client.get('/ar/about/'),'Owner content')
+        self.assertEqual(BrandSettings.load().logo_id,logo)
+
+    def test_retention_deletes_expired_records_and_private_files_only_on_apply(self):
+        from datetime import timedelta
+        from django.utils import timezone
+        from django.core.files.storage import FileSystemStorage
+        field=Enquiry._meta.get_field('attachment');original=field.storage
+        with tempfile.TemporaryDirectory() as directory:
+            field.storage=FileSystemStorage(location=directory)
+            try:
+                old=Enquiry.objects.create(name='Retention test',email='test@example.test',phone='1',message='Synthetic',attachment=SimpleUploadedFile('proof.jpg',b'test-only'))
+                Enquiry.objects.filter(pk=old.pk).update(created_at=timezone.now()-timedelta(days=91))
+                recent=Enquiry.objects.create(name='Recent test',email='test@example.test',phone='1',message='Synthetic')
+                name=old.attachment.name
+                call_command('purge_enquiries',verbosity=0)
+                self.assertTrue(field.storage.exists(name));self.assertTrue(Enquiry.objects.filter(pk=old.pk).exists())
+                call_command('purge_enquiries',apply=True,verbosity=0)
+                self.assertFalse(field.storage.exists(name));self.assertFalse(Enquiry.objects.filter(pk=old.pk).exists())
+                self.assertTrue(Enquiry.objects.filter(pk=recent.pk).exists())
+            finally: field.storage=original
+
+    def test_approved_launch_has_bilingual_privacy_and_records_consent_version(self):
+        call_command('configure_reviewed_launch',hosting_country='Saudi Arabia',enable_enquiries=True,verbosity=0)
+        for lang in ['ar','en']:
+            self.assertContains(self.client.get(f'/{lang}/privacy/'),'90')
+            self.assertContains(self.client.get('/quote/?lang='+lang),f'/{lang}/privacy/')
+        brand=BrandSettings.load();brand.privacy_version='test-version';brand.save()
+        self.client.post('/quote/',self.valid_data())
+        self.assertEqual(Enquiry.objects.get().privacy_version,'test-version')
 
 class NoSourceImagesTests(TestCase):
     def test_seed_and_home_work_without_private_source_images(self):

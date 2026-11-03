@@ -25,7 +25,7 @@ class EnquiryViewSet(SnippetViewSet):
     list_display = ['name', 'company', 'created_at', 'status', 'notification_sent']
     list_filter = ['status', 'notification_sent', 'created_at']
     search_fields = ['name', 'company', 'email', 'phone']
-    panels = [FieldPanel(f, read_only=True) for f in ['created_at','language','name','company','email','phone','service','location','message','notification_sent']]
+    panels = [FieldPanel(f, read_only=True) for f in ['created_at','language','name','company','email','phone','service','location','message','privacy_version','notification_sent']]
     panels += [SecureAttachmentPanel('secure_attachment', icon='download', heading='المرفق / Attachment', help_text='Private; authorized downloads only.', read_only=True), FieldPanel('status'), FieldPanel('notes')]
     copy_view_enabled = False
     @property

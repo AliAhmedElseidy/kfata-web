@@ -22,6 +22,7 @@ class BrandSettings(BaseGenericSetting):
     favicon = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     accent = models.CharField(max_length=7, default='#c7a875', validators=[RegexValidator(r'^#[0-9a-fA-F]{6}$')])
     phone = models.CharField(max_length=30, blank=True)
+    secondary_phone = models.CharField(max_length=30, blank=True)
     whatsapp = models.CharField(max_length=20, blank=True, validators=[RegexValidator(r'^\d*$')], help_text='Country code and digits only; no + or spaces.')
     email = models.EmailField(blank=True)
     address_ar = models.CharField(max_length=250, blank=True)
@@ -34,6 +35,7 @@ class BrandSettings(BaseGenericSetting):
     font = models.CharField(max_length=10, choices=[('tahoma','Tahoma'),('arial','Arial'),('serif','Georgia')], default='tahoma')
     background = models.CharField(max_length=7, default='#10191c', validators=[RegexValidator(r'^#[0-9a-fA-F]{6}$')])
     enquiries_enabled = models.BooleanField(default=False, help_text='Enable only after publishing reviewed privacy notices and company contact information.')
+    privacy_version = models.CharField(max_length=20, default='2026-11-03')
     google_verification = models.CharField(max_length=150, blank=True)
     bing_verification = models.CharField(max_length=150, blank=True)
     allow_ai_training = models.BooleanField(default=False, help_text='Independent of search discovery; controls GPTBot and Google-Extended.')
@@ -46,6 +48,8 @@ class BrandSettings(BaseGenericSetting):
     ]))], blank=True)
     panels = [FieldPanel(f) for f in ['company_ar', 'company_en', 'logo', 'favicon', 'accent', 'phone', 'whatsapp', 'email', 'address_ar', 'address_en', 'map_url', 'linkedin', 'animations', 'opening_animation', 'menu']]
     panels += [FieldPanel(f) for f in ['motion_level','font','background','footer_menu','enquiries_enabled','google_verification','bing_verification','allow_ai_training']]
+    panels += [FieldPanel('secondary_phone')]
+    panels += [FieldPanel('privacy_version')]
     class Meta:
         verbose_name = 'هوية الموقع والتواصل / Brand and contact'
 
@@ -115,6 +119,7 @@ class Enquiry(models.Model):
     status = models.CharField(max_length=15, default='new', choices=[('new','جديد / New'),('contacted','تم التواصل / Contacted'),('closed','مغلق / Closed')])
     notes = models.TextField(blank=True)
     notification_sent = models.BooleanField(default=False)
+    privacy_version = models.CharField(max_length=20, default='2026-11-03', editable=False)
     def __str__(self):
         return f'{self.name} — {self.created_at:%Y-%m-%d}'
     class Meta:

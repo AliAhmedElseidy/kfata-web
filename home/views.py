@@ -62,6 +62,7 @@ def quote(request):
         if form.is_valid():
             enquiry = form.save(commit=False)
             enquiry.language = lang
+            enquiry.privacy_version = brand.privacy_version
             enquiry.save()
             if settings.EMAIL_HOST and settings.ENQUIRY_EMAIL:
                 try:

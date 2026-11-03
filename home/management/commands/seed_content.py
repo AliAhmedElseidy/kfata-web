@@ -83,14 +83,16 @@ class Command(BaseCommand):
         for slug,at,et in [('banking','القطاع المصرفي','Banking'),('commercial','التجاري','Commercial'),('education','التعليمي','Education'),('industrial','الصناعي','Industrial'),('residential','السكني','Residential'),('public-spaces','الطرق والمساحات العامة','Roads & public spaces')]:
             self.pair(parents['sectors'],ar,en,slug,at,et,kind='sector',publish=False)
         for slug,at,et,key,sector,client in [('anb-golden-belt','البنك العربي الوطني — الحزام الذهبي','ANB — Al Hizam Al Thahabi','anb-facade',('مصرفي','Banking'),'ANB'),('anb-new-tower','البنك العربي الوطني — البرج الجديد','ANB — New Tower','anb-tower',('مصرفي','Banking'),'ANB'),('residential-villas','الفلل السكنية','Residential villas','residential',('سكني','Residential'),'')]:
-            pages=self.pair(parents['projects'],ar,en,slug,at,et,kind='project',hero_image=images[key],client=client,sectors=sector)
+            pages=self.pair(parents['projects'],ar,en,slug,at,et,kind='project',hero_image=images[key],client=client,sectors=sector,publish=slug!='anb-golden-belt')
             for p in pages:
                 if p.live and not p.has_unpublished_changes and not p.hero_image_id and images[key]:
                     p.hero_image=images[key];p.save_revision().publish()
             if key=='anb-facade' and images['anb-interior']:
                 for p in pages:
                     if getattr(p, '_seed_created', False) and not p.body:
-                        p.body=[('gallery',{'title':'','images':[{'image':images['anb-interior'],'caption':''}]})];p.save_revision().publish()
+                        p.body=[('gallery',{'title':'','images':[{'image':images['anb-interior'],'caption':''}]})]
+                        revision=p.save_revision()
+                        if p.live: revision.publish()
         # Editorial/legal sections remain drafts pending company-approved information.
         for slug,at,et in [('quality-safety','الجودة والسلامة','Quality & safety'),('certifications','الشهادات والاعتمادات','Certifications'),('news','الأخبار والمعرفة','News & insights'),('careers','الوظائف','Careers'),('privacy','سياسة الخصوصية','Privacy policy')]:
             self.pair([home,english],ar,en,slug,at,et,kind='page',publish=False)

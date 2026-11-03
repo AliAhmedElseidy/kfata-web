@@ -41,7 +41,10 @@
       sessionStorage.setItem('kfata-intro', '1');
       const opening = document.createElement('div');
       opening.className = 'opening-mark'; opening.setAttribute('aria-hidden', 'true');
-      const mark = document.createElement('span'); mark.textContent = 'KFΛTA'; opening.append(mark);
+      const original = document.querySelector('.brand img');
+      const mark = original ? original.cloneNode(true) : document.createElement('span');
+      if (!original) mark.textContent = 'KFΛTA';
+      opening.append(mark);
       document.body.append(opening); setTimeout(() => opening.remove(), 1500);
     }
   } catch (_) { /* Storage access must never block the site. */ }
