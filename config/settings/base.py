@@ -197,7 +197,7 @@ WAGTAILADMIN_BASE_URL = PUBLIC_BASE_URL
 DATABASES = {'default': _env.db('DATABASE_URL', default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'))}
 PRIVATE_MEDIA_ROOT = Path(os.environ.get('PRIVATE_MEDIA_ROOT', BASE_DIR / 'private-media'))
 MEDIA_ROOT = Path(os.environ.get('MEDIA_ROOT', BASE_DIR / 'media'))
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'home.mail.ConfiguredSMTPBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
@@ -217,5 +217,7 @@ CACHES = {'default': {'BACKEND': 'django.core.cache.backends.db.DatabaseCache', 
 
 TRUSTED_PROXY_NETWORKS = [v.strip() for v in os.environ.get('TRUSTED_PROXY_NETWORKS', '').split(',') if v.strip()]
 ENQUIRY_RETENTION_DAYS = int(os.environ.get('ENQUIRY_RETENTION_DAYS','90'))
+SMTP_ENCRYPTION_KEY = os.environ.get('SMTP_ENCRYPTION_KEY','')
+OUTBOUND_EMAIL_DISABLED = os.environ.get('OUTBOUND_EMAIL_DISABLED','false').lower()=='true'
 if ENQUIRY_RETENTION_DAYS < 1:
     raise ValueError('ENQUIRY_RETENTION_DAYS must be positive.')

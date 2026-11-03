@@ -1,8 +1,8 @@
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 from wagtail import blocks
 from .storage import private_storage
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, HelpPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.fields import StreamField
 from wagtail.models import Page
@@ -131,3 +131,19 @@ class Enquiry(models.Model):
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'طلب عرض سعر / Enquiry'
+
+
+@register_setting
+class SMTPSettings(BaseGenericSetting):
+    delivery_mode = models.CharField(max_length=15,default='off',choices=[('off','متوقف / Off'),('panel','إعدادات اللوحة / Control panel'),('environment','إعدادات البيئة / Environment')])
+    host = models.CharField(max_length=253,blank=True,validators=[RegexValidator(r'^[a-zA-Z0-9][a-zA-Z0-9.-]*$')],help_text='Hostname only, without smtp:// or https://.')
+    port = models.PositiveIntegerField(default=587,validators=[MinValueValidator(1),MaxValueValidator(65535)])
+    transport = models.CharField(max_length=10,default='starttls',choices=[('starttls','STARTTLS'),('ssl','TLS / SSL')])
+    username = models.CharField(max_length=254,blank=True)
+    password_ciphertext = models.TextField(blank=True,editable=False)
+    sender = models.EmailField(default='info@kfata.com',blank=True)
+    recipient = models.EmailField(default='info@kfata.com',blank=True,help_text='Authorized internal recipient. Notifications contain only a reference and admin link.')
+    panels = [FieldPanel(f) for f in ['delivery_mode','host','port','transport','username','password_saved','smtp_password','clear_password','sender','recipient']]
+    panels += [HelpPanel(template='home/admin/smtp_test.html')]
+    class Meta:
+        verbose_name = 'البريد الصادر / Outgoing mail (SMTP)'

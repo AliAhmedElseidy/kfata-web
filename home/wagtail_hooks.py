@@ -5,6 +5,8 @@ from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail.permission_policies import ModelPermissionPolicy
 from .models import Enquiry
+from wagtail import hooks
+from django.urls import path
 
 class SecureAttachmentPanel(FieldPanel):
     def format_value_for_display(self, value):
@@ -39,3 +41,8 @@ def secure_attachment(self):
 
 Enquiry.secure_attachment = property(secure_attachment)
 register_snippet(EnquiryViewSet)
+
+@hooks.register('register_admin_urls')
+def smtp_test_urls():
+    from .views import smtp_test
+    return [path('settings/mail-test/',smtp_test,name='kfata_smtp_test')]

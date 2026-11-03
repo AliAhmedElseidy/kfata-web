@@ -10,12 +10,31 @@ from django.core.mail import send_mail
 from django.db import connection
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
-from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
+from django.views.decorators.debug import sensitive_post_parameters
+from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.utils.crypto import salted_hmac
 from .forms import EnquiryForm
 from .models import Enquiry, BrandSettings, ContentPage
+from .mail import notification_route
 logger = logging.getLogger(__name__)
+
+@login_required(login_url='/admin/login/')
+@permission_required('home.change_smtpsettings',raise_exception=True)
+@require_POST
+@never_cache
+@sensitive_post_parameters()
+def smtp_test(request):
+    try:
+        route=notification_route()
+        if not route: raise ValueError('disabled')
+        sent=send_mail('KFATA SMTP test','This is a requested configuration test. No customer data is included.',route[0],[route[1]])
+        if not sent: raise ValueError('not accepted')
+        messages.success(request,'تم إرسال رسالة الاختبار / Test email accepted for delivery.')
+    except Exception:
+        messages.error(request,'تعذر إرسال الاختبار. راجع إعدادات الحساب والتشفير والمنفذ. / Test delivery failed; check the account, TLS mode and port.')
+    return redirect(reverse('wagtailsettings:edit',args=['home','smtpsettings']))
 
 @require_GET
 def health(request):
@@ -66,12 +85,13 @@ def quote(request):
             enquiry.language = lang
             enquiry.privacy_version = brand.privacy_version
             enquiry.save()
-            if settings.EMAIL_HOST and settings.ENQUIRY_EMAIL:
-                try:
-                    send_mail('KFATA: new enquiry', f'A new enquiry #{enquiry.pk} is available in the admin. Sign in to review it.', settings.DEFAULT_FROM_EMAIL,[settings.ENQUIRY_EMAIL])
-                    Enquiry.objects.filter(pk=enquiry.pk).update(notification_sent=True)
-                except Exception:
-                    logger.warning('Enquiry notification failed for enquiry %s', enquiry.pk)
+            try:
+                route=notification_route()
+                if route:
+                    sent=send_mail('KFATA: new enquiry', f'A new enquiry #{enquiry.pk} is available. Sign in: {settings.PUBLIC_BASE_URL}/admin/snippets/home/enquiry/edit/{enquiry.pk}/',route[0],[route[1]])
+                    if sent: Enquiry.objects.filter(pk=enquiry.pk).update(notification_sent=True)
+            except Exception:
+                logger.warning('Enquiry notification failed for enquiry %s', enquiry.pk)
             messages.success(request, 'تم استلام طلبك / Your enquiry has been received.')
             return redirect('/quote/?lang=' + lang)
     return render(request, 'home/quote.html', {'form':form, 'lang':lang, 'privacy':privacy})

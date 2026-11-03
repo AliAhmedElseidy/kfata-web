@@ -65,10 +65,13 @@ class WebsiteTests(TestCase):
     @override_settings(EMAIL_HOST='smtp.example.test',ENQUIRY_EMAIL='inbox@example.test')
     @patch('home.views.send_mail',side_effect=OSError('SMTP offline'))
     def test_smtp_failure_keeps_enquiry(self,_):
+        from .models import SMTPSettings
+        config=SMTPSettings.load();config.delivery_mode='environment';config.save()
         r=self.client.post('/quote/',self.valid_data())
         self.assertEqual(r.status_code,302)
         self.assertEqual(Enquiry.objects.count(),1)
         self.assertFalse(Enquiry.objects.first().notification_sent)
+        _.assert_called_once()
     def test_spam_and_invalid_files_rejected(self):
         data=self.valid_data();data['website']='spam';self.client.post('/quote/',data)
         self.assertFalse(Enquiry.objects.exists())
@@ -232,3 +235,83 @@ class NoSourceImagesTests(TestCase):
             call_command('seed_content',verbosity=0)
             self.assertEqual(self.client.get('/ar/').status_code,200)
             self.assertEqual(self.client.get('/en/').status_code,200)
+
+
+from cryptography.fernet import Fernet
+
+@override_settings(SMTP_ENCRYPTION_KEY=Fernet.generate_key().decode())
+class SMTPControlTests(TestCase):
+    def data(self):
+        return {'delivery_mode':'panel','host':'smtp.example.test','port':587,'transport':'starttls','username':'smtp-user@example.test','smtp_password':'synthetic-smtp-password-only','sender':'sender@example.test','recipient':'internal@example.test'}
+
+    def test_password_encrypted_preserved_and_clearable(self):
+        from .models import SMTPSettings
+        from .smtp_forms import SMTPSettingsForm
+        from .mail import decrypt_secret
+        form=SMTPSettingsForm(self.data(),instance=SMTPSettings.load())
+        self.assertTrue(form.is_valid(),form.errors)
+        config=form.save();token=config.password_ciphertext
+        self.assertNotIn(self.data()['smtp_password'],str(config.__dict__))
+        self.assertEqual(decrypt_secret(token),self.data()['smtp_password'])
+        data=self.data();data['smtp_password']=''
+        form=SMTPSettingsForm(data,instance=config);self.assertTrue(form.is_valid(),form.errors)
+        self.assertEqual(form.save().password_ciphertext,token)
+        data.update(delivery_mode='off',clear_password=True)
+        form=SMTPSettingsForm(data,instance=config);self.assertTrue(form.is_valid(),form.errors)
+        self.assertEqual(form.save().password_ciphertext,'')
+
+    def test_settings_are_owner_only_and_never_echo_secret(self):
+        from django.contrib.auth.models import Group
+        from django.urls import reverse
+        from .models import SMTPSettings
+        from .smtp_forms import SMTPSettingsForm
+        call_command('setup_roles',verbosity=0)
+        user=get_user_model().objects.create_user('mail-manager',password=None,is_staff=True)
+        user.groups.add(Group.objects.get(name='KFATA Managers'))
+        self.client.force_login(user)
+        url=reverse('wagtailsettings:edit',args=['home','smtpsettings'])
+        denied=self.client.get(url,follow=True)
+        self.assertFalse(denied.status_code==200 and b'name="smtp_password"' in denied.content)
+        owner=get_user_model().objects.create_superuser('mail-owner','owner@example.test','test-only-password')
+        self.client.force_login(owner)
+        form=SMTPSettingsForm(self.data(),instance=SMTPSettings.load());self.assertTrue(form.is_valid(),form.errors)
+        config=form.save()
+        response=self.client.get(url,follow=True)
+        url=response.wsgi_request.path
+        self.assertEqual(response.status_code,200)
+        self.assertContains(response,'smtp_password')
+        self.assertNotContains(response,self.data()['smtp_password'])
+        self.assertNotContains(response,config.password_ciphertext)
+        self.assertIn('no-store',response['Cache-Control'])
+        self.assertContains(response,'formaction="'+reverse('kfata_smtp_test')+'"')
+        with patch('home.views.send_mail',return_value=1) as send:
+            self.assertEqual(self.client.post(reverse('kfata_smtp_test')).status_code,302)
+            send.assert_called_once()
+        data=self.data();data['host']=''
+        response=self.client.post(url,data)
+        self.assertEqual(response.status_code,200)
+        self.assertNotContains(response,data['smtp_password'])
+
+    @patch('home.mail.SMTPBackend')
+    def test_backend_uses_panel_and_off_sends_nothing(self,backend):
+        from django.core.mail import EmailMessage
+        from .models import SMTPSettings
+        from .smtp_forms import SMTPSettingsForm
+        from .mail import ConfiguredSMTPBackend,notification_route
+        form=SMTPSettingsForm(self.data(),instance=SMTPSettings.load());self.assertTrue(form.is_valid(),form.errors)
+        config=form.save();backend.return_value.send_messages.return_value=1
+        message=EmailMessage('Synthetic notification','Reference only','old@example.test',['internal@example.test'])
+        self.assertEqual(ConfiguredSMTPBackend().send_messages([message]),1)
+        self.assertEqual(backend.call_args.kwargs['password'],self.data()['smtp_password'])
+        self.assertTrue(backend.call_args.kwargs['use_tls'])
+        self.assertFalse(backend.call_args.kwargs['use_ssl'])
+        self.assertEqual(message.from_email,config.sender)
+        self.assertEqual(notification_route(),(config.sender,config.recipient))
+        backend.reset_mock()
+        with override_settings(OUTBOUND_EMAIL_DISABLED=True):
+            self.assertEqual(ConfiguredSMTPBackend().send_messages([message]),0)
+            self.assertIsNone(notification_route())
+            backend.assert_not_called()
+        backend.reset_mock();config.delivery_mode='off';config.save()
+        self.assertEqual(ConfiguredSMTPBackend().send_messages([message]),0)
+        backend.assert_not_called()

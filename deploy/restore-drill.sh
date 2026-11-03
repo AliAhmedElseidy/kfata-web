@@ -21,7 +21,7 @@ from pathlib import Path
 import secrets,sys
 lines = dict(line.split('=',1) for line in Path('.env').read_text().splitlines() if line and not line.startswith('#') and '=' in line)
 password = secrets.token_urlsafe(36)
-lines.update(POSTGRES_PASSWORD=password, DATABASE_URL=f'postgres://kfata:{password}@db:5432/kfata',KFATA_LOCAL_PORT=sys.argv[3],SITE_INDEXABLE='false',EMAIL_HOST='',ENQUIRY_EMAIL='',SECURE_SSL_REDIRECT='false',WEB_MEMORY='512m',DB_MEMORY='256m')
+lines.update(POSTGRES_PASSWORD=password, DATABASE_URL=f'postgres://kfata:{password}@db:5432/kfata',KFATA_LOCAL_PORT=sys.argv[3],SITE_INDEXABLE='false',EMAIL_HOST='',ENQUIRY_EMAIL='',OUTBOUND_EMAIL_DISABLED='true',SECURE_SSL_REDIRECT='false',WEB_MEMORY='512m',DB_MEMORY='256m')
 Path(sys.argv[1]).write_text('\n'.join(f'{k}={v}' for k,v in lines.items())+'\n')
 Path(sys.argv[2]).write_text('services:\n  web:\n    image: kfata-web-web:latest\n    env_file: '+sys.argv[1]+'\n')
 PY
