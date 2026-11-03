@@ -13,7 +13,20 @@ def cards(locale, kind, count=6):
 @register.simple_tag
 def navigation(page=None, language='ar'):
     locale = {'locale':page.locale} if page else {'locale__language_code':language}
-    return ContentPage.objects.live().public().filter(depth=3, **locale).exclude(slug='privacy').order_by('path')
+    return ContentPage.objects.live().public().filter(depth=3, **locale).exclude(slug__in=['privacy','terms','cookies']).order_by('path')
+
+@register.simple_tag
+def curated_cards(locale, value):
+    chosen=value.get('selected_pages') or []
+    if chosen:
+        ids=[p.pk for p in chosen if p]
+        pages={p.pk:p for p in ContentPage.objects.live().public().filter(pk__in=ids,locale=locale,kind=value['kind']).select_related('hero_image')}
+        return [pages[i] for i in ids if i in pages]
+    return cards(locale,value['kind'],value['count'])
+
+@register.simple_tag
+def policy_pages(language):
+    return ContentPage.objects.live().public().filter(slug__in=['privacy','terms','cookies'],locale__language_code=language).order_by('slug')
 
 @register.simple_tag
 def organization_json(brand, lang):
@@ -31,15 +44,18 @@ def translated_nav(page, target):
     if not target: return None
     return target.get_translation_or_none(page.locale) if page else target
 
-@register.simple_tag
-def menu_target(language, target):
+@register.simple_tag(takes_context=True)
+def menu_target(context, language, target):
     if not target: return None
-    from wagtail.models import Locale
-    locale = Locale.objects.filter(language_code=language).first()
-    translated = target.get_translation_or_none(locale) if locale else None
-    if translated and translated.live and not translated.get_view_restrictions().exists():
-        return translated
-    return None
+    # One public-page map per request, rather than a translation/restriction query
+    # for every navigation/footer link. public() also excludes restricted ancestors.
+    request=context.get('request')
+    cache=getattr(request,'_kfata_menu_pages',{}) if request else {}
+    if language not in cache:
+        from wagtail.models import Page
+        cache[language]={p.translation_key:p for p in Page.objects.live().public().filter(locale__language_code=language)}
+        if request is not None:request._kfata_menu_pages=cache
+    return cache[language].get(target.translation_key)
 
 @register.simple_tag
 def page_schema(page):

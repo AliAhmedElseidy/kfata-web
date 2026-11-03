@@ -4,6 +4,7 @@ from wagtail.documents.blocks import DocumentChooserBlock
 
 class SectionBlock(blocks.StructBlock):
     visible = blocks.BooleanBlock(default=True, required=False, label='إظهار القسم / Show section')
+    tone = blocks.ChoiceBlock(choices=[('dark','فحمي / Charcoal'),('stone','حجري / Stone')],default='dark',required=False)
 
 class Heading(SectionBlock):
     eyebrow = blocks.CharBlock(required=False)
@@ -18,6 +19,7 @@ class ImageText(SectionBlock):
     title = blocks.CharBlock()
     text = blocks.RichTextBlock(features=['bold', 'italic', 'link', 'ul', 'ol'])
     image = ImageChooserBlock()
+    caption = blocks.CharBlock(required=False,help_text='For illustrative imagery, disclose its origin and that it is not a company team/project photo.')
     reverse = blocks.BooleanBlock(required=False)
     class Meta:
         template = 'home/blocks/image_text.html'
@@ -56,6 +58,8 @@ class Listing(SectionBlock):
     title = blocks.CharBlock()
     kind = blocks.ChoiceBlock(choices=[('project', 'المشروعات / Projects'), ('service', 'الخدمات / Services'), ('article', 'الأخبار / News'), ('sector', 'القطاعات / Sectors')])
     count = blocks.IntegerBlock(default=6, min_value=1, max_value=24)
+    selected_pages = blocks.ListBlock(blocks.PageChooserBlock(),required=False,help_text='Optional curated order. Only published public pages in this language are shown.')
+    introduction = blocks.TextBlock(required=False)
     class Meta:
         template = 'home/blocks/listing.html'
         icon = 'list-ul'
@@ -75,6 +79,10 @@ class SiteBody(blocks.StreamBlock):
     faq = FAQ()
     cta = CallToAction()
     document = DocumentLink()
+    process = SectionBlock([
+        ('title',blocks.CharBlock()),('introduction',blocks.TextBlock(required=False)),
+        ('steps',blocks.ListBlock(blocks.StructBlock([('title',blocks.CharBlock()),('text',blocks.TextBlock())]),min_num=1,max_num=6)),
+    ],template='home/blocks/process.html',icon='list-ol',label='خطوات العمل / Process')
     hero = SectionBlock([
         ('title', blocks.CharBlock()), ('text', blocks.TextBlock(required=False)),
         ('image', ImageChooserBlock(required=False)), ('button_label', blocks.CharBlock(required=False)),

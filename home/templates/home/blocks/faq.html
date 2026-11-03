@@ -1,1 +1,1 @@
-<section class="section editorial reveal"><h2>{{ value.title }}</h2>{% for item in value.items %}<details><summary>{{ item.question }}</summary><p>{{ item.answer }}</p></details>{% endfor %}</section>
+<section class="section faq-section reveal tone-{{ value.tone|default:'dark' }}"><h2>{{ value.title }}</h2><div>{% for item in value.items %}<details><summary>{{ item.question }}<span aria-hidden="true">＋</span></summary><p>{{ item.answer }}</p></details>{% endfor %}</div></section>

@@ -14,6 +14,14 @@ class ImportedImage(models.Model):
     source_key = models.CharField(max_length=80, unique=True)
     image = models.ForeignKey('wagtailimages.Image', null=True, on_delete=models.SET_NULL, related_name='+')
 
+class PresentationUpdate(models.Model):
+    """One-time editorial updates must not reinsert content an owner later removes."""
+    page = models.ForeignKey('wagtailcore.Page',on_delete=models.CASCADE)
+    key = models.CharField(max_length=80)
+    applied_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['page','key'],name='unique_presentation_update')]
+
 @register_setting
 class BrandSettings(BaseGenericSetting):
     company_ar = models.CharField(max_length=150, default='KFATA')
@@ -32,7 +40,7 @@ class BrandSettings(BaseGenericSetting):
     animations = models.BooleanField(default=True)
     opening_animation = models.BooleanField(default=True)
     motion_level = models.CharField(max_length=10, choices=[('subtle','خفيف / Subtle'),('full','كامل / Full')], default='subtle')
-    font = models.CharField(max_length=10, choices=[('tahoma','Tahoma'),('arial','Arial'),('serif','Georgia')], default='tahoma')
+    font = models.CharField(max_length=10, choices=[('plex','IBM Plex Arabic'),('tahoma','Tahoma'),('arial','Arial'),('serif','Georgia')], default='plex')
     background = models.CharField(max_length=7, default='#10191c', validators=[RegexValidator(r'^#[0-9a-fA-F]{6}$')])
     enquiries_enabled = models.BooleanField(default=False, help_text='Enable only after publishing reviewed privacy notices and company contact information.')
     privacy_version = models.CharField(max_length=20, default='2026-11-03')
@@ -41,6 +49,16 @@ class BrandSettings(BaseGenericSetting):
     allow_ai_training = models.BooleanField(default=False, help_text='Independent of search discovery; controls GPTBot and Google-Extended.')
     footer_menu = StreamField([('link', blocks.StructBlock([('page', blocks.PageChooserBlock()), ('label_ar', blocks.CharBlock()), ('label_en', blocks.CharBlock())]))], blank=True)
     navigation_mode = models.CharField(max_length=10, default='auto', choices=[('auto','تلقائي / Automatic'),('custom','مخصص / Custom'),('hidden','مخفي / Hidden')])
+    footer_intro_ar = models.TextField(blank=True)
+    footer_intro_en = models.TextField(blank=True)
+    footer_cta_ar = models.CharField(max_length=160,blank=True)
+    footer_cta_en = models.CharField(max_length=160,blank=True)
+    footer_columns = StreamField([('column',blocks.StructBlock([
+        ('title_ar',blocks.CharBlock()),('title_en',blocks.CharBlock()),
+        ('links',blocks.ListBlock(blocks.StructBlock([
+            ('page',blocks.PageChooserBlock()),('label_ar',blocks.CharBlock(required=False)),('label_en',blocks.CharBlock(required=False)),
+        ]))),
+    ]))],blank=True)
     menu = StreamField([('link', blocks.StructBlock([
         ('page', blocks.PageChooserBlock()),
         ('label_ar', blocks.CharBlock()),
@@ -52,6 +70,7 @@ class BrandSettings(BaseGenericSetting):
     panels += [FieldPanel('secondary_phone')]
     panels += [FieldPanel('privacy_version')]
     panels += [FieldPanel('navigation_mode')]
+    panels += [MultiFieldPanel([FieldPanel(f) for f in ['footer_intro_ar','footer_intro_en','footer_cta_ar','footer_cta_en','footer_columns']],heading='الفوتر المؤسسي / Corporate footer')]
     class Meta:
         verbose_name = 'هوية الموقع والتواصل / Brand and contact'
 
@@ -97,6 +116,8 @@ class ContentPage(Page):
     def get_context(self, request, *args, **kwargs):
         from django.core.paginator import Paginator
         context = super().get_context(request, *args, **kwargs)
+        context['linked_services'] = self.related_services.live().public().filter(locale=self.locale)
+        context['linked_sectors'] = self.related_sectors.live().public().filter(locale=self.locale)
         if self.kind == 'project':
             context['related_projects'] = ContentPage.objects.live().public().filter(locale=self.locale,kind='project',sector=self.sector).exclude(pk=self.pk).select_related('hero_image')[:3]
         elif self.kind in {'service','sector'}:
