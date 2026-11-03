@@ -94,6 +94,10 @@ class Command(BaseCommand):
                     p.related_sectors.add(ContentPage.objects.get(slug=sector,kind='sector',locale=p.locale));changed=True
                 if not p.related_services.exists():
                     p.related_services.add(ContentPage.objects.get(slug=service,kind='service',locale=p.locale));changed=True
+                if not p.location:
+                    p.location='الرياض' if lang=='ar' else 'Riyadh';changed=True
+                if not p.scope:
+                    p.scope=({'ar':'تجديد المساحات الداخلية','en':'Interior renovation'} if project=='anb-new-tower' else {'ar':'الإنشاء والتشطيبات','en':'Construction and finishing'})[lang];changed=True
                 if changed:
                     revision=p.save_revision()
                     if p.live: revision.publish()
@@ -111,10 +115,20 @@ class Command(BaseCommand):
 
     def fill(self, language, slug, title, text, publish=False):
         p=ContentPage.objects.filter(locale__language_code=language,slug=slug).first()
-        if not p or p.body: return
+        if not p: return
         latest=p.get_latest_revision()
         if latest and latest.user_id: return
         live=p.live
+        changed=False
+        if not p.summary:
+            p.summary=text.split('. ')[0].rstrip('.')+'.';changed=True
+        if not p.search_description:
+            p.search_description=text[:160];changed=True
+        if p.body:
+            if changed:
+                revision=p.save_revision()
+                if live: revision.publish()
+            return
         p.body=[('heading',{'eyebrow':'KFATA','title':title,'text':'<p>'+text+'</p>'})]
         revision=p.save_revision()
         if live or publish: revision.publish()
