@@ -24,7 +24,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-The importer works without source images; see `assets/README.md`. Images are not committed pending publication approval.
+The four approved initial project images are included; see `assets/README.md` for provenance. The importer also supports an image-free setup.
 
 Visit `/ar/`, `/en/`, `/admin/` (content), `/django-admin/home/enquiry/` (enquiries).
 The Wagtail sidebar links to enquiry management for users with the required permission.

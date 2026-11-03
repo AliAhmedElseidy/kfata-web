@@ -1,12 +1,14 @@
-# Approved public imagery
+# Approved public project imagery
 
-Source images are intentionally not committed to this public repository.
-Automatic review blocked publication of the PDF-extracted images to GitHub pending explicit permission.
+The user explicitly approved publishing these four PDF-extracted company project photographs to this public GitHub repository on 2026-11-03:
 
-The optional initial importer recognizes these local filenames:
-- anb-interior.jpg
-- anb-facade.jpg
-- anb-tower.jpg
-- residential.jpg
+| File | Source |
+| --- | --- |
+| anb-tower.jpg | portfolio, page 6 |
+| anb-facade.jpg | portfolio, page 18 |
+| anb-interior.jpg | portfolio, page 18 |
+| residential.jpg | portfolio, page 36 |
 
-With no local images, seed_content creates pages without photographs. Editors can upload company-approved images using Wagtail. Obtain publication approval first. Do not commit original PDFs, registration documents, customer data or unreviewed images.
+Images were cropped from the supplied portfolio and compressed for web delivery. Original source PDFs and legal registration/certificate scans are not included.
+
+`python manage.py seed_content` imports these files on initial setup. Existing edited content remains preserved. Editors can replace project images through Wagtail. Publishing additional source documents or images requires appropriate review; this approval applies to the four files listed above.

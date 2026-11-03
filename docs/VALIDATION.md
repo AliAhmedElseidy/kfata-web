@@ -13,7 +13,7 @@
 
 ## Not verified / external blockers
 
-- Public GitHub image publication: blocked by automatic review pending explicit authorization; images are omitted from the PR.
+- Four initial project images were explicitly approved for this public GitHub repository on 2026-11-03 and are now included. The source PDFs and other unreviewed material remain excluded.
 - VPS access: SSH TCP connection returned `Network is unreachable` before authentication. Server inventory did not run.
 - DNS, TLS issuance/renewal, live domain, ingress routing and coexistence with Mailcow/ERPNext: unverified and unchanged.
 - Docker image/Compose runtime: Docker is not available in the authoring environment. CI includes an image build, but its result has not been observed yet.

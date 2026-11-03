@@ -13,3 +13,9 @@ backups/
 node_modules/
 assets/*.jpg
 assets/*.png
+
+# Explicitly approved public project photographs
+!assets/anb-tower.jpg
+!assets/anb-facade.jpg
+!assets/anb-interior.jpg
+!assets/residential.jpg
