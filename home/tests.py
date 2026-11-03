@@ -210,6 +210,21 @@ class WebsiteTests(TestCase):
         self.client.post('/quote/',self.valid_data())
         self.assertEqual(Enquiry.objects.get().privacy_version,'test-version')
 
+    def test_hidden_sections_and_draft_buttons_are_not_rendered(self):
+        brand=BrandSettings.load();brand.navigation_mode='hidden';brand.save()
+        p=HomePage.objects.get(slug='ar')
+        draft=ContentPage.objects.get(slug='certifications',locale=p.locale)
+        p.cta_page=draft;p.cta_label='Restricted link'
+        p.show_secondary_cta=False;p.secondary_cta_label='Restricted link'
+        p.body=[('heading',{'title':'Hidden section marker','visible':False}),('heading',{'title':'Visible section marker','visible':True}),('cta',{'title':'Contact','button_label':'Restricted link','page':draft,'visible':True})]
+        p.save_revision().publish()
+        r=self.client.get('/ar/')
+        self.assertContains(r,'Visible section marker')
+        self.assertNotContains(r,'Hidden section marker')
+        self.assertNotContains(r,'Restricted link')
+        self.assertNotContains(r,'/ar/certifications/')
+        self.assertNotContains(r,'/ar/projects/')
+
 class NoSourceImagesTests(TestCase):
     def test_seed_and_home_work_without_private_source_images(self):
         from pathlib import Path

@@ -40,6 +40,7 @@ class BrandSettings(BaseGenericSetting):
     bing_verification = models.CharField(max_length=150, blank=True)
     allow_ai_training = models.BooleanField(default=False, help_text='Independent of search discovery; controls GPTBot and Google-Extended.')
     footer_menu = StreamField([('link', blocks.StructBlock([('page', blocks.PageChooserBlock()), ('label_ar', blocks.CharBlock()), ('label_en', blocks.CharBlock())]))], blank=True)
+    navigation_mode = models.CharField(max_length=10, default='auto', choices=[('auto','تلقائي / Automatic'),('custom','مخصص / Custom'),('hidden','مخفي / Hidden')])
     menu = StreamField([('link', blocks.StructBlock([
         ('page', blocks.PageChooserBlock()),
         ('label_ar', blocks.CharBlock()),
@@ -50,6 +51,7 @@ class BrandSettings(BaseGenericSetting):
     panels += [FieldPanel(f) for f in ['motion_level','font','background','footer_menu','enquiries_enabled','google_verification','bing_verification','allow_ai_training']]
     panels += [FieldPanel('secondary_phone')]
     panels += [FieldPanel('privacy_version')]
+    panels += [FieldPanel('navigation_mode')]
     class Meta:
         verbose_name = 'هوية الموقع والتواصل / Brand and contact'
 
@@ -61,8 +63,12 @@ class HomePage(Page):
     social_image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     cta_label = models.CharField(max_length=80, blank=True)
     cta_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    secondary_cta_label = models.CharField(max_length=80, blank=True)
+    secondary_cta_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    show_secondary_cta = models.BooleanField(default=True)
     body = StreamField(SiteBody(), blank=True)
     content_panels = Page.content_panels + [FieldPanel(f) for f in ['eyebrow','headline','introduction','hero_image','cta_label','cta_page','body']]
+    content_panels += [MultiFieldPanel([FieldPanel(f) for f in ['show_secondary_cta','secondary_cta_label','secondary_cta_page']],heading='الزر الثاني / Secondary action')]
     promote_panels = Page.promote_panels + [FieldPanel('social_image')]
     subpage_types = ['home.ContentPage']
     max_count_per_parent = 2
