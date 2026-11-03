@@ -11,6 +11,8 @@ static/
 backups/
 *.log
 node_modules/
+operations/
+operations-backup.lock
 assets/*.jpg
 assets/*.png
 

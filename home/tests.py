@@ -10,12 +10,16 @@ from django.test import TestCase, override_settings
 from PIL import Image
 from wagtail.models import Page
 from .forms import EnquiryForm
-from .models import ContentPage, Enquiry, HomePage
+from .models import BrandSettings, ContentPage, Enquiry, HomePage
 
 class WebsiteTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         call_command('seed_content', verbosity=0)
+        brand = BrandSettings.load()
+        brand.enquiries_enabled=True;brand.email='contact@example.test';brand.phone='123456789';brand.save()
+        for p in ContentPage.objects.filter(slug='privacy'):
+            p.save_revision().publish()
     def setUp(self):
         cache.clear()
     def test_public_pages_and_languages(self):
@@ -28,10 +32,20 @@ class WebsiteTests(TestCase):
         self.assertContains(self.client.get('/en/'),'dir="ltr"')
     def test_home_redirect(self):
         self.assertRedirects(self.client.get('/'),'/ar/',fetch_redirect_response=False)
+    def test_generated_links_match_routable_tree(self):
+        for page in ContentPage.objects.live().public():
+            self.assertEqual(self.client.get(page.url).status_code,200,page.url)
+        self.assertNotContains(self.client.get('/ar/'),'href="/home/')
     def test_seed_preserves_editor_changes(self):
         p=HomePage.objects.get(slug='ar');p.headline='Edited';p.save_revision().publish()
         count=Page.objects.count();call_command('seed_content',verbosity=0)
         p.refresh_from_db();self.assertEqual(p.headline,'Edited');self.assertEqual(Page.objects.count(),count)
+        p.body=[];p.save_revision().publish();call_command('seed_content',verbosity=0)
+        p.refresh_from_db();self.assertFalse(p.body)
+        from wagtail.images import get_image_model
+        image=get_image_model().objects.first();image.title='Editor alternative text';image.save()
+        total=get_image_model().objects.count();call_command('seed_content',verbosity=0)
+        self.assertEqual(get_image_model().objects.count(),total)
     def test_drafts_and_sitemap(self):
         self.assertEqual(self.client.get('/ar/certifications/').status_code,404)
         r=self.client.get('/sitemap.xml');self.assertEqual(r.status_code,200)
@@ -87,7 +101,7 @@ class WebsiteTests(TestCase):
         user=get_user_model().objects.create_superuser('owner','owner@example.test','test-only-password')
         self.client.force_login(user)
         page=HomePage.objects.get(slug='ar')
-        for url in ['/admin/', f'/admin/pages/{page.pk}/edit/', '/django-admin/home/enquiry/']:
+        for url in ['/admin/', f'/admin/pages/{page.pk}/edit/', '/django-admin/home/enquiry/', '/admin/snippets/home/enquiry/']:
             with self.subTest(url=url): self.assertEqual(self.client.get(url).status_code,200)
     def test_private_file_download_and_public_denial(self):
         from django.core.files.storage import FileSystemStorage
@@ -106,6 +120,45 @@ class WebsiteTests(TestCase):
                 self.assertEqual(self.client.get('/media/'+item.attachment.name).status_code,404)
             finally:
                 Enquiry._meta.get_field('attachment').storage=storage
+
+    def test_enquiry_gate_rejects_unreviewed_launch(self):
+        brand=BrandSettings.load();brand.enquiries_enabled=False;brand.save()
+        self.assertNotContains(self.client.get('/quote/'),'<form')
+        self.assertEqual(self.client.post('/quote/',self.valid_data()).status_code,503)
+        self.assertFalse(Enquiry.objects.exists())
+
+    def test_editor_draft_and_publisher_permissions(self):
+        from django.contrib.auth.models import Group
+
+        call_command('setup_roles')
+        editor=get_user_model().objects.create_user('editor',password='test-only-password')
+        editor.groups.add(Group.objects.get(name='KFATA Editors'))
+        publisher=get_user_model().objects.create_user('publisher',password='test-only-password')
+        publisher.groups.add(Group.objects.get(name='KFATA Publishers'))
+        page=HomePage.objects.get(slug='ar')
+        self.assertTrue(page.permissions_for_user(editor).can_edit())
+        self.assertFalse(page.permissions_for_user(editor).can_publish())
+        self.assertTrue(page.permissions_for_user(publisher).can_publish())
+        self.assertFalse(editor.has_perm('home.view_enquiry'))
+        previous=page.headline;page.headline='Draft headline';page.save_revision()
+        self.assertContains(self.client.get('/ar/'),previous.split('\n')[0])
+        self.assertNotContains(self.client.get('/ar/'),'Draft headline')
+
+    def test_wagtail_enquiry_edit_and_permission(self):
+        item=Enquiry.objects.create(name='Private',email='a@example.test',phone='1',message='x')
+        user=get_user_model().objects.create_superuser('manager','owner@example.test','test-only-password')
+        self.client.force_login(user)
+        self.assertContains(self.client.get(f'/admin/snippets/home/enquiry/edit/{item.pk}/'),'Private')
+        self.assertEqual(self.client.get('/admin/snippets/home/enquiry/add/').status_code,302)
+        self.assertEqual(Enquiry.objects.count(),1)
+
+    def test_related_projects_and_structured_data(self):
+        r=self.client.get('/en/projects/anb-new-tower/')
+        self.assertContains(r,'Related projects')
+        self.assertContains(r,'BreadcrumbList')
+        self.assertContains(r,'ANB — Al Hizam Al Thahabi')
+        r=self.client.get('/en/projects/')
+        self.assertEqual(len(r.context['sectors']),len(set(r.context['sectors'])))
 
 class NoSourceImagesTests(TestCase):
     def test_seed_and_home_work_without_private_source_images(self):

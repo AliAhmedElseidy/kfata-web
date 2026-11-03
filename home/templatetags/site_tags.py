@@ -23,7 +23,30 @@ def organization_json(brand, lang):
 
 @register.simple_tag
 def translated_nav(page, target):
-    return target.get_translation_or_none(page.locale) or target
+    if not target: return None
+    return target.get_translation_or_none(page.locale) if page else target
+
+@register.simple_tag
+def menu_target(language, target):
+    if not target: return None
+    from wagtail.models import Locale
+    locale = Locale.objects.filter(language_code=language).first()
+    translated = target.get_translation_or_none(locale) if locale else None
+    if translated and translated.live and not translated.get_view_restrictions().exists():
+        return translated
+    return None
+
+@register.simple_tag
+def page_schema(page):
+    if not page: return '{}'
+    ancestors = page.get_ancestors().live().public().filter(depth__gte=2).specific()
+    items = [p for p in ancestors if p.full_url] + [page]
+    data = {'@context':'https://schema.org', '@type':'BreadcrumbList', 'itemListElement':[
+        {'@type':'ListItem','position':i,'name':p.title,'item':p.full_url} for i,p in enumerate(items,1)
+    ]}
+    if getattr(page,'kind',None) == 'article':
+        data = {'@context':'https://schema.org','@graph':[data,{'@type':'Article','headline':page.title,'datePublished':page.first_published_at.isoformat() if page.first_published_at else '', 'dateModified':page.last_published_at.isoformat() if page.last_published_at else '', 'mainEntityOfPage':page.full_url}]}
+    return mark_safe(json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))
 
 @register.simple_tag
 def privacy_page(language):

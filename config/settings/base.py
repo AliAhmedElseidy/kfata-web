@@ -209,7 +209,7 @@ ENQUIRY_EMAIL = os.environ.get('ENQUIRY_EMAIL', '')
 SITE_INDEXABLE = os.environ.get('SITE_INDEXABLE', 'false').lower() == 'true'
 FILE_UPLOAD_MAX_MEMORY_SIZE = 6 * 1024 * 1024
 DATA_UPLOAD_MAX_MEMORY_SIZE = 7 * 1024 * 1024
-WAGTAILDOCS_EXTENSIONS = ['pdf', 'docx', 'xlsx']
+WAGTAILDOCS_EXTENSIONS = ['pdf', 'docx', 'xlsx', 'mp4', 'webm']
 WAGTAILDOCS_SERVE_METHOD = 'serve_view'
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 MIDDLEWARE += ['home.middleware.IndexingMiddleware']

@@ -72,3 +72,20 @@ class SiteBody(blocks.StreamBlock):
     faq = FAQ()
     cta = CallToAction()
     document = DocumentLink()
+    hero = blocks.StructBlock([
+        ('title', blocks.CharBlock()), ('text', blocks.TextBlock(required=False)),
+        ('image', ImageChooserBlock(required=False)), ('button_label', blocks.CharBlock(required=False)),
+        ('page', blocks.PageChooserBlock(required=False)),
+    ], template='home/blocks/hero.html', icon='image')
+    statistics = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('items', blocks.ListBlock(blocks.StructBlock([
+            ('value', blocks.CharBlock()), ('label', blocks.CharBlock()),
+            ('source', blocks.CharBlock(help_text='Approved source and date; kept in the editor.')),
+        ]))),
+    ], template='home/blocks/statistics.html', icon='list-ul')
+    video = blocks.StructBlock([
+        ('title', blocks.CharBlock()),
+        ('video', DocumentChooserBlock(help_text='Approved MP4/WebM only; no autoplay or external tracking.')),
+        ('poster', ImageChooserBlock(required=False)), ('transcript', blocks.TextBlock()),
+    ], template='home/blocks/video.html', icon='media')

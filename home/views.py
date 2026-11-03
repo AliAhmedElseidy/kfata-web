@@ -13,7 +13,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.http import require_GET, require_http_methods
 from django.utils.crypto import salted_hmac
 from .forms import EnquiryForm
-from .models import Enquiry
+from .models import Enquiry, BrandSettings, ContentPage
 logger = logging.getLogger(__name__)
 
 @require_GET
@@ -29,12 +29,19 @@ def robots(request):
     text = 'User-agent: *\nDisallow: /\n'
     if settings.SITE_INDEXABLE:
         text = f'User-agent: *\nDisallow: /admin/\nDisallow: /django-admin/\nDisallow: /private/\nDisallow: /quote/\nSitemap: {settings.PUBLIC_BASE_URL}/sitemap.xml\n'
+        if not BrandSettings.load(request).allow_ai_training:
+            text += '\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: Google-Extended\nDisallow: /\n'
     return HttpResponse(text, content_type='text/plain')
 
 @require_http_methods(['GET','POST'])
 def quote(request):
     lang = request.GET.get('lang', 'ar')
     if lang not in {'ar','en'}: lang = 'ar'
+    brand = BrandSettings.load(request)
+    privacy = ContentPage.objects.live().public().filter(slug='privacy',locale__language_code=lang).first()
+    enabled = brand.enquiries_enabled and bool(brand.email and brand.phone and privacy)
+    if not enabled:
+        return render(request, 'home/quote.html', {'lang':lang, 'enquiries_unavailable':True}, status=503 if request.method == 'POST' else 200)
     form = EnquiryForm(request.POST or None, request.FILES or None)
     if request.method == 'POST':
         # REMOTE_ADDR only: do not trust a user-provided X-Forwarded-For.
@@ -64,7 +71,7 @@ def quote(request):
                     logger.warning('Enquiry notification failed for enquiry %s', enquiry.pk)
             messages.success(request, 'تم استلام طلبك / Your enquiry has been received.')
             return redirect('/quote/?lang=' + lang)
-    return render(request, 'home/quote.html', {'form':form, 'lang':lang})
+    return render(request, 'home/quote.html', {'form':form, 'lang':lang, 'privacy':privacy})
 
 @login_required(login_url='/admin/login/')
 @permission_required('home.view_enquiry', raise_exception=True)

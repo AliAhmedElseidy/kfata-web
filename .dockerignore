@@ -8,3 +8,5 @@ private-media
 static
 backups
 node_modules
+operations
+operations-backup.lock
