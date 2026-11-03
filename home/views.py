@@ -11,6 +11,7 @@ from django.db import connection
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.cache import never_cache
 from django.utils.crypto import salted_hmac
 from .forms import EnquiryForm
 from .models import Enquiry, BrandSettings, ContentPage
@@ -28,12 +29,13 @@ def health(request):
 def robots(request):
     text = 'User-agent: *\nDisallow: /\n'
     if settings.SITE_INDEXABLE:
-        text = f'User-agent: *\nDisallow: /admin/\nDisallow: /django-admin/\nDisallow: /private/\nDisallow: /quote/\nSitemap: {settings.PUBLIC_BASE_URL}/sitemap.xml\n'
+        text = f'User-agent: *\nDisallow: /admin/\nDisallow: /django-admin/\nDisallow: /private/\nDisallow: /quote/\nDisallow: /health/\nSitemap: {settings.PUBLIC_BASE_URL}/sitemap.xml\n'
         if not BrandSettings.load(request).allow_ai_training:
             text += '\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: Google-Extended\nDisallow: /\n'
     return HttpResponse(text, content_type='text/plain')
 
 @require_http_methods(['GET','POST'])
+@never_cache
 def quote(request):
     lang = request.GET.get('lang', 'ar')
     if lang not in {'ar','en'}: lang = 'ar'
