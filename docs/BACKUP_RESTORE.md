@@ -29,3 +29,9 @@ Manual PC copy `C:\Users\dell\.codex\backups\kfata-web\20261103T211956Z` is rest
 ```
 
 Older stopped `kfata-restore-check` also retains its separate volumes for inspection. No Mailcow/ERPNext services or volumes were removed.
+
+## Redesign snapshots (2026-11-04 Riyadh)
+
+`20261103T222742Z` precedes the0011 presentation migration/content update; `20261103T225122Z` captures the new content/media and owner pending English tower draft under f98e413 before a sitemap-only application patch. Snapshots and previous image were preserved. No new isolated restore was executed during this design phase; earlier recovery proof above remains for its original snapshot. Daily local backup/retention remain active; recurring off-server transfer is still not configured.
+
+The new-content snapshot225122Z also has a manual restricted-access PC copy at `C:\Users\dell\.codex\backups\kfata-web\20261103T225122Z`. Matching SHA256: database `c995806f57331c57714deba12a0330933875462f8f49d13bb1a0c2b9f828b7fc`; files `705285849d7889e51dff58c2446f5ff9c9e6ab63c6793a6891a0b5149d8773ea`. No scheduled off-server transfer or new restore claim.

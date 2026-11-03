@@ -2,7 +2,7 @@
 
 The two original PDFs were found on the owner's Desktop during the expanded search. They are image-only: 28 profile pages and 45 portfolio pages. All page thumbnails were inspected, with larger views of the relevant narrative, services, project and contact pages. Originals, page renders, contact comparisons and legal material remain in an access-controlled local review directory outside the repository.
 
-The original wordmark was extracted from profile p.1. It excludes the ISO and anniversary badges. The four approved project photos remain the only published source project photographs; no additional portfolio photograph, legal scan, supplier logo wall or certificate was added to the public repository.
+The original wordmark was extracted from profile p.1. It excludes the ISO and anniversary badges. At the earlier-phase review only the four approved project photos were public. The specifically approved additions for 2026-11-04 are listed below; no legal scan, supplier logo wall or certificate was added.
 
 Source copy added to the existing About page is a paraphrase of the service scope on profile pp.2/5, without unverified founding dates, size, staffing, ranking or certification claims. Source-informed quality/safety copy from p.4 remains a draft for review of current policy. Existing tower and residential descriptions use pp.6/22; contract areas and completion dates remain withheld.
 
@@ -32,4 +32,8 @@ The ANB Al Hizam / Golden Belt page was unpublished: portfolio p.18 heading, par
 
 Phone/email presentations agree between the two contact pages, while the address differs. The owner subsequently approved both phones and info@kfata.com, confirmed Al Olaya (8508 King Fahad Branch, 3817) as the current address and approved 90-day enquiry retention. Saudi Arabia was provided as hosting country; physical datacenter verification from the provider remains pending, since RIPE registration reports DE without establishing physical location. Legal name and current certificates need review of current records; no legal IDs, personal signatures or certificate scans were published. Supplier/partner walls were not turned into customer claims. The official company-domain fetch did not succeed, so it was not used to claim current contact verification.
 
-Six services and seven sectors now have bilingual source-informed descriptions. Public metadata/canonical/structured-data checks cover 44 routes. Indexing and enquiries are enabled; SMTP delivery remains off, configurable later in the owner panel.
+Six services and seven sectors now have bilingual source-informed descriptions. Earlier-phase public metadata/canonical/structured-data checks covered44 routes; the new phase covers50. Indexing and enquiries are enabled; SMTP delivery remains off, configurable later in the owner panel.
+
+## 2026-11-04 presentation phase
+
+The owner individually approved four additional crops: profile p6 two office-space photographs, and p22 residential interior/courtyard; see assets/README.md. The owner also approved the generated engineering illustration with explicit visible non-staff/non-project disclosure, four-step project-start wording and concise source-based quality/safety copy. This approval does not extend to certification scans, other photos or the16 draft project groups. New service/sector/about/project wording uses the previously mapped service scope and project examples, without dates, areas or guarantees. Quality summary is now public; certificates/news/careers remain drafts. Terms/cookies pages describe actual site behavior. Country was reconfirmed by instruction to keep Saudi Arabia, without independent physical-region evidence. English ANB tower has an owner-authored pending revision and was preserved rather than overwritten.

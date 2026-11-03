@@ -1,0 +1,9 @@
+{
+  "public_pages": 50,
+  "additional_internal_links_and_assets": 36,
+  "asset_urls": 25,
+  "whatsapp_present": true,
+  "phone_present": true,
+  "map_search_link_present": true,
+  "all_checked_http_statuses": 200
+}

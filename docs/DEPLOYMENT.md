@@ -61,3 +61,5 @@ Do not edit MX/SPF/DKIM/DMARC. Do not replace the domain zone. Restrict DNS edit
 ## 5. Updates and rollback
 
 Capture deployed commit, back up data, review migrations, build/test the new image, apply migrations once, update only this compose project. A previous image may not work with a new schema: use a reviewed migration rollback or restore the matching database/files snapshot. Never assume `git checkout` restores data.
+
+For the one-time approved presentation import: migrate0011, run refresh_presentation without --apply to inspect eligibility, then apply only after backup. It skips owner revisions/pending drafts and uses row locks/ledger keys; do not change it into a general reseeder. Post-change source and operational evidence are in DESIGN_REVIEW.md and REDESIGN_VALIDATION.md.

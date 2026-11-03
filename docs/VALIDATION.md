@@ -1,3 +1,7 @@
+# Earlier deployment validation (superseded for current presentation)
+
+For the 2026-11-04 redesign, read [REDESIGN_VALIDATION.md](REDESIGN_VALIDATION.md) and [DESIGN_REVIEW.md](DESIGN_REVIEW.md). The historical measurements below are not after-redesign evidence.
+
 # Validation — 2026-11-04 (Asia/Riyadh)
 
 ## Executed evidence

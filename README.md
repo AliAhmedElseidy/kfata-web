@@ -5,7 +5,7 @@ Intended production origin: **https://kfata.elsaidy.org**.
 
 ## Delivery status
 
-The site is running on **https://kfata.elsaidy.org** with independent Docker/PostgreSQL services and valid HTTPS. Indexing and enquiries are enabled after owner-approved contacts, privacy and 90-day retention. There are 44 public Arabic/English routes. Unapproved company material remains draft. Owner-only encrypted SMTP settings are available in Wagtail; delivery is off until an account is configured.
+The site is running on **https://kfata.elsaidy.org** with independent Docker/PostgreSQL services and valid HTTPS. Indexing and enquiries are enabled after owner-approved contacts, privacy and 90-day retention. There are 50 public Arabic/English routes. Unapproved company material remains draft. Owner-only encrypted SMTP settings are available in Wagtail; delivery is off until an account is configured.
 
 See [handover](docs/HANDOVER.md), [validation](docs/VALIDATION.md) and [content review](docs/CONTENT_REVIEW.md) for verified results and remaining external inputs. Mailcow and ERPNext were not restarted or reconfigured.
 ## Local development (Python 3.12)
@@ -47,3 +47,5 @@ DJANGO_SETTINGS_MODULE=config.settings.build python manage.py collectstatic --no
 - [Validation and remaining work](docs/VALIDATION.md)
 
 Do not commit credentials, original company PDFs, database dumps, customer enquiries or customer attachments.
+
+The 2026-11-04 presentation/content phase adds stone/charcoal editorial layouts, curated project/service/sector selections, local typography, approved project galleries and an editable corporate footer. See [design review](docs/DESIGN_REVIEW.md) and [redesign validation](docs/REDESIGN_VALIDATION.md), including the browser-verification interruption and remaining after screenshots.

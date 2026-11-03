@@ -1,0 +1,15 @@
+Creating test database for alias 'default'...
+
+D:\kfata-web\.venv\Lib\site-packages\django\core\handlers\base.py:61: UserWarning: No directory at: D:\kfata-web\static\
+  mw_instance = middleware(adapted_handler)
+...
+----------------------------------------------------------------------
+Ran 3 tests in 11.659s
+
+OK
+Destroying test database for alias 'default'...
+
+Found 3 test(s).
+System check identified no issues (0 silenced).
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.
