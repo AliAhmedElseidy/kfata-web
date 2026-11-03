@@ -1,18 +1,31 @@
-# Backup and restore
+# Backup and recovery
 
-`bash deploy/backup.sh` creates a PostgreSQL custom-format dump, media/private-media tarball and commit identifier with restrictive file permissions. It does not capture `.env`; keep secrets in a separate secure recovery system.
+Run `bash deploy/backup.sh` in `/opt/kfata-web`. It locks against concurrent runs, briefly stops only KFATA web to freeze writers, dumps PostgreSQL custom format and archives public/private media, then restarts web via EXIT trap. A short 502 interval is possible. It records deployed commit/image ID, SHA256SUMS and .complete. Permissions are restrictive; completed local snapshots retain 14 days. Daily systemd schedule is 03:15 Riyadh +≤5min jitter. Existing stacks are unaffected.
 
-The dump and files contain customer data. Backups must be access-controlled and copied off-server to a selected secure destination. A daily 03:15 Asia/Riyadh systemd timer and 14-day completed-snapshot retention are configured. A manual access-controlled off-server copy was made on the owner PC; recurring off-server transport is not configured. See HANDOVER.md.
+Backups contain customer data. Keep them access-controlled and transfer to a chosen secure off-server destination. A manual owner-PC copy was verified, but recurring off-server transport is not configured. `.env`, initial owner password and SMTP encryption key are excluded: preserve recovery secrets separately. Saved SMTP passwords need the original key, or must be re-entered. Do not expose environment/config files in support output.
 
-The script freezes writers by stopping only KFATA web briefly and restarts it with an EXIT trap. It records the deployed commit and image ID, and creates portable SHA-256 checksums. Do not interrupt Mailcow or ERPNext.
+## Isolated drill
 
-## Isolated restore drill (required before claiming operational readiness)
+Use a fresh project name matching `kfata-restore-[a-z0-9-]+` and unused loopback port. The helper refuses existing containers, volumes or configuration and validates archive paths/types before extraction. It uses a separate database password and files under `operations/<project>.env` and `.yaml`. It waits for PostgreSQL TCP readiness, avoiding the entrypoint's temporary Unix-socket initialization server. It disables indexing and forces OUTBOUND_EMAIL_DISABLED=true even if restored panel SMTP was enabled.
 
-1. Create a separate Compose project name, database credentials, unused loopback port and volumes; do not reuse production volumes.
-2. Start its db and restore with pg_restore using the target db/user environment.
-3. Extract the file archive only after listing and validating its paths, then restore ownership for UID/GID 10001.
-4. Start the exact saved application commit with indexing disabled and outbound SMTP disabled.
-5. Check page content, images, private attachments and enquiry counts.
-6. Record results. Delete only the explicitly identified drill resources afterward.
+```sh
+KFATA_DRILL_PROJECT=kfata-restore-example KFATA_DRILL_PORT=8100 \
+  bash deploy/restore-drill.sh backups/<UTC-snapshot>
+```
 
-A full isolated drill was executed on the VPS on 2026-11-03 with deploy/restore-drill.sh. Database restore, page counts, HTTP routes and tar content comparison passed. See HANDOVER.md for the exact snapshot and retained drill volumes.
+Use the image matching saved image-id/commit; the helper selects `kfata-web-web:latest`, so verify/rebuild that tag against the snapshot before a later recovery. Never assume the current latest image matches old database migrations. Restore does not capture Docker images or secrets.
+
+Verify counts/routes/content, compare archive to restored files with `tar --diff`, test protected attachment access, and stop only the isolated drill project after inspection. Do not use down -v or production volume paths. A recovered dataset may contain enquiries since deleted under retention; restrict access and reapply retention before any production cutover. Take a current backup and plan cutover separately; running this helper is not production rollback.
+
+## Executed final drill
+
+Snapshot `20261103T211956Z`, application `5d5bd9bf016c95581f08e375214cf3a312eb99fd`, restored as `kfata-restore-final2` on8099. 42 published ContentPages +2 homes, synthetic enquiry with 10×10 private JPEG recovered, file archive comparison passed, Arabic HTTP200, owner private download200 and anonymous302. Outbound kill switch verified true. Only that synthetic fixture/file was removed from production and drill afterward. Drill stopped, volumes retained. Earlier initialization attempt `kfata-restore-final` stopped after a readiness race; corrected helper passed on fresh volumes.
+
+Manual PC copy `C:\Users\dell\.codex\backups\kfata-web\20261103T211956Z` is restricted to the current Windows owner, SYSTEM and Administrators. Verified hashes:
+
+```text
+72b27780153d73218acb20673bc8e7e044a0bfdcdf56075d912ffe596aad19f1  database.dump
+5a8c6a75594884dc00cbf6467049acffef4e3a7bf570f42c9567415c615bd7b1  files.tar.gz
+```
+
+Older stopped `kfata-restore-check` also retains its separate volumes for inspection. No Mailcow/ERPNext services or volumes were removed.

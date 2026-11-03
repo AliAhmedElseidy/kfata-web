@@ -1,34 +1,35 @@
-# Validation — 2026-11-03
+# Validation — 2026-11-04 (Asia/Riyadh)
 
-## Executed
+## Executed evidence
 
-- Baseline GitHub Actions on 02c7b2e passed. Actions on implementation commit 886100a passed, including its Docker build: https://github.com/AliAhmedElseidy/kfata-web/actions/runs/41693875195 . Workflow changes were not pushed: the available Git credential lacks workflow scope. PostgreSQL integration was executed on the VPS instead.
-- 21 Django tests passed on PostgreSQL 16 (48.778s) and SQLite (21.501s). Raw reports: [PostgreSQL](validation/postgresql.txt), [SQLite](validation/sqlite.txt). Coverage includes public pages/translation links, all generated published URLs, drafts, editor/publisher permissions, Wagtail enquiry screens, protected attachments, CSRF, honeypot, invalid upload rejection, image re-encoding, submission throttling, SMTP failure persistence, related projects, distinct filters, metadata and safe repeated initialization.
-- Fresh migrations, production migrations, `makemigrations --check --dry-run`, Django checks, compressed static collection and Docker image build passed. Production checks have only the two deliberately disabled HSTS includeSubDomains/preload warnings. App runs as UID 10001 under Gunicorn; Compose web/db are healthy and private volumes persist across web recreation.
-- Read-only VPS audit ran before mutation: Ubuntu 24.04, six CPUs, 11 GiB RAM, about 5.2 GiB available, 66 GiB free disk. Host Nginx owns 80/443; existing Certbot timer was reused. Existing Mailcow and ERPNext containers/networks were not stopped, reconfigured or pruned.
-- A record already pointed to 144.91.120.177; no AAAA record was returned. DNS/mail records were not changed. KFATA listens only on loopback 8097.
-- Public HTTPS works, certificate issuance and a real production renewal succeeded; the domain-specific deploy hook validated and reloaded Nginx. Staging ACME dry runs failed with connection reset/timeouts, so those were not counted as success.
-- Backup and isolated PostgreSQL/media restore passed. 26 published ContentPages and zero enquiries matched production. Restored /ar/, /en/ and /admin/login/ returned 200. `tar --diff` against the restored archive passed. Drill project is stopped with its separate volumes retained. Real enquiry records/private customer attachments did not exist; attachment access and re-encoding were exercised using synthetic Django test data.
-- Daily 03:15 Riyadh backup timer installed; completed local snapshots retain 14 days. One manual off-server copy on the owner's Windows computer was checked against both SHA-256 hashes. Recurring off-server transport is not configured.
-- Mailcow public endpoint returned 200 and ERPNext returned 302 before and after the work. Existing stacks were not restarted by this session.
+- Running application `5d5bd9bf016c95581f08e375214cf3a312eb99fd`: [GitHub Actions success](https://github.com/AliAhmedElseidy/kfata-web/actions/runs/41719053434), checks/migrations/SQLite tests, repeat seed, static collection and Docker build. The Git credential lacks workflow scope, so PostgreSQL integration was run directly on the VPS rather than claiming a CI PostgreSQL service.
+- **28 Django tests pass** on PostgreSQL 16 (96.170s) and SQLite (33.093s). Raw reports: [PostgreSQL](validation/postgresql.txt), [SQLite](validation/sqlite.txt). Covers publication/drafts/translations, role workflow, revisioned associations, idempotent imports preserving owner edits, section visibility/navigation/CTA controls, metadata, CSRF/honeypot/throttling, image validation/re-encoding, private downloads, SMTP failure persistence, 90-day retention/file deletion, encrypted SMTP form/backend, owner-only access, blank/clear credential semantics and restore delivery kill switch.
+- Production migration 0010 applied; no pending model changes. Django deployment check reports only intentional HSTS includeSubDomains/preload warnings. `pip check`, Docker build and static manifest collection passed. Gunicorn web UID 10001; database and web healthy. Restore helper passes `bash -n` and a fresh actual recovery run after fixing TCP readiness.
+- Deployed client verified **all 44 public page routes**, 200 responses, unique descriptions per language, canonical URLs and parseable JSON-LD; 42 published ContentPages and 16 draft project groups. Ambiguous branch draft is not public. Quote and owner SMTP pages use no-store/noindex protections; indexing is on for reviewed public content. Robots includes sitemap and blocks private/admin/form paths; training controls are separate.
+- Real HTTPS synthetic form exercise: CSRF-missing 403; valid consent/PNG submission redirects with truthful receipt, persists language/privacy version, re-encodes JPEG; anonymous private download 302, staff without model permission 403, authorized staff 200, public media attempt 404. Test record/file/user removed. No real recipient email sent.
+- Production owner SMTP page 200 with blank password field and no-store; mode off, ciphertext empty, independent encryption key available. Actual provider delivery was not tested because the owner has no account details. Enquiries save independently.
+- Read-only host/ingress audit preceded mutation. Separate loopback8097 Docker project; PostgreSQL has no public port. Existing Nginx/Certbot retained, vhosts backed up, no MX/SPF/DKIM/DMARC edits and no existing-stack restart/prune. Mailcow 200 and ERPNext 302 before/after.
+- HTTP→HTTPS 301, HTTPS 200, certificate issuance and real production renewal/hook succeeded. Cert expires 2027-02-01 17:24:44 UTC. Staging dry runs reset/timed out and did not pass.
+- Snapshot `20261103T211956Z`: isolated PostgreSQL/media/private restore into `kfata-restore-final2` (8099), 42 ContentPages plus two homes and one synthetic enquiry. `tar --diff` passed. Recovered private JPEG verified 10×10, owner download200/anonymous302. Outbound kill switch true on drill/false on production. Synthetic record/file removed from both after verification; isolated containers stopped, volumes retained.
+- Backup manual PC copy hashes match. Daily Riyadh 03:15 backup +14-day local retention and 03:05 enquiry purge timers active, as is certbot.timer. Automated off-server transfer remains unconfigured.
 
-## Browser observations
+## Real browser observations
 
-Real Codex in-app Chromium on the current Windows machine, unthrottled current network, live HTTPS origin. Screenshots are in [preview](preview/). Arabic RTL and English LTR, images, language switching, project navigation and the disabled enquiry notice were inspected. No broken loaded images or horizontal overflow were found at 360, 768 and 1440px.
+Codex in-app Chromium on the owner's Windows machine, live HTTPS, unthrottled current network; screenshots in [preview](preview/). Final original logo/contact state checked at 360, 768, 1440px. No horizontal overflow or broken loaded images on the inspected home views; English quote form also fits 360px. Language switching and quote navigation worked. Earlier keyboard Tab/Enter navigation showed visible focus. Solid-color contrast measured 7.88:1 gold/background, 8.63:1 muted/panel, 15.72:1 body/background. No exhaustive screen-reader, keyboard or overlay-contrast certification is claimed.
 
-Local PerformanceObserver values, not Lighthouse scores or field data:
+PerformanceObserver values are local observations, not Lighthouse scores or field Core Web Vitals:
 
 | Visit | Width | LCP |
 | --- | ---: | ---: |
-| Initial Arabic navigation (cache state not controlled) | 1280 | 2612ms |
-| Subsequent Arabic navigation | 360 | 1164ms |
-| Subsequent Arabic navigation | 768 | 756ms |
-| Subsequent Arabic navigation | 1440 | 808ms |
+| Earlier initial visit, uncontrolled cache |1280|2612ms|
+| Earlier subsequent visit |360|1164ms|
+| Earlier subsequent visit |768|756ms|
+| Earlier subsequent visit |1440|808ms|
+| Final responsive pass while recovery work was active |360|9384ms|
+| Final responsive pass |768|2220ms|
+| Final responsive pass |1440|2844ms|
+| Subsequent visit after drill containers stopped |360|1940ms|
 
-No layout-shift entries were recorded in these inspected visits; this is a limited observation, not a certified CLS assessment. A representative INP distribution was not measured. Cold-cache slow-network mobile testing and real-user Core Web Vitals remain outstanding; the first observed LCP slightly exceeded 2.5 seconds. Do not claim all performance targets were met.
+The final pass varied materially and exceeded the 2.5s target on some visits. Recovery load/current network/cache were not controlled; these observations cannot isolate the cause. Do not present the earlier fast values alone as a passing assessment. A subsequent server-side curl observed 1.240s TTFB; this is not a mobile LCP test. No layout-shift entries appeared in the earlier visits, but this is not certified CLS. Representative INP, controlled cold-cache/slow-network measurements and field data remain outstanding.
 
-Core content/forms/links are server-rendered, and source code respects reduced motion and fails open if animation/storage APIs fail. A browser session with JavaScript disabled and an OS-level reduced-motion toggle was not separately executed. Keyboard Tab moved from the brand link to About KFATA with a visible focus outline; Enter navigation worked. Computed solid-color contrast ratios were 7.88:1 (gold/background), 8.63:1 (muted text/panel), and 15.72:1 (body text/background). Image-overlay contrast, full screen-reader and exhaustive keyboard audit remain outstanding. No formal accessibility certification is claimed.
-
-## Remaining launch blockers
-
-Approved company contact/retention/privacy information, original logo and source PDFs are missing. Enquiries and indexing remain off. Title-only/unsupported content remains draft, including empty sectors, quality/safety, certifications, news, careers and privacy. Customer PDF upload stays disabled. SMTP, account-level search verification, automated off-server backup transport and the remaining editorial source review must be completed with owner input. See [handover](HANDOVER.md).
+Core content/forms/links render on the server; the 44-route check executes no page JavaScript. Source supports reduced motion and animation fail-open. A real browser session with JavaScript disabled or OS reduced motion was not available through the current browser control capability and was not executed. See [handover](HANDOVER.md) for remaining content/provider/hosting-location verification.

@@ -17,3 +17,5 @@
 
 Wagtail manages both revisioned pages and enquiries through a permission-controlled SnippetViewSet; Django admin remains a legacy alternative. Brand settings also control nested menus, footer links, selected fonts, motion intensity, verification tokens and the enquiry launch switch.
 ImportedImage records preserve source identity when editors rename approved images. ParentalManyToManyField relations keep service/sector associations inside page revisions. Dedicated editorial groups and a publisher-approval workflow are configured by setup_roles.
+
+SMTPSettings is an owner-only Wagtail generic setting. ConfiguredSMTPBackend resolves off/panel/environment modes, decrypts Fernet credentials only for delivery and never returns saved passwords in the form. The independent SMTP_ENCRYPTION_KEY is a root-only environment secret. Restored instances force OUTBOUND_EMAIL_DISABLED before database settings are consulted. Enquiries persist before notification; send count zero never marks notification_sent.

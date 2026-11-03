@@ -10,7 +10,7 @@ change mail DNS records, remove volumes, or overwrite proxy configuration blindl
 
 Read docs/VALIDATION.md and docs/CONTENT_REVIEW.md before claiming completion.
 Review the full original implementation brief in the conversation when available.
-No deployment has occurred from the initial authoring environment.
+The site is now deployed; read docs/HANDOVER.md and the host's operations/deployed-commit for current state.
 
 Preserve editor changes: seed_content is initial import only, not a content reset.
 Use a branch and PR. Run checks and meaningful tests after changes.

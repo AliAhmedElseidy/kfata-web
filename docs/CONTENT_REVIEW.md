@@ -1,22 +1,11 @@
-# Content review before launch
+# Content status — 2026-11-04
 
-Sources: the two company PDFs supplied in the conversation, visually reviewed as image-based documents (28 and 45 pages). They are not committed to this public repository.
+The original 28-page profile and 45-page portfolio were found on the owner's Desktop, visually reviewed as image-only PDFs and kept outside this public repository. [SOURCE_REVIEW.md](SOURCE_REVIEW.md) maps provenance. Original wordmark is installed without anniversary/certification badges. The four expressly approved project photographs are the only published project source photos; legal scans, private identifiers and additional unreviewed imagery were not uploaded.
 
-- Confirm legal Arabic spelling against the current registration; the initial Arabic name is a working transcription.
-- Reconcile establishment year/history, employee/project/area metrics and the two different contact/address presentations. No such metrics or unconfirmed contact details were seeded.
-- Replace the temporary typographic KFATA wordmark with the original approved logo. Logo upload is supported.
-- Confirm project titles, scope, client naming permissions and source-image publication permissions.
-- Approved public project images included in GitHub: portfolio p.6 (ANB tower), p.18 (Al Hizam Al Thahabi exterior/interior), p.36 (residential villa). Cropped from original PDF imagery, not synthetic.
-- Complete approved quality/safety copy and certificate review. These pages are drafts.
-- Complete privacy notice describing actual processing, retention, recipients and contact details before accepting real enquiries. The form currently includes consent but is not a substitute for a reviewed notice.
-- Add accurate contact details and the intended enquiry inbox; none were inferred from possibly stale PDF pages.
-- News/careers are drafts until genuine content exists.
-- Improve English/Arabic editorial copy and image alternative text with company input.
-- Seed currently includes selected sample projects, not the entire 73-page source portfolio.
-- Enable SITE_INDEXABLE only after metadata, canonical origin, contact details and public content are reviewed.
-- No Google/Bing verification or submissions, DNS changes, GPT/Gemini discovery submissions or guaranteed indexing claims have occurred.
+Approved by the owner: info@kfata.com; +966112337351; +966504552257; 8508 King Fahad Branch, 3817, Al Olaya, Riyadh; 90-day form retention. Bilingual privacy and contact pages are public, enquiries enabled, indexing enabled after 44-route metadata/content review. Hosting country Saudi Arabia is owner-reported; physical location remains unverified (RIPE range registration says DE, which alone cannot establish physical location). Confirm from the provider and correct the privacy notice if necessary.
 
-The user explicitly approved publication of the four initial extracted project images to this public GitHub repository on 2026-11-03. This resolves the earlier automatic-review block for these files only; source PDFs and additional unreviewed images/documents remain excluded.
+Public copy includes two homes, about, six services, seven sectors, indexes, two supported project groups, contact and privacy in both languages: 44 routes. No title-only sector or empty news/careers navigation is public. Relationships link source-supported project/service/sector content.
 
+Still drafts: 15 additional bilingual project groups plus ANB Al Hizam/Golden Belt, whose heading/caption/images conflict; current quality/safety policy, certificates, news and careers. Owner review must confirm scope, client attribution, project grouping and any new photo rights before publication. Legal Arabic name, founding dates, areas/staffing and certification claims remain withheld until current evidence is approved. Supplier/partner walls were not called customers. No fabricated testimonial, rating or partnership claim was added.
 
-2026-11-03 follow-up: the original PDFs were not present in this environment. Public Arabic legal spelling is withheld in favor of KFATA. Empty sector pages/indexes were unpublished; legal, quality, certificate, news and careers drafts remain unpublished. Real enquiry collection and indexing are disabled. The infrastructure is live; see HANDOVER.md for the exact operational state.
+SMTP remains off at the owner's request pending future panel configuration. Search Console/Bing account verification and search submissions are not done; no ranking, indexing or assistant appearance is guaranteed. Customer PDF uploads stay disabled until appropriate scanning/sanitization exists. Re-running seed/import commands preserves edited pages, revisions and selected images; use Wagtail for subsequent editorial publication.

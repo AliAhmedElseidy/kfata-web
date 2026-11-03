@@ -2,7 +2,7 @@
 
 ## Current state
 
-The live review deployment uses /opt/kfata-web, independent kfata-web Compose services, loopback 8097, existing host Nginx and existing Certbot. See [HANDOVER.md](HANDOVER.md) for actual results, credential handoff, backups and remaining launch inputs. Indexing and enquiries stay disabled. The instructions below describe the operational procedure; they are not evidence of an unexecuted step.
+The live deployment uses /opt/kfata-web, independent kfata-web Compose services, loopback 8097, existing host Nginx and existing Certbot. See [HANDOVER.md](HANDOVER.md) for actual results, credential handoff, backups and remaining launch inputs. Indexing and enquiries are enabled after the documented owner approvals. SMTP delivery is off and can later be configured from owner-only Wagtail settings. The instructions below describe the operational procedure; they are not evidence of an unexecuted step.
 
 ## 1. Read-only inventory
 
@@ -20,7 +20,7 @@ The target host is shared with Mailcow and ERPNext. Never install a competing pr
 
 Use an isolated checkout such as `/opt/kfata-web`, on the reviewed commit. Copy `.env.example` to `.env`, with permissions 0600. Generate new independent secrets; URL-encode PostgreSQL credentials in DATABASE_URL if necessary.
 
-Set PUBLIC_BASE_URL, ALLOWED_HOSTS and matching PostgreSQL credentials. Keep SITE_INDEXABLE=false pending company-content review. Configure SMTP only with the intended outbound account. Set TRUSTED_PROXY_NETWORKS only to actual trusted proxy addresses; the proxy must overwrite X-Real-IP and X-Forwarded-Proto. Never trust 0.0.0.0/0.
+Set PUBLIC_BASE_URL, ALLOWED_HOSTS and matching PostgreSQL credentials. Keep SITE_INDEXABLE=false pending company-content review. Provision an independent Fernet SMTP_ENCRYPTION_KEY in root-only .env; keep its recovery copy outside the checkout. Configure the intended outbound account later through owner-only Wagtail SMTP settings, using STARTTLS or SSL. Keep mode off until tested. Set TRUSTED_PROXY_NETWORKS only to actual trusted proxy addresses; the proxy must overwrite X-Real-IP and X-Forwarded-Proto. Never trust 0.0.0.0/0.
 
 ```sh
 docker compose config --quiet

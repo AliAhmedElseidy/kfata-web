@@ -1,22 +1,25 @@
-# KFATA operational handover — 2026-11-03
+# KFATA operational handover — 2026-11-04 (Asia/Riyadh)
 
-## Available now
+## Live service
 
-- [Arabic site](https://kfata.elsaidy.org/ar/), [English site](https://kfata.elsaidy.org/en/), [Wagtail](https://kfata.elsaidy.org/admin/).
-- [PR 1](https://github.com/AliAhmedElseidy/kfata-web/pull/1) remains open; no merge or force push.
-- Initial verified deployment: `886100ae7793a400c3681e3d8c02b7e0ed86ff2a`. The host records the active application commit in `/opt/kfata-web/operations/deployed-commit`.
-- Review deployment, not final approved company-content launch. SITE_INDEXABLE=false. Real enquiries are disabled; a disabled POST returns 503 and saves nothing.
-- Two home pages and 26 published content pages. Title-only sectors and empty sector indexes were hidden. Quality/safety, certifications, news, careers and privacy remain drafts. Uncertain Arabic legal spelling is withheld; the public brand is KFATA. No invented statistics/certificates or unreviewed PDFs were published.
+- [Arabic](https://kfata.elsaidy.org/ar/), [English](https://kfata.elsaidy.org/en/), [administration](https://kfata.elsaidy.org/admin/).
+- [PR 1](https://github.com/AliAhmedElseidy/kfata-web/pull/1) stays open, without merge or force push.
+- Running application: `5d5bd9bf016c95581f08e375214cf3a312eb99fd`, recorded at `/opt/kfata-web/operations/deployed-commit`. Later delivery-documentation/restore-helper commits do not change that application image.
+- 44 public page routes: two home pages and 42 ContentPages. Six services and seven sectors have source-based copy in both languages. Original wordmark is installed. Only the four previously approved project photographs were published.
+- Contact details, Al Olaya address and 90-day enquiry retention were approved by the owner. Bilingual privacy is published; enquiry collection and search indexing are enabled. Search ownership verification/submissions were not performed and discovery/rankings are not guaranteed.
+- Sixteen bilingual project groups remain drafts (15 additional groups plus the inconsistent Al Hizam/Golden Belt attribution). Quality/safety, certificates, news and careers remain drafts pending current approved material. Legal Arabic name, founding figures and certificate claims are withheld. See [source review](SOURCE_REVIEW.md).
 
-## Owner access
+## Owner account and SMTP
 
-Account: `kfata-owner`. A unique random password was created without printing it and is stored only at `/root/.config/kfata-web/owner-initial-password`, mode 0600, in a mode-0700 directory. Retrieve it through your own trusted SSH terminal; do not paste it into chat, GitHub or a support ticket. Change the application password after taking ownership. There is no shared/default password.
+Account: `kfata-owner`. Retrieve its unique initial password through your own trusted SSH session from `/root/.config/kfata-web/owner-initial-password` (0600, parent 0700). Do not paste it into chat, GitHub or tickets. Change the application password after taking ownership. Tested SSH public-key access is available; the owner should also change the previously shared root password after preserving that working access. This session did not change the root password.
 
-The authorized SSH public-key connection worked. The previously shared root password should be changed by the owner after retaining this tested key access; this session did not change it.
+From Wagtail **Settings → SMTP** (owner-only), select panel delivery and enter host, port, STARTTLS/SSL, username, new password, sender and recipient, then save. Blank password preserves the saved credential; the explicit clear option removes it. The test button sends a configuration test using the **saved** settings only, without client data. Test acceptance is not proof of inbox delivery. No SMTP account exists yet: mode is **off**, no password is stored, and no real notification delivery is claimed. Enquiries still save and remain visible under Enquiries.
 
-## Manage only KFATA
+SMTP passwords are Fernet-encrypted in the database, never returned in the settings form. Independent root-only recovery key: `/root/.config/kfata-web/smtp-encryption-key`; Compose loads `SMTP_ENCRYPTION_KEY` from root-only `.env`. Preserve this key separately in the owner's secret store before using saved SMTP credentials. Database-only recovery cannot decrypt them without it; alternatively re-enter the SMTP password. Restored drill instances force `OUTBOUND_EMAIL_DISABLED=true` regardless of saved panel mode.
 
-On the VPS:
+## Manage KFATA only
+
+Checkout: `/opt/kfata-web`. Independent project `kfata-web`, PostgreSQL 16, private media volumes/network. Host Nginx routes this domain to `127.0.0.1:8097`; database has no host port. Web/database memory ceilings 768/512 MiB and CPU ceilings 1.0/0.75. No Docker socket or Mailcow/ERPNext databases/networks are shared.
 
 ```sh
 cd /opt/kfata-web
@@ -27,26 +30,20 @@ bash deploy/backup.sh
 cat operations/deployed-commit
 ```
 
-Application listens on `127.0.0.1:8097`; the existing host Nginx routes only kfata.elsaidy.org to it. PostgreSQL has no published port. Web/database memory ceilings are 768/512 MiB, CPU ceilings 1.0/0.75, with their own network and volumes. No Docker socket, shared databases or Mailcow/ERPNext application networks are mounted.
+Before updates: capture application SHA/image, back up, review migrations/rollback, build and test the exact commit, apply migrations once and update only this project. Git rollback alone does not restore data. Preserve edited pages, revisions and translations. `setup_roles` configures draft editors, publishers and brand/enquiry managers; SMTP/user administration stays owner-only unless explicitly delegated. See [content guide](CONTENT_GUIDE.md) and [deployment](DEPLOYMENT.md).
 
-Before an update, take a backup, review migrations, fetch/pull without overwriting editor data, build/test the exact commit, apply migrations once and update this Compose project only. Run `python manage.py setup_roles` after deliberate role configuration; editors save revisions and submit to publisher approval, publishers publish, managers also manage enquiries/brand settings, and the owner administers users/groups. Do not rerun owner provisioning for an existing account.
+## TLS, retention and recovery
 
-## TLS and backups
+- Certbot uses existing host installation/webroot `/var/lib/letsencrypt`. `certbot.timer` is active; domain-specific deploy hook validates/reloads Nginx. Certificate expires **2027-02-01 17:24:44 UTC**. A real production renewal succeeded; staging dry runs failed with resets/timeouts and are not reported as successes.
+- Proxy configuration before changes is preserved in `operations/nginx-before.tar.gz`. Existing vhosts and mail DNS were preserved. Mailcow returned 200 and ERPNext 302 before and after deployment.
+- `kfata-retention.timer`: 03:05 Riyadh, purges enquiries/private attachments older than 90 days and expired sessions. Contract records belong in separate company systems; this form database is not the contract archive.
+- `kfata-backup.timer`: 03:15 Riyadh plus up to five minutes jitter; retains completed local snapshots 14 days. The consistency freeze briefly stops only KFATA web, so a short 502 interval can occur. An EXIT trap restarts it.
+- Final tested snapshot: `/opt/kfata-web/backups/20261103T211956Z` (UTC). Restore into `kfata-restore-final2`, independent credentials/network/volumes, loopback 8099, returned 42 ContentPages plus two home pages and one synthetic enquiry. Media archive comparison passed, private 10x10 JPEG restored, authorized download 200/anonymous 302. The fixture and private file were subsequently removed from production and drill. Drill containers are stopped; volumes remain for inspection. An earlier failed initialization attempt is stopped as `kfata-restore-final`; no production data was affected. The helper now waits for TCP PostgreSQL readiness to avoid the temporary initialization-server race.
+- Manual off-server copy: `C:\Users\dell\.codex\backups\kfata-web\20261103T211956Z`, ACL restricted to current owner, SYSTEM and Administrators; both SHA-256 values match. Scheduled off-server transfer is **not configured**. Select an owner-controlled destination and credentials; local VPS copies alone do not cover host loss.
+- Dumps/media contain private data; never commit them. `.env`, owner password and SMTP recovery key are excluded. Preserve recovery secrets separately. See [backup/restore](BACKUP_RESTORE.md).
 
-- Certificate is issued through the existing Certbot installation using the webroot `/var/lib/letsencrypt`. Existing `certbot.timer` schedules renewal. `/etc/letsencrypt/renewal-hooks/deploy/kfata-web` validates Nginx and reloads it only for this certificate.
-- A real production renewal and hook succeeded. ACME staging dry runs failed with connection resets/timeouts; this is recorded separately from the successful real renewal.
-- Nginx configuration was backed up before the domain route was added: `/opt/kfata-web/operations/nginx-before.tar.gz`. No existing vhost was replaced. The KFATA-only route and rate-zone templates are in `deploy/`.
-- `kfata-backup.timer` runs daily at 03:15 Asia/Riyadh plus up to five minutes of jitter. It stops only KFATA web briefly to freeze database/file writers, restarts it via an EXIT trap, and retains completed local snapshots for 14 days. A brief application maintenance interval is expected; other stacks stay running.
-- Verified snapshot: `/opt/kfata-web/backups/20261103T182811Z`. Custom PostgreSQL dump and public/private media archive were restored into `kfata-restore-check` with separate credentials, volumes, network and loopback port 8098. Restored public page count was 26 and enquiry count 0; Arabic, English and login returned 200; archive content comparison passed. The drill containers are stopped; their volumes remain for inspection.
-- One access-controlled off-server copy is at `C:\Users\dell\.codex\backups\kfata-web\20261103T182811Z`; SHA-256 checks matched. This is a manual recovery copy. Scheduled off-server transfer is still unconfigured; choose an owner-controlled destination and credential mechanism. Local-only daily copies do not protect against loss of the VPS.
-- `.env`, outbound mail credentials and the initial owner password are excluded from repository/image/backup archives. Keep necessary recovery secrets separately in an approved password manager. A restored instance can generate independent application/database credentials and reset the owner password through authorized administration.
+## Remaining limits
 
-## Required company inputs
+The owner reported Saudi Arabia as the physical hosting country. RIPE network registration for the IP range reports DE/Contabo; registration is not proof of server location. Physical datacenter location has not been independently verified. Confirm it from the hosting contract/control panel and update both privacy pages before relying on the location claim. Current notice attributes the location to management-provided information.
 
-Supply the original approved logo and the two source PDFs, approved Arabic legal name, public phone/email/address, enquiry inbox, retention period and privacy contact. Neither PDF was present in this session's attachments. Only the four explicitly approved source photographs were used.
-
-Review the remaining project scope/client/date information and provide genuine quality/safety, certificate, news or careers material before publishing those drafts. Complete the privacy notice describing the actual hosting, storage, notification, retention, deletion and contact process; then enable enquiries from Brand settings. Configure SMTP through the protected environment and test with an internal test inbox. Never enable indexing until content, navigation, privacy and contact review are complete. Search Console/Bing account verification remains owner work.
-
-Hero images, editorial video blocks, responsive galleries and motion controls are available. A background video in the main hero and an animation of the original logo still require an approved asset and further presentation work. Customer PDFs remain disabled pending a real scanning/sanitizing pipeline.
-
-See [validation](VALIDATION.md) for measured performance limits and browser checks. No claim of full completion, guaranteed ranking, field Core Web Vitals or exhaustive accessibility certification is made.
+No SMTP transport was tested against a real provider; configure it later from the panel as requested. Unapproved content stays draft. Customer PDF uploads remain unavailable pending scanning/sanitizing. Video content requires an approved asset; the video block exists, while the main hero currently supports an image. Slow-network/cold-cache, representative INP, JavaScript-off/reduced-motion browser sessions and exhaustive accessibility QA remain incomplete. Recent LCP observations varied and do not establish that all performance targets pass. [Validation](VALIDATION.md) records the evidence and limits.

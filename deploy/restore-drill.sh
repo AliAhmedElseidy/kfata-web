@@ -27,10 +27,14 @@ Path(sys.argv[2]).write_text('services:\n  web:\n    image: kfata-web-web:latest
 PY
 drill=(docker compose -p "$project" --env-file "$env_path" -f compose.yaml -f "$override_path")
 "${drill[@]}" up -d db
+ready=false
 for i in $(seq 1 30); do
-    if "${drill[@]}" exec -T db sh -c 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"' >/dev/null; then break; fi
+    # The entrypoint's temporary initialization server accepts Unix sockets only.
+    # Wait for TCP so pg_restore cannot race that server shutting down.
+    if "${drill[@]}" exec -T db sh -c 'pg_isready -h 127.0.0.1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"' >/dev/null; then ready=true; break; fi
     sleep 2
 done
+[[ "$ready" = true ]] || { echo 'Restore database did not become ready.' >&2; exit 1; }
 "${drill[@]}" exec -T db sh -c 'pg_restore --exit-on-error --no-owner -U "$POSTGRES_USER" -d "$POSTGRES_DB"' < "$backup/database.dump"
 python3 - "$backup/files.tar.gz" <<'PY'
 import sys,tarfile

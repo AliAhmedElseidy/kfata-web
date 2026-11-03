@@ -5,7 +5,7 @@ Intended production origin: **https://kfata.elsaidy.org**.
 
 ## Delivery status
 
-The site is running on **https://kfata.elsaidy.org** with independent Docker/PostgreSQL services and valid HTTPS. This is a review deployment: indexing and real enquiry collection remain disabled until approved company contacts, privacy terms and source content are supplied.
+The site is running on **https://kfata.elsaidy.org** with independent Docker/PostgreSQL services and valid HTTPS. Indexing and enquiries are enabled after owner-approved contacts, privacy and 90-day retention. There are 44 public Arabic/English routes. Unapproved company material remains draft. Owner-only encrypted SMTP settings are available in Wagtail; delivery is off until an account is configured.
 
 See [handover](docs/HANDOVER.md), [validation](docs/VALIDATION.md) and [content review](docs/CONTENT_REVIEW.md) for verified results and remaining external inputs. Mailcow and ERPNext were not restarted or reconfigured.
 ## Local development (Python 3.12)
