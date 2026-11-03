@@ -179,6 +179,8 @@ class WebsiteTests(TestCase):
         self.assertEqual(Page.objects.count(),total)
         self.assertContains(self.client.get('/ar/about/'),'Owner content')
         self.assertEqual(BrandSettings.load().logo_id,logo)
+        self.assertEqual(self.client.get('/ar/sectors/').status_code,200)
+        self.assertContains(self.client.get('/en/sectors/banking/'),'ANB — New Tower')
 
     def test_retention_deletes_expired_records_and_private_files_only_on_apply(self):
         from datetime import timedelta

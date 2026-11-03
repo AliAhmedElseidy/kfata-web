@@ -1,4 +1,5 @@
 import json
+from urllib.parse import urljoin
 from django import template
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -12,14 +13,17 @@ def cards(locale, kind, count=6):
 @register.simple_tag
 def navigation(page=None, language='ar'):
     locale = {'locale':page.locale} if page else {'locale__language_code':language}
-    return ContentPage.objects.live().public().filter(depth=3, **locale).order_by('path')
+    return ContentPage.objects.live().public().filter(depth=3, **locale).exclude(slug='privacy').order_by('path')
 
 @register.simple_tag
 def organization_json(brand, lang):
-    data = {'@context':'https://schema.org','@type':'Organization','name':brand.company_ar if lang=='ar' else brand.company_en,'url':settings.PUBLIC_BASE_URL}
+    data = {'@context':'https://schema.org','@type':'GeneralContractor','@id':settings.PUBLIC_BASE_URL+'/#organization','name':brand.company_ar if lang=='ar' else brand.company_en,'url':settings.PUBLIC_BASE_URL,'areaServed':{'@type':'Country','name':'Saudi Arabia'}}
     if brand.phone: data['telephone'] = brand.phone
     if brand.email: data['email'] = brand.email
     if brand.linkedin: data['sameAs'] = [brand.linkedin]
+    address=brand.address_ar if lang=='ar' else brand.address_en
+    if address: data['address']=address
+    if brand.logo_id: data['logo']=urljoin(settings.PUBLIC_BASE_URL,brand.logo.file.url)
     return mark_safe(json.dumps(data, ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))
 
 @register.simple_tag

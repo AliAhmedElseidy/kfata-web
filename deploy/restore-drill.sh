@@ -3,21 +3,29 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 backup="$(realpath "${1:?Pass a KFATA backup directory}")"
+project="${KFATA_DRILL_PROJECT:-kfata-restore-check}"
+port="${KFATA_DRILL_PORT:-8098}"
+[[ "$project" =~ ^kfata-restore-[a-z0-9-]+$ ]] || { echo 'Invalid isolated drill project name.' >&2; exit 1; }
+[[ "$port" =~ ^[0-9]+$ ]] && (( port > 1024 && port < 65536 )) || { echo 'Invalid drill port.' >&2; exit 1; }
+test -z "$(docker ps -a --filter "label=com.docker.compose.project=$project" -q)" || { echo 'Drill containers already exist; choose a fresh name.' >&2; exit 1; }
+test -z "$(docker volume ls --filter "label=com.docker.compose.project=$project" -q)" || { echo 'Drill volumes already exist; choose a fresh name.' >&2; exit 1; }
 test -f "$backup/database.dump"
 test -f "$backup/files.tar.gz"
 umask 077
 mkdir -p operations
-test ! -e operations/drill.env || { echo 'Existing drill found; inspect it before reusing.' >&2; exit 1; }
-python3 - <<'PY'
+env_path="operations/$project.env"
+override_path="operations/$project.yaml"
+test ! -e "$env_path" || { echo 'Existing drill configuration found; inspect it before reusing.' >&2; exit 1; }
+python3 - "$env_path" "$override_path" "$port" <<'PY'
 from pathlib import Path
-import secrets
+import secrets,sys
 lines = dict(line.split('=',1) for line in Path('.env').read_text().splitlines() if line and not line.startswith('#') and '=' in line)
 password = secrets.token_urlsafe(36)
-lines.update(POSTGRES_PASSWORD=password, DATABASE_URL=f'postgres://kfata:{password}@db:5432/kfata',KFATA_LOCAL_PORT='8098',SITE_INDEXABLE='false',EMAIL_HOST='',ENQUIRY_EMAIL='',SECURE_SSL_REDIRECT='false',WEB_MEMORY='512m',DB_MEMORY='256m')
-Path('operations/drill.env').write_text('\n'.join(f'{k}={v}' for k,v in lines.items())+'\n')
-Path('operations/drill.yaml').write_text('services:\n  web:\n    image: kfata-web-web:latest\n    env_file: operations/drill.env\n')
+lines.update(POSTGRES_PASSWORD=password, DATABASE_URL=f'postgres://kfata:{password}@db:5432/kfata',KFATA_LOCAL_PORT=sys.argv[3],SITE_INDEXABLE='false',EMAIL_HOST='',ENQUIRY_EMAIL='',SECURE_SSL_REDIRECT='false',WEB_MEMORY='512m',DB_MEMORY='256m')
+Path(sys.argv[1]).write_text('\n'.join(f'{k}={v}' for k,v in lines.items())+'\n')
+Path(sys.argv[2]).write_text('services:\n  web:\n    image: kfata-web-web:latest\n    env_file: '+sys.argv[1]+'\n')
 PY
-drill=(docker compose -p kfata-restore-check --env-file operations/drill.env -f compose.yaml -f operations/drill.yaml)
+drill=(docker compose -p "$project" --env-file "$env_path" -f compose.yaml -f "$override_path")
 "${drill[@]}" up -d db
 for i in $(seq 1 30); do
     if "${drill[@]}" exec -T db sh -c 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"' >/dev/null; then break; fi
@@ -37,4 +45,4 @@ PY
 "${drill[@]}" up -d --no-build web
 "${drill[@]}" exec -T web python manage.py check
 "${drill[@]}" exec -T web python manage.py shell -c 'from home.models import ContentPage,Enquiry; print("Restored published pages:",ContentPage.objects.live().count(),"enquiries:",Enquiry.objects.count())'
-echo 'Restore running on loopback 8098. Verify pages and files, then stop only kfata-restore-check (retain volumes for inspection).'
+printf 'Restore project %s running on loopback %s. Verify pages/files, then stop only this drill project; retain its volumes for inspection.\n' "$project" "$port"
