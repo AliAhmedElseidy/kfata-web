@@ -7,13 +7,14 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from home import views
+from home.sitemaps import PublicSitemap
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/ar/', permanent=False), name='root'),
     path('media/<path:path>', views.public_image, name='public_image'),
     path('health/', views.health, name='health'),
     path('robots.txt', views.robots),
-    path('sitemap.xml', sitemap),
+    path('sitemap.xml', sitemap, {'sitemaps':{'pages':PublicSitemap}}),
     path('quote/', views.quote, name='quote'),
     path('private/enquiry/<int:pk>/', views.attachment, name='private_attachment'),
     path('django-admin/', admin.site.urls),

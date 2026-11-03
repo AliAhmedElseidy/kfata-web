@@ -4,6 +4,8 @@ from django.core.management import call_command
 from django.contrib.auth import get_user_model
 from wagtail.models import Page,PageViewRestriction
 from home.models import HomePage,ContentPage,BrandSettings,PresentationUpdate,SMTPSettings
+from urllib.parse import urlsplit
+from xml.etree import ElementTree
 
 class PresentationTests(TestCase):
     @classmethod
@@ -61,3 +63,7 @@ class PresentationTests(TestCase):
         self.assertNotContains(response,'anb-golden-belt')
         self.assertEqual(self.client.get('/en/projects/anb-golden-belt/').status_code,404)
         self.assertIn('AI-generated illustration',response.content.decode())
+        sitemap=ElementTree.fromstring(self.client.get('/sitemap.xml').content)
+        paths=[urlsplit(n.text).path for n in sitemap.iter() if n.tag.endswith('}loc')]
+        self.assertNotIn('/',paths)
+        self.assertIn('/en/terms/',paths)
