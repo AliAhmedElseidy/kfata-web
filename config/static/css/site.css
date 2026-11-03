@@ -18,3 +18,5 @@ body.motion-ready[data-motion=on] .reveal{opacity:0;transform:translateY(18px);t
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.opening-mark{display:none!important}body.motion-ready .reveal{opacity:1!important;transform:none!important}.project-card:hover img,.button:hover{transform:none}}
 body[data-motion=off] *,body[data-motion=off] *:before,body[data-motion=off] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}body[data-motion=off] .project-card:hover img,body[data-motion=off] .button:hover{transform:none}
 body[data-font=arial]{font-family:Arial,Tahoma,sans-serif}body[data-font=serif]{font-family:Georgia,'KFATA Plex',serif}
+
+.tone-stone :focus-visible,.project-heading :focus-visible{outline-color:#75603d}

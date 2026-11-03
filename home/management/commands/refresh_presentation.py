@@ -47,8 +47,8 @@ class Command(BaseCommand):
                 ImportedImage.objects.update_or_create(source_key=key,defaults={'image':image});self.images[key]=image
         for language in ['ar','en']:
             self.ar=language=='ar'
-            home=HomePage.objects.get(locale__language_code=language,depth=2)
-            self.pages={p.slug:p for p in ContentPage.objects.filter(locale=home.locale)}
+            home=HomePage.objects.select_for_update().get(locale__language_code=language,depth=2)
+            self.pages={p.slug:p for p in ContentPage.objects.select_for_update().filter(locale=home.locale)}
             self.update_home(home)
             for slug,data in SERVICES.items():
                 p=self.pages.get(slug)
@@ -65,6 +65,7 @@ class Command(BaseCommand):
     def t(self,a,e): return a if self.ar else e
     def eligible(self,p):
         if PresentationUpdate.objects.filter(page=p,key=KEY).exists() or (p.live and p.has_unpublished_changes):return False
+        if not p.live and p.slug not in {'quality-safety','terms','cookies'}:return False
         revision=p.get_latest_revision();return not (revision and revision.user_id)
     def save(self,p):
         p.save_revision().publish();PresentationUpdate.objects.get_or_create(page=p,key=KEY)
@@ -134,6 +135,8 @@ class Command(BaseCommand):
         from home.presentation_policies import policies
         for slug,(title,summary,sections) in policies(self.ar).items():
             p=self.pages.get(slug)
+            policy_key=f'{KEY}:policy:{slug}'
+            if PresentationUpdate.objects.filter(key=policy_key,page__locale=home.locale).exists():continue
             if p and not self.eligible(p):continue
             if not p:
                 p=ContentPage(slug=slug,title=title,locale=home.locale,kind='page')
@@ -142,8 +145,12 @@ class Command(BaseCommand):
                 home.add_child(instance=p)
             p.summary=summary;p.search_description=summary
             p.body=[self.heading(t,text,tone='stone' if i%2==0 else 'dark') for i,(t,text) in enumerate(sections)];self.save(p)
+            PresentationUpdate.objects.get_or_create(page=p,key=policy_key)
     def brand(self):
-        b=BrandSettings.load()
+        home=HomePage.objects.filter(locale__language_code='ar',depth=2).first()
+        brand_key=f'{KEY}:brand'
+        if PresentationUpdate.objects.filter(page=home,key=brand_key).exists():return
+        b=BrandSettings.objects.select_for_update().get(pk=BrandSettings.load().pk)
         defaults={'footer_intro_ar':'تصميم وإنشاء وتجديد وتجهيز للمساحات المصرفية والتجارية والسكنية.','footer_intro_en':'Design, construction, renovation and fit-out for banking, commercial and residential spaces.','footer_cta_ar':'لنبنِ المساحة التي تتصورها.','footer_cta_en':'Let’s build the place you envision.','whatsapp':'966504552257','map_url':'https://www.google.com/maps/search/?api=1&query='+quote(b.address_en or b.address_ar)}
         if not (b.address_en or b.address_ar):defaults.pop('map_url')
         for field,value in defaults.items():
@@ -154,3 +161,4 @@ class Command(BaseCommand):
             groups=[('الشركة','Company',['about','quality-safety','contact']),('الخدمات','Services',list(SERVICES)),('اكتشف أعمالنا','Explore our work',['projects','banking','commercial','residential','sectors'])]
             b.footer_columns=[('column',{'title_ar':a,'title_en':e,'links':[{'page':pages[s],'label_ar':'','label_en':''} for s in slugs if s in pages]}) for a,e,slugs in groups]
         b.save()
+        PresentationUpdate.objects.get_or_create(page=home,key=brand_key)

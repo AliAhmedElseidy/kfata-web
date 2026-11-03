@@ -31,7 +31,14 @@ class PresentationTests(TestCase):
         self.assertTrue(service.has_unpublished_changes)
         self.assertEqual(mail.host,'smtp.example.test');self.assertEqual(mail.password_ciphertext,'preserve-test-ciphertext')
         p=HomePage.objects.get(slug='en');p.body=[];p.save_revision().publish()
+        brand=BrandSettings.load();brand.footer_columns=[];brand.footer_intro_ar='';brand.save()
+        policy=ContentPage.objects.get(slug='terms',locale__language_code='en')
+        policy.slug='website-terms';policy.save_revision().publish()
+        count=Page.objects.count()
         self.update();p.refresh_from_db();self.assertFalse(p.body)
+        self.assertEqual(Page.objects.count(),count)
+        self.assertFalse(BrandSettings.load().footer_columns)
+        self.assertEqual(BrandSettings.load().footer_intro_ar,'')
     def test_curated_pages_footer_policies_and_galleries_are_public_and_translated(self):
         self.update()
         for lang in ['ar','en']:
