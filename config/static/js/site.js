@@ -14,7 +14,7 @@
     animation.finished.then(()=>active.delete(animation),()=>active.delete(animation));
     return animation;
   };
-  const settle=element=>animate(element,[{opacity:.82,transform:`translate3d(0,${quiet()?6:12}px,0)`},{opacity:1,transform:'none'}]);
+  const settle=element=>animate(element,[{opacity:.96,transform:`translate3d(0,${quiet()?6:12}px,0)`},{opacity:1,transform:'none'}]);
   // Local diagnostics only; no analytics, cookies or network reporting.
   if('PerformanceObserver' in window){
     try{new PerformanceObserver(list=>{const entries=list.getEntries();root.dataset.lcpMs=Math.round(entries[entries.length-1].startTime);}).observe({type:'largest-contentful-paint',buffered:true});}catch(_){}
@@ -133,7 +133,7 @@
         observer.unobserve(entry.target);
         settle(entry.target);
         const children=entry.target.querySelectorAll('.project-grid>.project-card,.service-list>.project-card,.sector-list>.project-card,.process-steps>li');
-        children.forEach((element,i)=>animate(element,[{opacity:.84,transform:`translate3d(0,${quiet()?5:10}px,0)`},{opacity:1,transform:'none'}],{delay:Math.min(i,3)*(quiet()?35:60)}));
+        children.forEach((element,i)=>animate(element,[{opacity:.96,transform:`translate3d(0,${quiet()?5:10}px,0)`},{opacity:1,transform:'none'}],{delay:Math.min(i,3)*(quiet()?35:60)}));
       }),{threshold:.06});
       document.querySelectorAll('.reveal,.gallery-section,.project-facts,.page-heading,.footer-callout').forEach(element=>observer.observe(element));
     }catch(_){/* No observer means ordinary, visible content. */}
