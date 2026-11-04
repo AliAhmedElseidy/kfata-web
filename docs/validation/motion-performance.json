@@ -1,0 +1,8 @@
+{
+  "environment": "Windows, Codex IAB Chromium, live HTTPS, unthrottled current network, uncontrolled cache; 2026-11-04 Riyadh",
+  "before": [
+    {"viewport": "1440x1000", "lcp_ms": 1340, "layout_shift_entries": "none observed", "horizontal_overflow": false},
+    {"viewport": "360x800", "lcp_ms": 1344, "layout_shift_entries": "none observed", "horizontal_overflow": false},
+    {"viewport": "768x1024", "lcp_ms": 1908, "layout_shift_entries": "none observed", "horizontal_overflow": false}
+  ]
+}
