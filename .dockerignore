@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+__pycache__
+*.sqlite3*
+media
+private-media
+static
+backups
+node_modules
+operations
+operations-backup.lock

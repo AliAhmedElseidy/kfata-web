@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily KFATA retention before backup
+
+[Timer]
+OnCalendar=*-*-* 03:05:00 Asia/Riyadh
+Persistent=true
+
+[Install]
+WantedBy=timers.target

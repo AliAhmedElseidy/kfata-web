@@ -1,0 +1,11 @@
+[Unit]
+Description=KFATA enquiry retention and expired sessions
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/kfata-web
+ExecStart=/usr/bin/docker compose -p kfata-web exec -T --interactive=false web python manage.py purge_enquiries --apply
+ExecStart=/usr/bin/docker compose -p kfata-web exec -T --interactive=false web python manage.py clearsessions
+UMask=0077

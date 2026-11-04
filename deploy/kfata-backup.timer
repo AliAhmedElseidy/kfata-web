@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily KFATA backup at 03:15 Riyadh time
+
+[Timer]
+OnCalendar=*-*-* 03:15:00 Asia/Riyadh
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

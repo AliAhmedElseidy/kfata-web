@@ -1,0 +1,26 @@
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar site_tags %}
+{% firstof page.locale.language_code lang 'ar' as language %}
+<!doctype html><html lang="{{ language }}" dir="{% if language == 'ar' %}rtl{% else %}ltr{% endif %}"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}{% firstof page.seo_title page.title 'KFATA' %}{% endblock %} | KFATA</title>
+<meta name="description" content="{% firstof page.search_description page.summary page.introduction 'KFATA International Contracting' %}">
+{% if not site_indexable or request.is_preview %}<meta name="robots" content="noindex,nofollow">{% endif %}
+{% if page and not request.is_preview %}<link rel="canonical" href="{{ page.full_url }}">{% for translation in page.get_translations.live.public %}{% if translation.full_url %}<link rel="alternate" hreflang="{{ translation.locale.language_code }}" href="{{ translation.full_url }}">{% endif %}{% endfor %}<link rel="alternate" hreflang="{{ language }}" href="{{ page.full_url }}">{% endif %}
+<meta property="og:title" content="{% firstof page.seo_title page.title 'KFATA' %}"><meta property="og:type" content="website"><meta property="og:description" content="{% firstof page.search_description page.summary page.introduction 'KFATA International Contracting' %}">
+{% if page %}<meta property="og:url" content="{{ page.full_url }}">{% endif %}
+{% if page %}{% with share_image=page.social_image|default:page.hero_image %}{% if share_image %}{% image share_image fill-1200x630 as social %}<meta property="og:image" content="{{ public_base }}{{ social.url }}">{% endif %}{% endwith %}{% endif %}
+{% if brand.favicon %}{% image brand.favicon fill-64x64 as favicon %}<link rel="icon" href="{{ favicon.url }}">{% endif %}
+{% block hero_preload %}{% endblock %}
+<link rel="preload" href="{% static 'fonts/IBMPlexSansArabic-Regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{% static 'css/site.css' %}"><script src="{% static 'js/site.js' %}" defer></script>
+<style>:root{--bg:{{ brand.background }};--gold:{{ brand.accent|default:'#c7a875' }}}</style>
+<script type="application/ld+json">{% organization_json brand language %}</script>
+<script type="application/ld+json">{% page_schema page %}</script>{% if brand.google_verification %}<meta name="google-site-verification" content="{{ brand.google_verification }}">{% endif %}{% if brand.bing_verification %}<meta name="msvalidate.01" content="{{ brand.bing_verification }}">{% endif %}</head><body data-font="{{ brand.font }}" data-intensity="{{ brand.motion_level }}" data-motion="{{ brand.animations|yesno:'on,off' }}" data-opening="{{ brand.opening_animation|yesno:'on,off' }}">
+<a class="skip" href="#main">{% if language == 'ar' %}انتقل إلى المحتوى{% else %}Skip to content{% endif %}</a>
+{% wagtailuserbar %}
+<header class="site-header"><a class="brand" href="{% if language == 'ar' %}/ar/{% else %}/en/{% endif %}" aria-label="KFATA home">{% if brand.logo %}{% image brand.logo max-240x90 alt='KFATA' %}{% else %}<span class="wordmark">KF<span>Λ</span>TA</span>{% endif %}<small>{% if language == 'ar' %}{{ brand.company_ar }}{% else %}INTERNATIONAL CONTRACTING{% endif %}</small></a>
+<details class="mobile-menu" open><summary aria-controls="main-navigation">{% if language == 'ar' %}القائمة{% else %}Menu{% endif %}<span aria-hidden="true">☰</span></summary><nav id="main-navigation" class="main-nav" aria-label="{% if language == 'ar' %}القائمة الرئيسية{% else %}Main navigation{% endif %}">
+{% if brand.menu and brand.navigation_mode != 'hidden' %}{% include 'home/menu.html' with entries=brand.menu %}{% elif brand.navigation_mode == 'auto' %}{% navigation page language as nav_pages %}{% for target in nav_pages %}{% if target.kind != 'project' and target.kind != 'article' %}<a href="{% pageurl target %}">{{ target.title }}</a>{% endif %}{% endfor %}{% endif %}</nav></details><div class="header-actions">{% if page %}{% for translation in page.get_translations.live.public %}<a class="language" href="{% pageurl translation %}" lang="{{ translation.locale.language_code }}">{% if language == 'ar' %}EN{% else %}عربي{% endif %}</a>{% endfor %}{% endif %}<a class="button compact" href="{% url 'quote' %}?lang={{ language }}">{% if language == 'ar' %}ابدأ مشروعك ↙{% else %}Start a project ↗{% endif %}</a></div></header>
+<main id="main" tabindex="-1">{% for message in messages %}<div class="notice" role="status">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</main>
+{% include 'home/footer.html' %}
+</body></html>

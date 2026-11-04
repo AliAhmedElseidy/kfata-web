@@ -1,0 +1,10 @@
+[Unit]
+Description=KFATA database and media backup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/kfata-web
+ExecStart=/bin/bash /opt/kfata-web/deploy/backup.sh
+UMask=0077
