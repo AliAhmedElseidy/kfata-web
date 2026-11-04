@@ -91,3 +91,12 @@ html{scroll-padding-top:calc(var(--header-height,110px) + 20px)}
 }
 body[data-motion=off] .opening-mark{display:none!important}
 body[data-motion=off] .project-card:is(:hover,:focus-within) img,body[data-motion=off] .project-card:is(:hover,:focus-within) h3 span,body[data-motion=off] .button:is(:hover,:focus-visible),body[data-motion=off] .filters a:is(:hover,:focus-visible){transform:none!important}
+
+html{scrollbar-gutter:stable}
+@media(max-width:700px){
+ .site-header .brand{width:126px;min-width:0}.site-header .brand small{font-size:7px;line-height:1.5;letter-spacing:.4px}
+ [dir=ltr] .hero h1{font-size:34px;line-height:1.24;letter-spacing:-.4px}
+ [dir=ltr] .hero-intro{font-size:14px;line-height:1.8}
+ .footer-main>.footer-column:nth-last-child(2):nth-child(even){grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
+ .footer-main>.footer-column:nth-last-child(2):nth-child(even)>h3{grid-column:1/-1}
+}
