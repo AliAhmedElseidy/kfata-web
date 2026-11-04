@@ -1,3 +1,5 @@
+> Current delivery: [MOTION_VALIDATION.md](MOTION_VALIDATION.md), 2026-11-05. The earlier browser interruption and pending responsive/keyboard/reduced-motion/script-blocked checks described below are historical; those checks now have actual browser evidence. Other limits remain as stated.
+
 # KFATA design/content phase — 2026-11-04 (Riyadh)
 
 ## Implemented direction

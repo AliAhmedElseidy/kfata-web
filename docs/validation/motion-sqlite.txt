@@ -5,7 +5,7 @@ D:\kfata-web\.venv\Lib\site-packages\django\core\handlers\base.py:61: UserWarnin
 ..........................Enquiry notification failed for enquiry 1
 .....
 ----------------------------------------------------------------------
-Ran 31 tests in 37.784s
+Ran 31 tests in 80.698s
 
 OK
 Destroying test database for alias 'default'...

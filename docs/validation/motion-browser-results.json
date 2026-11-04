@@ -1,0 +1,201 @@
+{
+  "initialAfter": [
+    {
+      "brokenLoadedImages": 0,
+      "cls": "0.0000",
+      "height": 800,
+      "lcpMs": "2660",
+      "motion": "enabled",
+      "overflow": false,
+      "width": 360
+    },
+    {
+      "brokenLoadedImages": 0,
+      "cls": "0.0000",
+      "height": 1024,
+      "lcpMs": "2828",
+      "motion": "enabled",
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "brokenLoadedImages": 0,
+      "cls": "0.0000",
+      "height": 1000,
+      "lcpMs": "2752",
+      "motion": "enabled",
+      "overflow": false,
+      "width": 1440
+    }
+  ],
+  "beforeHeroPreload": [
+    {
+      "broken": 0,
+      "cls": "0.0000",
+      "height": 800,
+      "introPlayed": "false",
+      "lcpClass": "hero-image",
+      "lcpMs": "2864",
+      "lcpTag": "IMG",
+      "motionState": "enabled",
+      "overflow": false,
+      "ttfbMs": "1149",
+      "width": 360
+    },
+    {
+      "broken": 0,
+      "cls": "0.0000",
+      "height": 1024,
+      "introPlayed": "false",
+      "lcpClass": "hero-image",
+      "lcpMs": "2812",
+      "lcpTag": "IMG",
+      "motionState": "enabled",
+      "overflow": false,
+      "ttfbMs": "798",
+      "width": 768
+    },
+    {
+      "broken": 0,
+      "cls": "0.0000",
+      "height": 1000,
+      "introPlayed": "false",
+      "lcpClass": "hero-image",
+      "lcpMs": "2804",
+      "lcpTag": "IMG",
+      "motionState": "enabled",
+      "overflow": false,
+      "ttfbMs": "1305",
+      "width": 1440
+    }
+  ],
+  "finalAfter": [
+    {
+      "cls": "0.0000",
+      "height": 800,
+      "introPlayed": "false",
+      "lcpClass": "hero-image",
+      "lcpMs": "1596",
+      "lcpResourceEndMs": "1239",
+      "lcpTag": "IMG",
+      "lcpTransferBytes": "0",
+      "motionState": "enabled",
+      "overflow": false,
+      "ttfbMs": "1190",
+      "visibility": "visible",
+      "width": 360
+    },
+    {
+      "cls": "0.0000",
+      "height": 1024,
+      "introPlayed": "false",
+      "lcpClass": "hero-image",
+      "lcpMs": "1540",
+      "lcpResourceEndMs": "1295",
+      "lcpTag": "IMG",
+      "lcpTransferBytes": "0",
+      "motionState": "enabled",
+      "overflow": false,
+      "ttfbMs": "1080",
+      "visibility": "visible",
+      "width": 768
+    },
+    {
+      "cls": "0.0000",
+      "height": 1000,
+      "introPlayed": "false",
+      "lcpClass": "hero-image",
+      "lcpMs": "1040",
+      "lcpResourceEndMs": "794",
+      "lcpTag": "IMG",
+      "lcpTransferBytes": "0",
+      "motionState": "enabled",
+      "overflow": false,
+      "ttfbMs": "739",
+      "visibility": "visible",
+      "width": 1440
+    }
+  ],
+  "serviceChecks": [
+    {
+      "broken": 0,
+      "lang": "ar",
+      "overflow": false,
+      "width": 360
+    },
+    {
+      "broken": 0,
+      "lang": "ar",
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "broken": 0,
+      "lang": "ar",
+      "overflow": false,
+      "width": 1440
+    },
+    {
+      "broken": 0,
+      "lang": "en",
+      "overflow": false,
+      "width": 360
+    },
+    {
+      "broken": 0,
+      "lang": "en",
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "broken": 0,
+      "lang": "en",
+      "overflow": false,
+      "width": 1440
+    }
+  ],
+  "footerChecks": [
+    {
+      "footerVisible": true,
+      "headerTop": 0,
+      "lang": "ar",
+      "overflow": false,
+      "width": 360
+    },
+    {
+      "footerVisible": true,
+      "headerTop": 0,
+      "lang": "ar",
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "footerVisible": true,
+      "headerTop": 0,
+      "lang": "ar",
+      "overflow": false,
+      "width": 1440
+    },
+    {
+      "footerVisible": true,
+      "headerTop": 0,
+      "lang": "en",
+      "overflow": false,
+      "width": 360
+    },
+    {
+      "footerVisible": true,
+      "headerTop": 0,
+      "lang": "en",
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "footerVisible": true,
+      "headerTop": 0,
+      "lang": "en",
+      "overflow": false,
+      "width": 1440
+    }
+  ]
+}

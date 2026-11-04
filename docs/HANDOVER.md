@@ -1,10 +1,10 @@
-# KFATA operational handover — 2026-11-04 (Asia/Riyadh)
+# KFATA operational handover — 2026-11-05 (Asia/Riyadh)
 
 ## Live service
 
 - [Arabic](https://kfata.elsaidy.org/ar/), [English](https://kfata.elsaidy.org/en/), [administration](https://kfata.elsaidy.org/admin/).
 - [PR 1](https://github.com/AliAhmedElseidy/kfata-web/pull/1) stays open, without merge or force push.
-- Running application: `b4b98b3cd869375a1e68f7c1b27a54a91441ec60`, recorded at `/opt/kfata-web/operations/deployed-commit`. Later delivery-documentation commits do not change that application image.
+- Running application: `f5e2454a076f702a46f2e401f02b914f255d173d`, recorded at `/opt/kfata-web/operations/deployed-commit`. Later delivery-documentation commits do not change that application image.
 - 50 public page routes: two home pages and 48 ContentPages. Six services and seven sectors have source-based copy in both languages. Original wordmark is installed. Eight specifically approved source project photographs and one explicitly labeled generated engineering illustration are published; source/approval details are in assets/README.md.
 - Contact details, Al Olaya address and 90-day enquiry retention were approved by the owner. Bilingual privacy is published; enquiry collection and search indexing are enabled. Search ownership verification/submissions were not performed and discovery/rankings are not guaranteed.
 - Sixteen bilingual project groups remain drafts (15 additional groups plus the inconsistent Al Hizam/Golden Belt attribution). The approved quality/safety summary, terms and cookies pages are public. Certificates, news and careers remain drafts pending current approved material. Legal Arabic name, founding figures and certificate claims are withheld. See [source review](SOURCE_REVIEW.md).
@@ -46,7 +46,7 @@ Before updates: capture application SHA/image, back up, review migrations/rollba
 
 The owner reported Saudi Arabia as the physical hosting country. RIPE network registration for the IP range reports DE/Contabo; registration is not proof of server location. Physical datacenter location has not been independently verified. Confirm it from the hosting contract/control panel and update both privacy pages before relying on the location claim. Current notice attributes the location to management-provided information.
 
-No SMTP transport was tested against a real provider; configure it later from the panel as requested. Unapproved content stays draft. Customer PDF uploads remain unavailable pending scanning/sanitizing. Video content requires an approved asset; the video block exists, while the main hero currently supports an image. Slow-network/cold-cache, representative INP, JavaScript-off/reduced-motion browser sessions and exhaustive accessibility QA remain incomplete. Recent LCP observations varied and do not establish that all performance targets pass. [Validation](VALIDATION.md) records the evidence and limits.
+No SMTP transport was tested against a real provider; configure it later from the panel as requested. Unapproved content stays draft. Customer PDF uploads remain unavailable pending scanning/sanitizing. Video content requires an approved asset; the video block exists, while the main hero currently supports an image. Slow-network/cold-cache, representative INP and exhaustive accessibility QA remain incomplete. Real script-blocked/reduced-motion browser sessions passed in the motion phase; see MOTION_VALIDATION.md. Recent LCP observations varied and do not establish that all performance targets pass. [Validation](VALIDATION.md) records the evidence and limits.
 
 ## 2026-11-04 redesign delivery
 
@@ -56,6 +56,12 @@ Consistent pre-content snapshot: `backups/20261103T222742Z` (old application ima
 
 SMTP fingerprints and existing user/enquiry IDs matched across the content update. The phase did not configure or send real SMTP mail. Actual synthetic form/private-file retest succeeded and was cleaned up. Mailcow and ERPNext remained200/302. Footer WhatsApp publication was explicitly approved for +966504552257; the map is an address search, not a verified coordinate pin.
 
-Browser automation stopped when it could not determine the native Chrome URL confidently. After screenshots, responsive360/768/1440, gallery/keyboard focus, actual JS-off/reduced-motion sessions and after LCP/CLS remain incomplete. Do not describe this phase as fully visually accepted from HTTP tests alone. The new desktop local preview was inspected before that stop, and before screenshots were preserved.
+Historical redesign-phase interruption: browser automation stopped when it could not determine the native Chrome URL confidently. That interruption was resolved in the subsequent motion phase using the established in-app browser; the requested responsive, gallery/keyboard, script-blocked and reduced-motion checks and after measurements are now recorded in MOTION_VALIDATION.md.
 
 The new-content snapshot225122Z also has a manual restricted-access PC copy at `C:\Users\dell\.codex\backups\kfata-web\20261103T225122Z`. Matching SHA256: database `c995806f57331c57714deba12a0330933875462f8f49d13bb1a0c2b9f828b7fc`; files `705285849d7889e51dff58c2446f5ff9c9e6ab63c6793a6891a0b5149d8773ea`. No scheduled off-server transfer or new restore claim.
+
+## 2026-11-05 architectural motion delivery
+
+Read [MOTION_VALIDATION.md](MOTION_VALIDATION.md) for current application behavior, actual browser matrix, before/after captures and performance limits. Original-logo intro lasts 1,320ms once/session; existing settings control animation, intro and quiet/standard levels. Native menu/gallery keyboard focus, both languages and 360/768/1440 were tested. Final cached LCP samples: 1,596/1,540/1,040ms respectively; observed CLS0, with slower intermediate samples retained. This is not controlled cold-cache or field certification.
+
+Pre-motion consistent snapshot: `backups/20261104T204024Z`, previous image `kfata-web-web:before-motion`. Final page/content/brand/SMTP hashes match before, existing enquiries preserved, owner English tower draft untouched. No content import or migration ran. Current web/database healthy; Mailcow200 and ERPNext302. The older restore and manual PC-copy evidence above remain historical; no new restore/off-server-copy claim for this snapshot.

@@ -1,8 +1,8 @@
-# Continue after the design phase
+# Continue after the architectural motion delivery
 
-Read HANDOVER.md, DESIGN_REVIEW.md, REDESIGN_VALIDATION.md and the host operations/deployed-commit. The redesign is deployed, but final browser QA is incomplete because Windows computer control stopped when it could not identify the Chrome URL confidently. Respect that control stop; do not bypass it using another automation stack. In a later authorized browser session, prefer the already selected in-app browser and establish its live URL/state first.
+Read MOTION_VALIDATION.md, HANDOVER.md, CONTENT_GUIDE.md and the host operations/deployed-commit. The application is f5e2454a076f702a46f2e401f02b914f255d173d; later documentation-only checkout commits may differ. Real in-app browser responsive Arabic/English home/project/services/footer, keyboard menu/gallery, local script-execution-blocked and actual OS reduced-motion checks passed. Before/after screenshots and observed LCP/CLS are saved. The prior unidentified-Chrome interruption is historical and resolved.
 
-Finish after screenshots at360/768/1440 and English, inspect the entire homepage/project/service/sector/contact/quote/footer, test native mobile navigation and gallery arrows/Escape/Tab/focus restoration, actual JavaScript-disabled/reduced-motion sessions and before/after LCP/CLS under documented conditions. Before screenshots are under docs/preview/redesign-before/. Historical screenshots elsewhere predate the redesign. No after files or after LCP are currently available.
+Remaining frontend validation: controlled cold-cache and throttled-network samples, representative INP and deeper accessibility/screen-reader auditing. Final cached LCP samples under 2.5s do not establish a field guarantee; intermediate slower observations remain in the report. No video artifact was recorded.
 
 An owner-authored pending English ANB tower revision was preserved; inspect/merge deliberately without discarding it. Sixteen project groups remain drafts, including the ambiguous Al Hizam/Golden Belt attribution. Additional cert/news/career material remains unapproved. The owner specifically approved the new four source crops, generated engineering illustration disclosure, process/quality text and WhatsApp; see assets/README.md.
 

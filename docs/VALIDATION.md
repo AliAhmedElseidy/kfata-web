@@ -1,3 +1,5 @@
+> Current delivery: [MOTION_VALIDATION.md](MOTION_VALIDATION.md), 2026-11-05. The earlier browser interruption and pending responsive/keyboard/reduced-motion/script-blocked checks described below are historical; those checks now have actual browser evidence. Other limits remain as stated.
+
 # Earlier deployment validation (superseded for current presentation)
 
 For the 2026-11-04 redesign, read [REDESIGN_VALIDATION.md](REDESIGN_VALIDATION.md) and [DESIGN_REVIEW.md](DESIGN_REVIEW.md). The historical measurements below are not after-redesign evidence.
