@@ -1,3 +1,5 @@
+> Execution update: [CONTENT_DELIVERY.md](CONTENT_DELIVERY.md). Source text has been applied and publicly verified; earlier unreachable-host statements describe the authoring environment. The original construction scene now exists as a local review prototype/recording; it is not deployed.
+
 # Source review — 2026-11-03
 
 The two original PDFs were found on the owner's Desktop during the expanded search. They are image-only: 28 profile pages and 45 portfolio pages. All page thumbnails were inspected, with larger views of the relevant narrative, services, project and contact pages. Originals, page renders, contact comparisons and legal material remain in an access-controlled local review directory outside the repository.

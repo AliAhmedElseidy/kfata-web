@@ -1,3 +1,5 @@
+> Execution update: [CONTENT_DELIVERY.md](CONTENT_DELIVERY.md). Source text has been applied and publicly verified; earlier unreachable-host statements describe the authoring environment. The original construction scene now exists as a local review prototype/recording; it is not deployed.
+
 # KFATA visual decision — 2026-11-05
 
 The owner supplied five video references and delegated the design decision. This supersedes vague requests for more fade-in effects.

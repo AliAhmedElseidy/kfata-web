@@ -1,0 +1,28 @@
+Creating test database for alias 'default'...
+
+.....D:\kfata-web\.venv\Lib\site-packages\django\core\handlers\base.py:61: UserWarning: No directory at: D:\kfata-web\static\
+  mw_instance = middleware(adapted_handler)
+..............................Enquiry notification failed for enquiry 1
+.....
+----------------------------------------------------------------------
+Ran 40 tests in 45.070s
+
+OK
+Destroying test database for alias 'default'...
+
+Found 40 test(s).
+System check identified no issues (0 silenced).
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+KFATA roles configured. Assign accounts deliberately; superusers manage users and groups.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Approved contacts and bilingual privacy configured. Enquiry collection: True
+KFATA roles configured. Assign accounts deliberately; superusers manage users and groups.
+Eligible enquiries: 1; no data deleted.
+Retention applied; deleted enquiries: 1.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.
+Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.

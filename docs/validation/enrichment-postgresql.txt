@@ -1,0 +1,24 @@
+Found 40 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.........Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.
+...Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+...KFATA roles configured. Assign accounts deliberately; superusers manage users and groups.
+.Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+.Approved contacts and bilingual privacy configured. Enquiry collection: True
+....KFATA roles configured. Assign accounts deliberately; superusers manage users and groups.
+............Eligible enquiries: 1; no data deleted.
+Retention applied; deleted enquiries: 1.
+.Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+Initial bilingual content created. Existing edited content was preserved. Review drafts and contact information before production indexing.
+.Enquiry notification failed for enquiry 6
+.Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.
+Source copy imported; 15 bilingual project groups remain drafts. Existing editor content and logo selections preserved.
+....
+----------------------------------------------------------------------
+Ran 40 tests in 266.406s
+
+OK
+Destroying test database for alias 'default'...
