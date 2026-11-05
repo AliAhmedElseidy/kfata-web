@@ -2,7 +2,7 @@
 
 ## Production
 
-Application: `77407baba0e200d6a43240b94740843e2f20052e`, recorded in `/opt/kfata-web/operations/deployed-commit`. [PR 2](https://github.com/AliAhmedElseidy/kfata-web/pull/2) remains open on `feat/kfata-source-enrichment`; no PR merge or force push. Later preview/documentation commits are not the running application image.
+Application: `e3b88861a42a4bba022eed31097b0d1a82c7076f`, recorded in `/opt/kfata-web/operations/deployed-commit`. [PR 2](https://github.com/AliAhmedElseidy/kfata-web/pull/2) remains open on `feat/kfata-source-enrichment`; no PR merge or force push. Later preview/documentation commits are not the running application image.
 
 The owner explicitly requested applying and publishing PR2's sourced text. Read-only host inventory (`deploy/audit.sh`) and the actual Nginx vhost were inspected first. Independent loopback8097 KFATA project, existing host TLS/ingress, PostgreSQL without host port, Mailcow and ERPNext preserved. Pre-enrichment consistent backup: `/opt/kfata-web/backups/20261105T094407Z`; previous image tagged `kfata-web-web:before-enrichment`. Only KFATA web was briefly stopped by the backup and automatically restarted. No new restore drill/off-server-copy claim.
 
@@ -36,3 +36,7 @@ The preview template uses the local Wagtail home content and shared header/foote
 Source/reproduction instructions: [tools/scene/README.md](../tools/scene/README.md). Opt-in local preview routes are not in production URL configuration. Generated scene media, screenshots containing it and recordings have not been uploaded to the public repository or server. The source code is reviewable in PR2; the new motion is **not live**. Original approved company imagery remains on production's hero/showcase.
 
 Next: owner review of building form/materials/composition, then final-resolution desktop/mobile assets, production CMS selection/activation, first-visit loading/performance and final accessibility checks before motion deployment. Existing cached LCP observations in MOTION_VALIDATION.md concern the older f5e2454 presentation; no new production LCP/INP improvement or field-performance guarantee is claimed here.
+
+## Final checks
+
+Final application e3b8886 includes the inactive preview code but no preview route in production and no generated media on the host. It also escapes pagination query separators correctly. The targeted pagination regression passed1 test in6.471s; actual browser banking page2 retained the selected filter. [Final application CI passed](https://github.com/AliAhmedElseidy/kfata-web/actions/runs/42011010205). An external HTTPS crawl fetched94 public pages plus47 additional internal links/assets, all200; [raw result](validation/enrichment-http.json). This is availability/link evidence, not a new LCP/INP measurement. Local preview stays at loopback8035 for owner review.
