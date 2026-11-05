@@ -101,3 +101,15 @@ class CompanyContentTests(TestCase):
             self.assertContains(clinic,f'/{lang}/services/renovation/')
             self.assertContains(clinic,f'/{lang}/sectors/banking/')
             self.assertContains(self.client.get(f'/{lang}/sectors/banking/'),f'/{lang}/projects/')
+
+    def test_sector_filter_uses_relationship_without_rewriting_project_facts(self):
+        self.run_update(apply=True,publish=True)
+        for lang in ['ar','en']:
+            sector=ContentPage.objects.get(locale__language_code=lang,slug='banking')
+            tower=ContentPage.objects.get(locale__language_code=lang,slug='anb-new-tower')
+            old_label=tower.sector
+            response=self.client.get(f'/{lang}/projects/',{'sector':sector.title})
+            total=response.context['items'].paginator.count
+            self.assertEqual(total,ContentPage.objects.live().public().filter(kind='project',locale=sector.locale,related_sectors=sector).count())
+            self.assertEqual(response.context['sectors'].count(sector.title),1)
+            tower.refresh_from_db();self.assertEqual(tower.sector,old_label)

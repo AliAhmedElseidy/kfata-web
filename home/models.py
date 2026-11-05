@@ -130,10 +130,16 @@ class ContentPage(Page):
                 qs = qs.annotate(has_photo=models.Case(models.When(hero_image__isnull=False, then=1), default=0, output_field=models.IntegerField())).order_by('-has_photo', '-first_published_at', 'pk')
             else:
                 qs = qs.order_by('-first_published_at', 'pk')
-            sectors = list(qs.exclude(sector='').order_by('sector').values_list('sector', flat=True).distinct())
+            if self.listing_kind == 'project':
+                # A project fact may use a shorter label (e.g. مصرفي). Filter by
+                # the actual published relationship rather than splitting one
+                # sector into duplicate labels or rewriting an owner's facts.
+                sectors = list(ContentPage.objects.live().public().filter(locale=self.locale,kind='sector',sector_projects__in=qs).order_by('title').values_list('title',flat=True).distinct())
+            else:
+                sectors = list(qs.exclude(sector='').order_by('sector').values_list('sector', flat=True).distinct())
             selected = request.GET.get('sector','')
             if selected:
-                qs = qs.filter(sector=selected)
+                qs = qs.filter(models.Q(related_sectors__title=selected) | models.Q(sector=selected)).distinct()
             context.update(items=Paginator(qs, 9).get_page(request.GET.get('page')), sectors=sectors, selected_sector=selected)
         return context
 
