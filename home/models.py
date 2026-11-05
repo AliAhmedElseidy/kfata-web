@@ -24,6 +24,13 @@ class PresentationUpdate(models.Model):
 
 @register_setting
 class BrandSettings(BaseGenericSetting):
+    scene_enabled = models.BooleanField(default=False, verbose_name='تفعيل مشهد البناء / Enable construction scene')
+    scene_video = models.ForeignKey('wagtaildocs.Document',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='فيديو الكمبيوتر / Desktop video',help_text='Public MP4, H.264, fast-start, up to 6 MB. Playback is always muted.')
+    scene_video_mobile = models.ForeignKey('wagtaildocs.Document',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='فيديو الموبايل / Mobile video',help_text='Optional lighter MP4; otherwise the desktop video is used.')
+    scene_poster = models.ForeignKey('wagtailimages.Image',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='صورة المبنى المكتمل / Completed-building poster')
+    scene_poster_mobile = models.ForeignKey('wagtailimages.Image',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='صورة الموبايل / Mobile poster',help_text='Optional; use the same completed-building composition.')
+    scene_caption_ar = models.CharField(max_length=300,default='تصور معماري توضيحي؛ ليس مشروعًا منفذًا لـKFATA.')
+    scene_caption_en = models.CharField(max_length=300,default='Illustrative architectural concept; not a completed KFATA project.')
     company_ar = models.CharField(max_length=150, default='KFATA')
     company_en = models.CharField(max_length=150, default='KFATA International Contracting')
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -71,6 +78,27 @@ class BrandSettings(BaseGenericSetting):
     panels += [FieldPanel('privacy_version')]
     panels += [FieldPanel('navigation_mode')]
     panels += [MultiFieldPanel([FieldPanel(f) for f in ['footer_intro_ar','footer_intro_en','footer_cta_ar','footer_cta_en','footer_columns']],heading='الفوتر المؤسسي / Corporate footer')]
+    panels += [MultiFieldPanel([FieldPanel(f) for f in ['scene_enabled','scene_video','scene_video_mobile','scene_poster','scene_poster_mobile','scene_caption_ar','scene_caption_en']],heading='مشهد البناء على الرئيسية / Homepage construction scene')]
+
+    @property
+    def construction_scene_ready(self):
+        from .scene import public_asset, public_video
+        return self.scene_enabled and public_video(self.scene_video) and public_asset(self.scene_poster)
+
+    @property
+    def scene_mobile_document(self):
+        from .scene import public_video
+        return self.scene_video_mobile if public_video(self.scene_video_mobile) else self.scene_video
+
+    @property
+    def scene_mobile_image(self):
+        from .scene import public_asset
+        return self.scene_poster_mobile if public_asset(self.scene_poster_mobile) else self.scene_poster
+
+    def clean(self):
+        super().clean()
+        from .scene import validate_scene_settings
+        validate_scene_settings(self)
     class Meta:
         verbose_name = 'هوية الموقع والتواصل / Brand and contact'
 
@@ -91,6 +119,15 @@ class HomePage(Page):
     promote_panels = Page.promote_panels + [FieldPanel('social_image')]
     subpage_types = ['home.ContentPage']
     max_count_per_parent = 2
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        brand = BrandSettings.load(request)
+        context['construction_scene'] = brand.construction_scene_ready
+        if context['construction_scene']:
+            context['scene_mobile_poster'] = brand.scene_mobile_image
+            context['scene_mobile_video'] = brand.scene_mobile_document
+        return context
 
 class ContentPage(Page):
     KIND = [('page','صفحة / Page'),('service','خدمة / Service'),('sector','قطاع / Sector'),('project','مشروع / Project'),('article','مقال / Article'),('listing','فهرس / Listing')]
