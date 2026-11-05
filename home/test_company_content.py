@@ -80,3 +80,24 @@ class CompanyContentTests(TestCase):
         self.assertNotIn('Old text',p.body[0].value['text'].source)
         self.assertEqual(p.body[1].block_type,'faq')
         self.assertEqual(p.body[1].value['title'],'Curated questions')
+
+    def test_public_listing_paginates_every_case_and_relations_are_navigable(self):
+        self.run_update(apply=True,publish=True)
+        for lang in ['ar','en']:
+            seen=set()
+            response=self.client.get(f'/{lang}/projects/')
+            photos=[p for p in response.context['items'] if p.hero_image_id]
+            if photos:
+                self.assertTrue(response.context['items'][0].hero_image_id)
+            for number in range(1,response.context['items'].paginator.num_pages+1):
+                result=self.client.get(f'/{lang}/projects/',{'page':number})
+                self.assertEqual(result.status_code,200)
+                for page in result.context['items']:
+                    seen.add(page.slug)
+                    self.assertContains(result,page.url)
+            expected={p['slug'] for p in load_pack()['pages'] if p['kind']=='project'}
+            self.assertTrue(expected.issubset(seen))
+            clinic=self.client.get(f'/{lang}/projects/anb-internal-clinic/')
+            self.assertContains(clinic,f'/{lang}/services/renovation/')
+            self.assertContains(clinic,f'/{lang}/sectors/banking/')
+            self.assertContains(self.client.get(f'/{lang}/sectors/banking/'),f'/{lang}/projects/')

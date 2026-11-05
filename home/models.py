@@ -124,7 +124,12 @@ class ContentPage(Page):
             field = 'related_services' if self.kind == 'service' else 'related_sectors'
             context['related_projects'] = ContentPage.objects.live().public().filter(locale=self.locale,kind='project',**{field:self}).select_related('hero_image')[:6]
         if self.listing_kind:
-            qs = ContentPage.objects.live().public().filter(locale=self.locale, kind=self.listing_kind).select_related('hero_image').order_by('-first_published_at')
+            qs = ContentPage.objects.live().public().filter(locale=self.locale, kind=self.listing_kind).select_related('hero_image')
+            if self.listing_kind == 'project':
+                # Approved photographed work precedes the text-only case studies.
+                qs = qs.annotate(has_photo=models.Case(models.When(hero_image__isnull=False, then=1), default=0, output_field=models.IntegerField())).order_by('-has_photo', '-first_published_at', 'pk')
+            else:
+                qs = qs.order_by('-first_published_at', 'pk')
             sectors = list(qs.exclude(sector='').order_by('sector').values_list('sector', flat=True).distinct())
             selected = request.GET.get('sector','')
             if selected:

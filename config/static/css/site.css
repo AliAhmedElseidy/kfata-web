@@ -100,3 +100,14 @@ html{scrollbar-gutter:stable}
  .footer-main>.footer-column:nth-last-child(2):nth-child(even){grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
  .footer-main>.footer-column:nth-last-child(2):nth-child(even)>h3{grid-column:1/-1}
 }
+
+/* Source-backed case studies without approved photographs stay text-led. */
+.project-grid>.card-project.text-case{grid-column:1/-1;border-top:1px solid var(--line);padding-block:24px}
+.project-grid>.card-project.text-case>a{display:block;background:transparent}
+.project-grid>.card-project.text-case .card-copy{padding:0;max-width:none}
+.project-grid>.card-project.text-case h3{font-size:clamp(22px,2.3vw,32px);margin-block:10px}
+.project-grid>.card-project.text-case .card-scope{display:none}
+.project-grid>.card-project.text-case p:not(.eyebrow){max-width:74ch}
+@media(min-width:900px){.project-grid>.card-project.text-case .card-copy{display:grid;grid-template-columns:1fr 1.5fr;column-gap:48px}.project-grid>.card-project.text-case .eyebrow{grid-column:1}.project-grid>.card-project.text-case h3{grid-column:1}.project-grid>.card-project.text-case p:not(.eyebrow){grid-column:2;grid-row:1/4;align-self:center}}
+
+.project-showcase>.project-card.text-case:nth-child(even){margin-top:0}
