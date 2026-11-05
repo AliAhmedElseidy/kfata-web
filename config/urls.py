@@ -7,9 +7,11 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from home import views
+from home.scene import scene_video
 from home.sitemaps import PublicSitemap
 
 urlpatterns = [
+    path('scene-media/<int:document_id>/', scene_video, name='scene_video'),
     path('', RedirectView.as_view(url='/ar/', permanent=False), name='root'),
     path('media/<path:path>', views.public_image, name='public_image'),
     path('health/', views.health, name='health'),

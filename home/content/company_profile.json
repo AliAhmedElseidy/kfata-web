@@ -1,0 +1,1547 @@
+{
+  "version": "2026-11-05-source-v1",
+  "source_files": {
+    "profile": "KFATA International Contracting Company Profile.pdf",
+    "portfolio": "portfolio .pdf"
+  },
+  "notes": [
+    "Page numbers are 1-based PDF pages.",
+    "Source-based editorial copy; current legal/certification claims, financial figures, exact dimensions, dates and operational security details intentionally excluded.",
+    "No new source photographs or raw PDFs are included.",
+    "The ambiguous Golden Belt branch and an owner-authored pending revision must remain protected."
+  ],
+  "pages": [
+    {
+      "slug": "about",
+      "parent_slug": null,
+      "kind": "page",
+      "source": {
+        "profile": [
+          2,
+          5
+        ],
+        "portfolio": [
+          2,
+          3
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "عن KFATA",
+          "summary": "التصميم والإنشاء والتجديد والتجهيز ضمن خبرات متكاملة.",
+          "paragraphs": [
+            "تقدم KFATA خدمات التصميم والتنفيذ والمقاولات والتجديد وتنسيق المواقع والتأثيث والأنظمة التقنية والصوت والصورة والأمن. يجمع نطاق أعمالها بين إنشاء المنشآت وتطوير المساحات القائمة وتجهيزها للاستخدام، مع خبرات موثقة في الأعمال المصرفية والمكتبية والتجارية والسكنية والتعليمية والصناعية وأعمال الطرق والساحات."
+          ],
+          "details": [
+            "أعمال الفروع المصرفية والمقرات الإدارية ومراكز التحويل ومواقع الصراف الآلي.",
+            "إنشاء وتشطيبات الفلل والمدارس والمرافق التجارية والصناعية.",
+            "أعمال المساحات الخارجية والطرق والمعالم المعمارية."
+          ]
+        },
+        "en": {
+          "title": "About KFATA",
+          "summary": "Integrated expertise in design, construction, renovation and fit-out.",
+          "paragraphs": [
+            "KFATA provides design and build, contracting, renovation, landscaping, furnishing, and IT, audiovisual and security services. Its work spans new facilities, refurbishment of existing premises and fit-out for use, with documented banking, office, commercial, residential, educational, industrial, road and public-space projects."
+          ],
+          "details": [
+            "Bank branches, administrative offices, remittance centres and ATM sites.",
+            "Construction and finishing for villas, schools, commercial and industrial facilities.",
+            "Outdoor spaces, roads and architectural landmarks."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "design-build",
+      "parent_slug": "services",
+      "kind": "service",
+      "source": {
+        "profile": [
+          5
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "التصميم والتنفيذ",
+          "summary": "من الفكرة المعمارية إلى مساحة قابلة للاستخدام.",
+          "paragraphs": [
+            "ربط التصميم بالتنفيذ يتيح دراسة توزيع المساحات والخامات والتجهيزات ضمن نطاق متكامل. تقدم KFATA التصميم والتنفيذ ضمن خدماتها، وتعرض أعمالها تطبيقات في المنشآت المصرفية والمكتبية والسكنية والتجارية."
+          ],
+          "details": [
+            "توزيع المساحات والاحتياجات الوظيفية.",
+            "تنسيق الخامات والتشطيبات والتجهيزات المطلوبة.",
+            "تحديد نطاق التصميم والتنفيذ قبل بدء الأعمال."
+          ]
+        },
+        "en": {
+          "title": "Design & build",
+          "summary": "From architectural concept to a usable space.",
+          "paragraphs": [
+            "Connecting design and construction allows layouts, materials and fit-out to be considered within one scope. KFATA lists design and build among its services, with applications across banking, office, residential and commercial work."
+          ],
+          "details": [
+            "Space planning and functional requirements.",
+            "Coordination of materials, finishes and required fit-out.",
+            "Definition of the design and delivery scope before works begin."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "contracting",
+      "parent_slug": "services",
+      "kind": "service",
+      "source": {
+        "profile": [
+          5,
+          15,
+          18,
+          22
+        ],
+        "portfolio": [
+          26,
+          27,
+          28
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "المقاولات والإنشاءات",
+          "summary": "إنشاءات وأعمال مدنية وتشطيبات لقطاعات متعددة.",
+          "paragraphs": [
+            "يشمل سجل الأعمال إنشاء وتشطيب منشآت سكنية وتعليمية ومرافق تجارية ومركز نقد، إلى جانب أعمال مدنية في الطرق والساحات. تُناقش متطلبات كل مشروع وفق استخدام المنشأة وحالة الموقع والمخططات والنطاق المطلوب."
+          ],
+          "details": [
+            "المباني والأعمال الإنشائية.",
+            "الأعمال المدنية ضمن نطاق المشروع.",
+            "التنسيق بين الإنشاءات والتشطيبات والتجهيزات."
+          ]
+        },
+        "en": {
+          "title": "Contracting & construction",
+          "summary": "Construction, civil works and finishes across multiple sectors.",
+          "paragraphs": [
+            "The portfolio includes residential and educational construction and finishing, commercial facilities, a cash centre and civil works in roads and plazas. Each scope is discussed according to facility use, site condition, drawings and the required work."
+          ],
+          "details": [
+            "Buildings and structural works.",
+            "Civil works within the project scope.",
+            "Coordination between construction, finishes and fit-out."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "renovation",
+      "parent_slug": "services",
+      "kind": "service",
+      "source": {
+        "profile": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          11
+        ],
+        "portfolio": [
+          6,
+          12,
+          13,
+          14,
+          22
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "التجديد والتشطيبات",
+          "summary": "تطوير المساحات القائمة وتحديث هويتها وتجهيزاتها.",
+          "paragraphs": [
+            "يعرض البورتفوليو أعمال تجديد لفروع ومقار البنك العربي الوطني ومساحات إدارية وتجارية. تشمل الأمثلة مناطق استقبال وعمل واجتماعات وتشطيبات أسقف وأرضيات وقواطع زجاجية وإضاءة، مع تنسيق نطاق التجديد وفق ظروف تشغيل المنشأة."
+          ],
+          "details": [
+            "تجديد المساحات الداخلية والخارجية.",
+            "الأرضيات والأسقف والقواطع والتشطيبات.",
+            "تحديث توزيع المساحات والتجهيزات المرتبطة بها."
+          ]
+        },
+        "en": {
+          "title": "Renovation & finishing",
+          "summary": "Refurbishing existing spaces, finishes and fit-out.",
+          "paragraphs": [
+            "The portfolio documents refurbishment of ANB branches and offices and administrative and commercial spaces. Examples include reception, working and meeting areas, ceilings, floors, glazed partitions and lighting, with renovation scope coordinated around facility operations."
+          ],
+          "details": [
+            "Interior and exterior refurbishment.",
+            "Floors, ceilings, partitions and finishes.",
+            "Updates to spatial layouts and related fit-out."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "landscaping",
+      "parent_slug": "services",
+      "kind": "service",
+      "source": {
+        "profile": [
+          5,
+          14
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "تنسيق المواقع والمساحات الخارجية",
+          "summary": "مساحات خارجية مرتبطة بالمبنى واستخدامه.",
+          "paragraphs": [
+            "تتضمن الأعمال ساحات خارجية وتنسيق مساحات مرتبطة بالمرافق، مع أمثلة على مناطق جلوس وأعمال موقع ضمن المشروعات. يحدد استخدام المساحة وحركة الوصول والأعمال المطلوبة نطاق تطوير الموقع."
+          ],
+          "details": [
+            "الساحات ومناطق الاستخدام الخارجية.",
+            "تجهيز المساحات المرتبطة بالمباني.",
+            "تنسيق الأعمال الخارجية مع الإنشاء والتجديد."
+          ]
+        },
+        "en": {
+          "title": "Landscaping & external works",
+          "summary": "Outdoor spaces connected to the building and its use.",
+          "paragraphs": [
+            "The work includes courtyards and outdoor areas associated with facilities, with seating and site-work examples in the portfolio. The use of the space, access arrangements and required work define the external-works scope."
+          ],
+          "details": [
+            "Courtyards and outdoor-use areas.",
+            "External spaces associated with buildings.",
+            "Coordination with construction and refurbishment."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "furnishing",
+      "parent_slug": "services",
+      "kind": "service",
+      "source": {
+        "profile": [
+          5,
+          16,
+          22
+        ],
+        "portfolio": [
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "التأثيث والتجهيز",
+          "summary": "تجهيز المساحات لتناسب العمل والاستقبال والاستخدام اليومي.",
+          "paragraphs": [
+            "تشمل خدمات KFATA التأثيث والتجهيز، وتعرض المشروعات مساحات عمل واستقبال واجتماعات ومقاهي داخلية. تُحدد احتياجات الأثاث والتجهيزات وفق الاستخدام والتوزيع المكاني والخامات المطلوبة."
+          ],
+          "details": [
+            "مناطق العمل والاجتماعات والاستقبال.",
+            "الأثاث وتجهيز المساحات حسب الاستخدام.",
+            "تنسيق التجهيزات مع التشطيبات الداخلية."
+          ]
+        },
+        "en": {
+          "title": "Furnishing & fit-out",
+          "summary": "Fit-out for working, reception and everyday use.",
+          "paragraphs": [
+            "KFATA lists furnishing and fit-out among its services. Project examples show workspaces, reception and meeting areas and internal cafés. Furniture and fit-out requirements are defined by intended use, spatial arrangement and the selected materials."
+          ],
+          "details": [
+            "Working, meeting and reception areas.",
+            "Furniture and fit-out according to use.",
+            "Coordination with interior finishes."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "technology",
+      "parent_slug": "services",
+      "kind": "service",
+      "source": {
+        "profile": [
+          5
+        ],
+        "portfolio": [
+          5,
+          12
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "الأنظمة التقنية والصوت والصورة والأمن",
+          "summary": "تجهيزات تقنية تُنسق مع احتياجات المنشأة.",
+          "paragraphs": [
+            "يرد ضمن خدمات الشركة نطاق الأنظمة التقنية والصوت والصورة والأمن والمراقبة. ويعرض البورتفوليو أعمال غرفة تحكم وتجهيز مواقع مصرفية ومواقع صراف آلي، بما يدعم مناقشة احتياجات الربط والتشغيل لكل مشروع."
+          ],
+          "details": [
+            "تحديد الأنظمة القائمة والمطلوبة.",
+            "متطلبات الربط والتجهيز والتنسيق.",
+            "نطاق فني خاص بكل مشروع دون افتراض خدمات غير مذكورة."
+          ]
+        },
+        "en": {
+          "title": "IT, audiovisual & security",
+          "summary": "Technical systems coordinated with facility requirements.",
+          "paragraphs": [
+            "The listed services include IT, audiovisual, security and surveillance systems. The portfolio also presents control-room works, banking fit-out and ATM sites, providing context for discussion of each project’s integration and operating requirements."
+          ],
+          "details": [
+            "Existing and required systems.",
+            "Integration, fit-out and coordination needs.",
+            "Project-specific technical scope without assuming unlisted services."
+          ]
+        }
+      }
+    },
+    {
+      "slug": "banking",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "portfolio": [
+          6,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "القطاع المصرفي",
+          "summary": "فروع ومقار ومراكز تحويل ومواقع صراف آلي.",
+          "paragraphs": [
+            "تشمل الأمثلة برج البنك العربي الوطني ومقره القديم وفروع العوالي والمجمعة والفروع الجنوبية، إضافة إلى مراكز تلي موني ومواقع الصراف الآلي. ترتبط هذه الأعمال بالتجديد والتشطيبات والتجهيزات والمساحات الخارجية."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Banking",
+          "summary": "Branches, offices, remittance centres and ATM sites.",
+          "paragraphs": [
+            "Examples include the ANB tower, old head office, Al Awali and Al Majmaah branches, southern branches, TeleMoney centres and ATM sites. The work relates to refurbishment, finishes, fit-out and external spaces."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "commercial",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          15,
+          16,
+          17
+        ],
+        "portfolio": [
+          10,
+          11,
+          15,
+          34,
+          35
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "القطاع التجاري والمكتبي",
+          "summary": "مساحات إدارية وتجارية ومطاعم ومقاهٍ.",
+          "paragraphs": [
+            "يعرض الملف مكاتب إدارية وتجهيزات استقبال واجتماعات ومطاعم ومقاهي، إلى جانب مرافق تجارية. يتيح تنوع الأمثلة عرض تكامل التشطيبات والأثاث والإضاءة وتوزيع المساحات."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Commercial & offices",
+          "summary": "Administrative and commercial spaces, restaurants and cafés.",
+          "paragraphs": [
+            "The portfolio presents administrative offices, reception and meeting spaces, restaurants, cafés and commercial facilities. These examples illustrate the coordination of finishes, furniture, lighting and spatial layouts."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "education",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          18
+        ],
+        "portfolio": [
+          26
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "القطاع التعليمي",
+          "summary": "إنشاء وتشطيبات منشأة مدرسية في المزاحمية.",
+          "paragraphs": [
+            "يتضمن سجل الأعمال مشروع مدرسة بالمزاحمية، مع صور لمراحل الإنشاء والمباني ومساحات الموقع. تجمع الأعمال التعليمية المعروضة بين تنفيذ المبنى والتشطيبات والمرافق المرتبطة به."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Education",
+          "summary": "School construction and finishing in Al Muzahmiyah.",
+          "paragraphs": [
+            "The portfolio includes a school in Al Muzahmiyah, with construction-stage, building and site images. The documented educational scope combines building construction, finishes and associated facilities."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "industrial",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          21
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "القطاع الصناعي",
+          "summary": "أعمال إنشاء وتشطيبات لمنشأة صناعية.",
+          "paragraphs": [
+            "يعرض بروفايل الشركة منشأة صناعية ضمن قطاع الصناعة، مع صور لمساحاتها وأعمالها الداخلية. يُحدد النطاق وفق احتياجات التشغيل والخدمات والتشطيبات الخاصة بالمبنى."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Industrial",
+          "summary": "Construction and finishing for an industrial facility.",
+          "paragraphs": [
+            "The company profile presents an industrial facility and images of its spaces and interior works. Scope is defined according to the building’s operational needs, services and finishes."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "residential",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          22
+        ],
+        "portfolio": [
+          36
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "القطاع السكني",
+          "summary": "فلل وواجهات ومساحات داخلية.",
+          "paragraphs": [
+            "تشمل الأعمال السكنية إنشاء وتشطيب فلل وتطوير واجهات ومساحات داخلية وساحات مرتبطة بها. تُعرض الأمثلة دون نشر بيانات الملاك أو عناوين العقارات الخاصة."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Residential",
+          "summary": "Villas, facades and interior spaces.",
+          "paragraphs": [
+            "Residential work includes villa construction and finishes, facades, interiors and associated courtyards. Examples are presented without publishing homeowner information or private property addresses."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "public-spaces",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          19,
+          20
+        ],
+        "portfolio": [
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "الطرق والساحات والمعالم",
+          "summary": "أعمال مدنية وطرق ومعالم معمارية ومساحات خارجية.",
+          "paragraphs": [
+            "يتضمن البورتفوليو أعمال طرق وحواجز طرق ومظلات مواقف، إضافة إلى مجسمي الغاط ورماح الجماليين. يجمع هذا المجال الأعمال المدنية والتجهيزات والتشطيبات المرتبطة بالموقع."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Roads, plazas & landmarks",
+          "summary": "Civil works, roads, architectural landmarks and outdoor spaces.",
+          "paragraphs": [
+            "The portfolio includes road works, road blockers and parking shades, as well as architectural landmarks in Al Ghat and Rumah. This scope connects civil works, site installations and finishes."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "entertainment",
+      "parent_slug": "sectors",
+      "kind": "sector",
+      "source": {
+        "profile": [
+          5
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "القطاع الترفيهي",
+          "summary": "قطاع مدرج ضمن مجالات عمل الشركة.",
+          "paragraphs": [
+            "يرد القطاع الترفيهي ضمن قطاعات الشركة في البروفايل. تُناقش احتياجات المنشأة الترفيهية من إنشاء وتجديد وتشطيبات وتجهيز وفق طبيعتها ونطاق الأعمال المطلوب."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Entertainment",
+          "summary": "A sector listed among the company’s areas of work.",
+          "paragraphs": [
+            "Entertainment is listed among the company’s sectors. Construction, renovation, finishes and fit-out requirements are discussed according to the facility and proposed scope."
+          ],
+          "details": []
+        }
+      }
+    },
+    {
+      "slug": "anb-new-tower",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          6
+        ],
+        "portfolio": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "برج البنك العربي الوطني",
+          "summary": "تجديد المساحات المكتبية والمصرفية داخل البرج.",
+          "paragraphs": [
+            "تتضمن الأعمال تجديد مساحات داخلية وتجهيز مناطق عمل واجتماعات واستقبال. يعرض البورتفوليو المكاتب المفتوحة والقواطع الزجاجية والأسقف والإضاءة ومساحات الاستخدام المشترك."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB tower",
+          "summary": "Renovation of office and banking spaces within the tower.",
+          "paragraphs": [
+            "The work includes interior renovation and fit-out of working, meeting and reception areas. The portfolio shows open-plan offices, glazed partitions, ceilings, lighting and shared spaces."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-old-head-office",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          7
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "banking",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "المقر الرئيسي القديم — البنك العربي الوطني",
+          "summary": "تجديد المقر ومساحات العمل والخدمات الداخلية.",
+          "paragraphs": [
+            "تشمل الصور أعمال تجديد داخل المقر الرئيسي القديم، مع مناطق تشغيل وعمل ومساحات جلوس وخدمات داخلية. يُعرض نطاق التجديد دون تعميم المواصفات على جميع مشروعات البنك."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB old head office",
+          "summary": "Refurbishment of headquarters workspaces and internal facilities.",
+          "paragraphs": [
+            "The images document renovation within the old head office, including working and operational areas, seating and internal facilities. The scope is presented without generalizing its specifications to every banking project."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-al-awali",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          9
+        ],
+        "portfolio": [
+          13,
+          14
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "فرع العوالي — البنك العربي الوطني",
+          "summary": "أعمال تجديد للواجهة والمساحات الداخلية.",
+          "paragraphs": [
+            "يعرض المشروع واجهة الفرع ومدخله ومناطق خدمة العملاء، مع تفاصيل الأرضيات والأسقف والإضاءة وتجهيزات المساحات الداخلية."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB Al Awali branch",
+          "summary": "Facade and interior refurbishment.",
+          "paragraphs": [
+            "The project presents the branch facade, entrance and customer-service areas, including floor, ceiling, lighting and interior fit-out details."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-al-majmaah",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          10
+        ],
+        "portfolio": [
+          16,
+          17
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "Al Majmaah",
+      "languages": {
+        "ar": {
+          "title": "فرع المجمعة — البنك العربي الوطني",
+          "summary": "تجهيز فرع مصرفي بمساحات استقبال وعمل.",
+          "paragraphs": [
+            "توضح الصور معالجة الواجهات والمدخل، إلى جانب مناطق استقبال ومكاتب وقواطع زجاجية ومساحات داخلية مرتبطة بخدمة العملاء."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB Al Majmaah branch",
+          "summary": "Bank-branch fit-out with reception and working spaces.",
+          "paragraphs": [
+            "The photographs show facade and entrance treatment, reception areas, offices, glazed partitions and interior spaces associated with customer service."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-southern-branches",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          11
+        ],
+        "portfolio": [
+          22
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "Southern region",
+      "languages": {
+        "ar": {
+          "title": "تجديد الفروع الجنوبية — البنك العربي الوطني",
+          "summary": "تطوير التشطيبات ومساحات خدمة العملاء في الفروع.",
+          "paragraphs": [
+            "تتضمن الأعمال المعروضة تجديد المساحات العامة ومناطق الخدمة، مع معالجات للأرضيات والأسقف والجدران والإضاءة وتجهيزات الفرع."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB southern branch renovation",
+          "summary": "Refurbishment of finishes and customer-service spaces across branches.",
+          "paragraphs": [
+            "The documented work includes refurbishment of public areas and service spaces, with floor, ceiling, wall, lighting and branch fit-out treatments."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-atm-sites",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          12
+        ],
+        "portfolio": [
+          24,
+          25
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "مواقع الصراف الآلي",
+          "summary": "أعمال إنشاء وتجهيز مواقع صراف آلي مستقلة.",
+          "paragraphs": [
+            "يعرض الملف مواقع متنوعة للصراف الآلي، بينها مواقع خدمة السيارات ومواقع مستقلة. يشمل العرض الأعمال المدنية والتشطيبات وتجهيز الموقع المرتبط بالخدمة."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ATM sites",
+          "summary": "Construction and fit-out of standalone ATM sites.",
+          "paragraphs": [
+            "The portfolio presents a range of ATM sites, including drive-through and standalone installations. The presentation covers civil works, finishes and associated site preparation."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "telemoney-centres",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          13
+        ],
+        "portfolio": [
+          23
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "مراكز تلي موني للتحويل",
+          "summary": "إنشاء وتشطيبات وتجهيز مراكز تحويل.",
+          "paragraphs": [
+            "تعرض المشروعات واجهات ومداخل ومساحات خدمة عملاء لمراكز تلي موني، مع أعمال داخلية وتجهيزات مرتبطة بوظيفة المركز."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "TeleMoney remittance centres",
+          "summary": "Construction, finishes and fit-out of remittance centres.",
+          "paragraphs": [
+            "The projects show TeleMoney centre facades, entrances and customer-service spaces, with interior work and fit-out associated with the centres’ use."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-courtyard",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          14
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "banking",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "الساحات الخارجية — البنك العربي الوطني",
+          "summary": "تجديد وتنظيم مساحات خارجية مرتبطة بالمرفق.",
+          "paragraphs": [
+            "يتضمن العمل ساحات خارجية ومناطق جلوس وتنسيق موقع، وتعرض الصور مراحل الموقع والنتيجة المعمارية للمساحات المحيطة."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB courtyard works",
+          "summary": "Refurbishment and arrangement of external facility spaces.",
+          "paragraphs": [
+            "The work includes courtyards, seating and site landscaping. Images show site stages and the architectural treatment of the surrounding spaces."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "landscaping",
+        "renovation"
+      ]
+    },
+    {
+      "slug": "amnco-cash-centre",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          15
+        ],
+        "portfolio": [
+          27,
+          28
+        ]
+      },
+      "sector_slug": "commercial",
+      "location": "Abha",
+      "languages": {
+        "ar": {
+          "title": "مبنى مركز النقد — أمنكو",
+          "summary": "إنشاء وتشطيبات لمرفق مركز نقد.",
+          "paragraphs": [
+            "يعرض البورتفوليو مراحل إنشاء المبنى من الأعمال الأولية إلى الهيكل والواجهات والتشطيبات. يركز العرض العام على نطاق الإنشاء، دون نشر تفاصيل التجهيزات الأمنية أو التشغيلية."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "AMNCO cash-centre building",
+          "summary": "Construction and finishing of a cash-centre facility.",
+          "paragraphs": [
+            "The portfolio shows construction stages from initial works to structure, facades and finishes. The public presentation focuses on construction scope without publishing security-installation or operational details."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting",
+        "renovation"
+      ]
+    },
+    {
+      "slug": "office-fitout",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          16
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "commercial",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "تجهيز المكاتب الإدارية",
+          "summary": "تشطيبات وتجهيز مساحات عمل واجتماعات واستقبال.",
+          "paragraphs": [
+            "تعرض الصور توزيعًا للمكاتب ومساحات استقبال واجتماعات، مع قواطع وأثاث وأسقف وإضاءة متناسقة مع الاستخدام الإداري."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Administrative office fit-out",
+          "summary": "Finishes and fit-out of working, meeting and reception areas.",
+          "paragraphs": [
+            "The images show office layouts, reception and meeting spaces, with partitions, furniture, ceilings and lighting coordinated for administrative use."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting",
+        "renovation"
+      ]
+    },
+    {
+      "slug": "restaurant-fitout",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          17
+        ],
+        "portfolio": [
+          34,
+          35
+        ]
+      },
+      "sector_slug": "commercial",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "تشطيبات المطاعم والمقاهي",
+          "summary": "تجهيز مساحات ضيافة وخدمة عملاء.",
+          "paragraphs": [
+            "تشمل الأمثلة واجهات ومحلات ومناطق جلوس وكونترات خدمة، مع تشطيبات داخلية توظف المساحة والخامات والإضاءة وفق طبيعة النشاط."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Restaurant & café fit-out",
+          "summary": "Fit-out of hospitality and customer-service spaces.",
+          "paragraphs": [
+            "Examples include facades, retail premises, seating and service counters, with interior finishes that coordinate space, materials and lighting for the activity."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting",
+        "renovation"
+      ]
+    },
+    {
+      "slug": "school-muzahmiyah",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          18
+        ],
+        "portfolio": [
+          26
+        ]
+      },
+      "sector_slug": "education",
+      "location": "Al Muzahmiyah",
+      "languages": {
+        "ar": {
+          "title": "المشروع المدرسي — المزاحمية",
+          "summary": "إنشاء وتشطيبات مبنى مدرسي ومرافقه.",
+          "paragraphs": [
+            "يعرض الملف تنفيذ مشروع مدرسي من مراحل الموقع والإنشاء، مع مبنى تعليمي ومساحات خارجية مرتبطة به. تتكامل الأعمال الإنشائية مع التشطيبات وتجهيز المرافق ضمن المشروع."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Al Muzahmiyah school project",
+          "summary": "Construction and finishing of a school building and associated facilities.",
+          "paragraphs": [
+            "The portfolio documents a school project through site and construction stages, with an educational building and associated external spaces. Structural works connect with finishes and facility preparation within the project."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "al-ghat-landmark",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          19
+        ],
+        "portfolio": [
+          32
+        ]
+      },
+      "sector_slug": "public-spaces",
+      "location": "Al Ghat",
+      "languages": {
+        "ar": {
+          "title": "مجسم الغاط المعماري",
+          "summary": "معلم معماري عند مدخل المدينة.",
+          "paragraphs": [
+            "تُظهر الصور تكوينًا معماريًا قائمًا بذاته، مع معالجة للموقع والإضاءة المحيطة به. يجمع المشروع الأعمال الإنشائية والتشطيبات والعناصر البصرية للمعلم."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Al Ghat architectural landmark",
+          "summary": "An architectural landmark at the city entrance.",
+          "paragraphs": [
+            "The photographs show a freestanding architectural structure with site treatment and surrounding lighting. The project combines construction, finishes and the landmark’s visual elements."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "rumah-landmark",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          19
+        ],
+        "portfolio": [
+          33
+        ]
+      },
+      "sector_slug": "public-spaces",
+      "location": "Rumah",
+      "languages": {
+        "ar": {
+          "title": "مجسم رماح المعماري",
+          "summary": "تكوين معماري بارز عند مدخل المدينة.",
+          "paragraphs": [
+            "يعرض البورتفوليو المجسم نهارًا وليلًا، موضحًا التكوين والكسوة والإضاءة وعلاقته بالطريق والموقع المحيط."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Rumah architectural landmark",
+          "summary": "A prominent architectural structure at the city entrance.",
+          "paragraphs": [
+            "The portfolio shows the landmark by day and night, illustrating its form, cladding, lighting and relationship to the road and surrounding site."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "road-works",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          20
+        ],
+        "portfolio": [
+          30
+        ]
+      },
+      "sector_slug": "public-spaces",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "أعمال الطرق وصيانتها",
+          "summary": "طرق وأرصفة وجزر وسطية وتجهيزات موقع.",
+          "paragraphs": [
+            "يتضمن نطاق الأعمال الموصوف شبكات طرق رئيسية وفرعية وأسفلتية وترابية، وأرصفة وجزرًا وسطية وتصريفًا ولافتات إرشاد وتحذير. يُحدد النطاق الفعلي وفق متطلبات كل موقع."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Road works & maintenance",
+          "summary": "Roads, pavements, medians and site installations.",
+          "paragraphs": [
+            "The described scope includes main and secondary road networks, asphalt and unpaved surfaces, pavements, medians, drainage and guidance/warning signs. Actual work is defined by each site’s requirements."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "warehouse-finishing",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          21
+        ],
+        "portfolio": []
+      },
+      "sector_slug": "industrial",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "أعمال المنشأة الصناعية",
+          "summary": "إنشاء وتشطيبات لمساحات منشأة صناعية.",
+          "paragraphs": [
+            "تشمل الأعمال مساحات داخلية وتشطيبات وتجهيزات مرتبطة بمنشأة صناعية. يجمع نطاق العرض بين الاستخدام التشغيلي للمبنى والمعالجات الداخلية للفراغات."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Industrial facility works",
+          "summary": "Construction and finishes within an industrial facility.",
+          "paragraphs": [
+            "The work includes internal spaces, finishes and fit-out associated with an industrial facility. The presentation connects the building’s operational use with the interior treatment of its spaces."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "residential-villas",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [
+          22
+        ],
+        "portfolio": [
+          36
+        ]
+      },
+      "sector_slug": "residential",
+      "location": "Riyadh",
+      "languages": {
+        "ar": {
+          "title": "الفلل السكنية",
+          "summary": "إنشاء وتشطيبات واجهات ومساحات داخلية.",
+          "paragraphs": [
+            "تُظهر الأعمال فللًا سكنية بواجهات وتكوينات معمارية متنوعة، إلى جانب مساحات داخلية وساحات. يربط العرض بين الشكل الخارجي والتشطيبات وتجهيز الفراغات للاستخدام السكني."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Residential villas",
+          "summary": "Construction and finishing of facades and interiors.",
+          "paragraphs": [
+            "The work shows residential villas with varied facades and architectural forms, together with interiors and courtyards. The presentation connects exterior treatment, finishes and fit-out for residential use."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-jeddah-head-office",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          15
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "Jeddah",
+      "languages": {
+        "ar": {
+          "title": "المقر الإقليمي بجدة — البنك العربي الوطني",
+          "summary": "تشطيبات وتجهيز مناطق استقبال وحركة وخدمة.",
+          "paragraphs": [
+            "يتضمن العرض كسوات جدران وأرضيات وقواطع زجاجية وإضاءة ومساحات انتظار وتجهيزات دخول. تبرز الصور تنسيق التفاصيل الداخلية ضمن بيئة المقر الإداري."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB Jeddah regional head office",
+          "summary": "Finishes and fit-out of reception, circulation and service areas.",
+          "paragraphs": [
+            "The presentation includes wall finishes, floors, glazed partitions, lighting, waiting spaces and entrance fit-out. The images illustrate coordination of interior details within the administrative headquarters."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-internal-clinic",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          21
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "Eastern region",
+      "languages": {
+        "ar": {
+          "title": "العيادة الداخلية — البنك العربي الوطني",
+          "summary": "تجهيز وتشطيبات مساحة عيادة داخلية.",
+          "paragraphs": [
+            "يعرض البورتفوليو غرفًا ومساحات داخل عيادة، مع تجهيزات وتشطيبات وأرضيات فينيل، بما يوضح توظيف التشطيبات الداخلية لتناسب استخدام المكان."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB internal clinic",
+          "summary": "Fit-out and finishing of an internal clinic.",
+          "paragraphs": [
+            "The portfolio shows rooms and spaces within a clinic, with equipment, finishes and vinyl flooring, illustrating the coordination of interior finishes with the use of the space."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "anb-control-room",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          12
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "أعمال غرفة التحكم — البنك العربي الوطني",
+          "summary": "تجديد وتجهيز مساحة غرفة تحكم.",
+          "paragraphs": [
+            "يعرض الملف أعمالًا داخلية لغرفة تحكم، مع أسقف وإضاءة ومناطق تشغيل وتجهيزات مكتبية. يقتصر الوصف العام على الأعمال المعمارية والتجهيز دون نشر تفاصيل تشغيلية."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB control-room works",
+          "summary": "Refurbishment and fit-out of a control-room space.",
+          "paragraphs": [
+            "The portfolio presents control-room interiors with ceilings, lighting, operating areas and office fit-out. The public description is limited to architectural and fit-out works, without operational details."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "technology"
+      ]
+    },
+    {
+      "slug": "anb-tower-cafe",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          10,
+          11
+        ]
+      },
+      "sector_slug": "banking",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "مقهى البرج — البنك العربي الوطني",
+          "summary": "تشطيبات وتجهيز مقهى داخل المبنى.",
+          "paragraphs": [
+            "تشمل الصور كونتر الخدمة ومناطق جلوس وتجهيزات وإضاءة وتشطيبات داخلية، إلى جانب امتداد للجلوس الخارجي."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "ANB tower café",
+          "summary": "Finishes and fit-out of an in-building café.",
+          "paragraphs": [
+            "The photographs show a service counter, seating, fit-out, lighting and interior finishes, together with an outdoor seating extension."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "renovation",
+        "furnishing"
+      ]
+    },
+    {
+      "slug": "garage-finishing",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          29
+        ]
+      },
+      "sector_slug": "public-spaces",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "تشطيبات الجراجات",
+          "summary": "أرضيات وحركة مرورية وتشطيبات مساحات المواقف.",
+          "paragraphs": [
+            "تعرض الصور تشطيبات جراجات تشمل معالجة الأرضيات والعلامات ومسارات الحركة والأعمدة داخل مساحات المواقف."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Garage finishing",
+          "summary": "Floors, circulation markings and parking-space finishes.",
+          "paragraphs": [
+            "The photographs show garage finishes including floor treatment, markings, circulation routes and columns within parking spaces."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "road-blocker-installations",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          29,
+          30
+        ]
+      },
+      "sector_slug": "public-spaces",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "تركيب حواجز الطرق",
+          "summary": "أعمال مدنية وتجهيز وتركيب حواجز طرق.",
+          "paragraphs": [
+            "يتضمن العرض مراحل الحفر والتجهيز والأعمال الخرسانية والتركيب واختبار المكونات. تُحدد المواصفات ومدد التنفيذ وفق متطلبات كل مشروع وظروف الموقع."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Road-blocker installations",
+          "summary": "Civil works, preparation and installation for road blockers.",
+          "paragraphs": [
+            "The presentation covers excavation, preparation, concrete works, installation and component testing. Specifications and schedules are defined by each project’s requirements and site conditions."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "parking-shades",
+      "parent_slug": "projects",
+      "kind": "project",
+      "source": {
+        "profile": [],
+        "portfolio": [
+          31
+        ]
+      },
+      "sector_slug": "public-spaces",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "مظلات مواقف السيارات",
+          "summary": "تجهيز مساحات مواقف بمظلات خارجية.",
+          "paragraphs": [
+            "تعرض الصور مظلات مرتبطة بمواقف سيارات ومساحات خارجية، مع تكوينات إنشائية وأعمال تركيب تتكامل مع حركة الاستخدام والموقع."
+          ],
+          "details": []
+        },
+        "en": {
+          "title": "Car-parking shades",
+          "summary": "External shade installations for parking spaces.",
+          "paragraphs": [
+            "The photographs show shade structures associated with parking and outdoor areas, with structural forms and installations coordinated with site use and circulation."
+          ],
+          "details": []
+        }
+      },
+      "service_slugs": [
+        "contracting"
+      ]
+    },
+    {
+      "slug": "quality-safety",
+      "parent_slug": null,
+      "kind": "page",
+      "source": {
+        "profile": [
+          4
+        ],
+        "portfolio": [
+          3
+        ]
+      },
+      "sector_slug": "",
+      "location": "",
+      "languages": {
+        "ar": {
+          "title": "الجودة والسلامة والاستدامة",
+          "summary": "نهج يربط دقة التنفيذ بمراجعة الجودة وتقييم مخاطر العمل.",
+          "paragraphs": [
+            "يعرض بروفايل الشركة اهتمامًا بإدارة الجودة ومراجعة التنفيذ وممارسات الصحة والسلامة المهنية وتقييم المخاطر. ويتناول كفاءة استخدام الموارد وتقليل الأثر البيئي ضمن توجهات الاستدامة.",
+            "تُناقش متطلبات الجودة والسلامة الخاصة بكل مشروع ضمن نطاقه ومخططاته وإجراءاته المعتمدة، مع مراعاة طبيعة المنشأة وظروف التنفيذ."
+          ],
+          "details": [
+            "دقة التنفيذ ومراجعة الأعمال.",
+            "تنسيق مخاطر العمل وإجراءات السلامة.",
+            "الاهتمام بالموارد وظروف الموقع."
+          ]
+        },
+        "en": {
+          "title": "Quality, safety & sustainability",
+          "summary": "An approach connecting execution quality, review and work-risk assessment.",
+          "paragraphs": [
+            "The company profile describes attention to quality management, execution review, health and safety practices and risk assessment. It also addresses resource efficiency and environmental impact as part of its sustainability approach.",
+            "Project-specific quality and safety requirements are discussed within the scope, drawings and agreed procedures, taking account of facility use and execution conditions."
+          ],
+          "details": [
+            "Execution precision and work review.",
+            "Work-risk and safety-procedure coordination.",
+            "Attention to resources and site conditions."
+          ]
+        }
+      }
+    }
+  ],
+  "review_only_facts": [
+    {
+      "source": {
+        "profile": [
+          3
+        ]
+      },
+      "facts": [
+        "1977 establishment",
+        "800k+ sqm",
+        "110 employees",
+        "4200+ projects",
+        "85% recurring clients"
+      ],
+      "reason": "Historical/company-wide figures require current scope, definition and legal-history reconciliation; not inserted into public claims."
+    },
+    {
+      "source": {
+        "profile": [
+          23,
+          24,
+          25,
+          26
+        ],
+        "portfolio": [
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43
+        ]
+      },
+      "facts": [
+        "Registration and certificate documents are present in the supplied files."
+      ],
+      "reason": "No scans, IDs, signatures or claims of current certificate validity are published."
+    },
+    {
+      "source": {
+        "profile": [
+          8,
+          10
+        ],
+        "portfolio": [
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      "facts": [
+        "Branch identity and imagery around Al Majmaah / Al Hizam Al Thahabi require reconciliation."
+      ],
+      "reason": "Do not publish the ambiguous Golden Belt page or borrow its images for a precisely attributed branch."
+    }
+  ]
+}

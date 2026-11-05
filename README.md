@@ -51,3 +51,5 @@ Do not commit credentials, original company PDFs, database dumps, customer enqui
 The 2026-11-04 presentation/content phase adds stone/charcoal editorial layouts, curated project/service/sector selections, local typography, approved project galleries and an editable corporate footer. See [design review](docs/DESIGN_REVIEW.md) and [redesign validation](docs/REDESIGN_VALIDATION.md), including the browser-verification interruption and remaining after screenshots.
 
 The 2026-11-05 motion phase adds the finite architectural logo introduction, unified quiet/standard animation, sticky/mobile navigation refinements and accessible gallery focus handling. See [current delivery and real browser evidence](docs/MOTION_VALIDATION.md), which supersedes the preceding browser-verification interruption.
+
+The owner-authorized PR2 source enrichment is now live:94 public routes and24 case-study topics per language, with the English owner draft protected. See [current content delivery](docs/CONTENT_DELIVERY.md). The original construction video is a local review prototype; [preview source](tools/scene/README.md) is separate from production activation.

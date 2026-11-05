@@ -141,7 +141,7 @@
   }
   try{
     const original=document.querySelector('.brand img');
-    if(hero&&original&&document.body.dataset.opening==='on'&&!sessionStorage.getItem('kfata-intro-v2')){
+    if(!document.querySelector('[data-construction-scene]')&&hero&&original&&document.body.dataset.opening==='on'&&!sessionStorage.getItem('kfata-intro-v2')){
       sessionStorage.setItem('kfata-intro-v2','1');root.dataset.introPlayed='true';
       const opening=document.createElement('div');opening.className='opening-mark';opening.setAttribute('aria-hidden','true');
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 300 130');svg.setAttribute('focusable','false');

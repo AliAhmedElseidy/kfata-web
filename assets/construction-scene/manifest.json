@@ -1,0 +1,32 @@
+{
+  "duration_seconds": 7,
+  "fps": 24,
+  "render_samples": 16,
+  "original_frames": 168,
+  "files": {
+    "desktop.mp4": {
+      "width": 1280,
+      "height": 720,
+      "bytes": 433740,
+      "sha256": "5b1752f1963eb90bc974edef44348e69aa5cb81d58b15d86cba4de32cef4299b",
+      "codec": "h264",
+      "audio_tracks": 0
+    },
+    "mobile.mp4": {
+      "width": 960,
+      "height": 540,
+      "bytes": 217335,
+      "sha256": "35a37268bd7689ada24c148c8c4972fba9d99e7fc65e36bf2145a9b304b814f4",
+      "codec": "h264",
+      "audio_tracks": 0
+    },
+    "poster.jpg": {
+      "bytes": 90527,
+      "sha256": "7237d43623370634d8b15d6577afb76fc4c3ed4aaea9746d46d4c298bb48fd24"
+    },
+    "poster-mobile.jpg": {
+      "bytes": 49214,
+      "sha256": "7cad468c8045ba38c4ef4ed910f2a7d96f832c455a967eaf773d61f300b4195a"
+    }
+  }
+}

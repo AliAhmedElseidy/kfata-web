@@ -24,6 +24,13 @@ class PresentationUpdate(models.Model):
 
 @register_setting
 class BrandSettings(BaseGenericSetting):
+    scene_enabled = models.BooleanField(default=False, verbose_name='تفعيل مشهد البناء / Enable construction scene')
+    scene_video = models.ForeignKey('wagtaildocs.Document',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='فيديو الكمبيوتر / Desktop video',help_text='Public MP4, H.264, fast-start, up to 6 MB. Playback is always muted.')
+    scene_video_mobile = models.ForeignKey('wagtaildocs.Document',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='فيديو الموبايل / Mobile video',help_text='Optional lighter MP4; otherwise the desktop video is used.')
+    scene_poster = models.ForeignKey('wagtailimages.Image',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='صورة المبنى المكتمل / Completed-building poster')
+    scene_poster_mobile = models.ForeignKey('wagtailimages.Image',null=True,blank=True,on_delete=models.SET_NULL,related_name='+',verbose_name='صورة الموبايل / Mobile poster',help_text='Optional; use the same completed-building composition.')
+    scene_caption_ar = models.CharField(max_length=300,default='تصور معماري توضيحي؛ ليس مشروعًا منفذًا لـKFATA.')
+    scene_caption_en = models.CharField(max_length=300,default='Illustrative architectural concept; not a completed KFATA project.')
     company_ar = models.CharField(max_length=150, default='KFATA')
     company_en = models.CharField(max_length=150, default='KFATA International Contracting')
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -71,6 +78,27 @@ class BrandSettings(BaseGenericSetting):
     panels += [FieldPanel('privacy_version')]
     panels += [FieldPanel('navigation_mode')]
     panels += [MultiFieldPanel([FieldPanel(f) for f in ['footer_intro_ar','footer_intro_en','footer_cta_ar','footer_cta_en','footer_columns']],heading='الفوتر المؤسسي / Corporate footer')]
+    panels += [MultiFieldPanel([FieldPanel(f) for f in ['scene_enabled','scene_video','scene_video_mobile','scene_poster','scene_poster_mobile','scene_caption_ar','scene_caption_en']],heading='مشهد البناء على الرئيسية / Homepage construction scene')]
+
+    @property
+    def construction_scene_ready(self):
+        from .scene import public_asset, public_video
+        return self.scene_enabled and public_video(self.scene_video) and public_asset(self.scene_poster)
+
+    @property
+    def scene_mobile_document(self):
+        from .scene import public_video
+        return self.scene_video_mobile if public_video(self.scene_video_mobile) else self.scene_video
+
+    @property
+    def scene_mobile_image(self):
+        from .scene import public_asset
+        return self.scene_poster_mobile if public_asset(self.scene_poster_mobile) else self.scene_poster
+
+    def clean(self):
+        super().clean()
+        from .scene import validate_scene_settings
+        validate_scene_settings(self)
     class Meta:
         verbose_name = 'هوية الموقع والتواصل / Brand and contact'
 
@@ -91,6 +119,15 @@ class HomePage(Page):
     promote_panels = Page.promote_panels + [FieldPanel('social_image')]
     subpage_types = ['home.ContentPage']
     max_count_per_parent = 2
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        brand = BrandSettings.load(request)
+        context['construction_scene'] = brand.construction_scene_ready
+        if context['construction_scene']:
+            context['scene_mobile_poster'] = brand.scene_mobile_image
+            context['scene_mobile_video'] = brand.scene_mobile_document
+        return context
 
 class ContentPage(Page):
     KIND = [('page','صفحة / Page'),('service','خدمة / Service'),('sector','قطاع / Sector'),('project','مشروع / Project'),('article','مقال / Article'),('listing','فهرس / Listing')]
@@ -124,11 +161,22 @@ class ContentPage(Page):
             field = 'related_services' if self.kind == 'service' else 'related_sectors'
             context['related_projects'] = ContentPage.objects.live().public().filter(locale=self.locale,kind='project',**{field:self}).select_related('hero_image')[:6]
         if self.listing_kind:
-            qs = ContentPage.objects.live().public().filter(locale=self.locale, kind=self.listing_kind).select_related('hero_image').order_by('-first_published_at')
-            sectors = list(qs.exclude(sector='').order_by('sector').values_list('sector', flat=True).distinct())
+            qs = ContentPage.objects.live().public().filter(locale=self.locale, kind=self.listing_kind).select_related('hero_image')
+            if self.listing_kind == 'project':
+                # Approved photographed work precedes the text-only case studies.
+                qs = qs.annotate(has_photo=models.Case(models.When(hero_image__isnull=False, then=1), default=0, output_field=models.IntegerField())).order_by('-has_photo', '-first_published_at', 'pk')
+            else:
+                qs = qs.order_by('-first_published_at', 'pk')
+            if self.listing_kind == 'project':
+                # A project fact may use a shorter label (e.g. مصرفي). Filter by
+                # the actual published relationship rather than splitting one
+                # sector into duplicate labels or rewriting an owner's facts.
+                sectors = list(ContentPage.objects.live().public().filter(locale=self.locale,kind='sector',sector_projects__in=qs).order_by('title').values_list('title',flat=True).distinct())
+            else:
+                sectors = list(qs.exclude(sector='').order_by('sector').values_list('sector', flat=True).distinct())
             selected = request.GET.get('sector','')
             if selected:
-                qs = qs.filter(sector=selected)
+                qs = qs.filter(models.Q(related_sectors__title=selected) | models.Q(sector=selected)).distinct()
             context.update(items=Paginator(qs, 9).get_page(request.GET.get('page')), sectors=sectors, selected_sector=selected)
         return context
 

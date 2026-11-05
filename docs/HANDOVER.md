@@ -4,10 +4,10 @@
 
 - [Arabic](https://kfata.elsaidy.org/ar/), [English](https://kfata.elsaidy.org/en/), [administration](https://kfata.elsaidy.org/admin/).
 - [PR 1](https://github.com/AliAhmedElseidy/kfata-web/pull/1) stays open, without merge or force push.
-- Running application: `f5e2454a076f702a46f2e401f02b914f255d173d`, recorded at `/opt/kfata-web/operations/deployed-commit`. Later delivery-documentation commits do not change that application image.
-- 50 public page routes: two home pages and 48 ContentPages. Six services and seven sectors have source-based copy in both languages. Original wordmark is installed. Eight specifically approved source project photographs and one explicitly labeled generated engineering illustration are published; source/approval details are in assets/README.md.
+- Running application: `e3b88861a42a4bba022eed31097b0d1a82c7076f`, recorded at `/opt/kfata-web/operations/deployed-commit`. Later delivery-documentation commits do not change that application image.
+- 94 public page routes: two home pages and 92 ContentPages. Six services and seven sectors have source-based copy in both languages. Original wordmark is installed. Eight specifically approved source project photographs and one explicitly labeled generated engineering illustration are published; source/approval details are in assets/README.md.
 - Contact details, Al Olaya address and 90-day enquiry retention were approved by the owner. Bilingual privacy is published; enquiry collection and search indexing are enabled. Search ownership verification/submissions were not performed and discovery/rankings are not guaranteed.
-- Sixteen bilingual project groups remain drafts (15 additional groups plus the inconsistent Al Hizam/Golden Belt attribution). The approved quality/safety summary, terms and cookies pages are public. Certificates, news and careers remain drafts pending current approved material. Legal Arabic name, founding figures and certificate claims are withheld. See [source review](SOURCE_REVIEW.md).
+- The inconsistent Al Hizam/Golden Belt bilingual group remains draft. Source-backed text for24 case-study topics per language is public following the owner-authorized PR2 enrichment; these are not24 distinct contracts. The approved quality/safety summary, terms and cookies pages are public. Certificates, news and careers remain drafts pending current approved material. Legal Arabic name, founding figures and certificate claims are withheld. See [source review](SOURCE_REVIEW.md).
 
 ## Owner account and SMTP
 
@@ -65,3 +65,9 @@ The new-content snapshot225122Z also has a manual restricted-access PC copy at `
 Read [MOTION_VALIDATION.md](MOTION_VALIDATION.md) for current application behavior, actual browser matrix, before/after captures and performance limits. Original-logo intro lasts 1,320ms once/session; existing settings control animation, intro and quiet/standard levels. Native menu/gallery keyboard focus, both languages and 360/768/1440 were tested. Final cached LCP samples: 1,596/1,540/1,040ms respectively; observed CLS0, with slower intermediate samples retained. This is not controlled cold-cache or field certification.
 
 Pre-motion consistent snapshot: `backups/20261104T204024Z`, previous image `kfata-web-web:before-motion`. Final page/content/brand/SMTP hashes match before, existing enquiries preserved, owner English tower draft untouched. No content import or migration ran. Current web/database healthy; Mailcow200 and ERPNext302. The older restore and manual PC-copy evidence above remain historical; no new restore/off-server-copy claim for this snapshot.
+
+## 2026-11-05 source enrichment and scene preview
+
+See [CONTENT_DELIVERY.md](CONTENT_DELIVERY.md). Backup `20261105T094407Z`, previous image `before-enrichment`. Applied77 eligible source records (63 updates,14 creates); owner English tower pending revision preserved.94 public routes checked,24 project topics discoverable in each language,128 project relationship links verified. Home/brand/SMTP/accounts/protected revision/enquiry fingerprints unchanged.40 tests passed on PostgreSQL and SQLite; targeted filter patch also passed. Canonical sector filters now use relationships without rewriting owner facts.
+
+Original7s architectural construction scene and an actual8.5s browser recording exist only in the owner-PC ignored `operations/scene-preview/` folder. Preview code is in PR2; local-only route settings are opt-in. No generated scene media or motion has been uploaded/deployed. Review building/materials/composition before final assets and production CMS activation. Existing hero photos and original logo motion remain live. Source/documentation checkout commits after e3b8886 do not alter that application marker.
