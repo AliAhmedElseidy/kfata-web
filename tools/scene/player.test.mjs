@@ -9,7 +9,7 @@ class Element {
   addEventListener(type,fn){(this.listeners[type]??=[]).push(fn);}
   emit(type,event={}){for(const fn of this.listeners[type]??[])fn(event);}
 }
-function mount({reduced=false,mobile=false,blocked=false,masterOff=false}={}){
+function mount({reduced=false,mobile=false,blocked=false,masterOff=false,pending=false,lang='en'}={}){
   const preference=new Element();preference.matches=reduced;
   const root=new Element(),player=new Element(),controls=new Element(),toggle=new Element(),status=new Element(),video=new Element();
   video.dataset={desktopUrl:'/scene-media/1/',mobileUrl:'/scene-media/2/'};
@@ -17,12 +17,12 @@ function mount({reduced=false,mobile=false,blocked=false,masterOff=false}={}){
   video.getAttribute=()=>video.src;
   video.removeAttribute=()=>{video.src=null;};
   video.load=()=>{};
-  video.play=()=>{video.playCalls++;if(blocked)return Promise.reject(new Error('NotAllowedError'));video.paused=false;video.ended=false;video.emit('playing');return Promise.resolve();};
+  video.play=()=>{video.playCalls++;if(pending)return new Promise(()=>{});if(blocked)return Promise.reject(new Error('NotAllowedError'));video.paused=false;video.ended=false;video.emit('playing');return Promise.resolve();};
   video.pause=()=>{if(!video.paused){video.paused=true;video.emit('pause');}};
   root.querySelector=selector=>({'video':video,'.scene-player':player,'.scene-controls':controls,'[data-scene-toggle]':toggle,'[data-scene-state]':status})[selector];
   const window=new Element();window.matchMedia=query=>query.includes('reduced')?preference:{matches:mobile};
   Object.defineProperty(window,'sessionStorage',{get(){throw Error('Playback must not depend on session storage');}});
-  const document={documentElement:{lang:'en'},body:{dataset:{motion:masterOff?'off':'on'}},querySelector:()=>root};
+  const document={documentElement:{lang},body:{dataset:{motion:masterOff?'off':'on'}},querySelector:()=>root};
   vm.runInNewContext(source,{window,document});
   return {root,player,controls,toggle,status,video,preference,window};
 }
@@ -44,4 +44,12 @@ test('end holds the final poster without looping; replay is explicit',()=>{
 test('pause/resume preserves position and changing reduced-motion stops playback',()=>{
   const v=mount();v.video.currentTime=3;v.toggle.emit('click');assert.equal(v.root.dataset.state,'paused');v.toggle.emit('click');assert.equal(v.video.currentTime,3);
   v.preference.matches=true;v.preference.emit('change');assert.equal(v.video.src,null);assert.equal(v.root.dataset.state,'reduced');assert.equal(v.video.paused,true);
+});
+
+test('pause during initial loading cancels the attempt and suppresses a late playing event',()=>{
+  const v=mount({pending:true});assert.equal(v.root.dataset.state,'loading');v.toggle.emit('click');assert.equal(v.root.dataset.state,'paused');assert.equal(v.video.autoplay,false);
+  v.video.emit('playing');assert.equal(v.root.dataset.state,'paused');assert.notEqual(v.player.dataset.playing,'true');
+});
+test('Arabic pause and resume labels remain correctly encoded',()=>{
+  const v=mount({lang:'ar'});assert.equal(v.toggle.textContent,'إيقاف مؤقت');v.toggle.emit('click');assert.equal(v.toggle.textContent,'متابعة');v.toggle.emit('click');assert.equal(v.toggle.textContent,'إيقاف مؤقت');
 });

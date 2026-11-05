@@ -1,25 +1,15 @@
-# Local architectural concept preview
+# Original architectural construction scene
 
-This original procedural scene is a review prototype, not a KFATA building or a final photoreal architectural film. It uses no reference-video frames, external models or external textures. The supplied 508810/508807 clips were unavailable in this execution session; the documented stage sequence was used. The construction sequence is an actual offline 3D render, not visitor-side 3D, a logo animation or CSS cubes.
+The owner approved the existing direction and requested final activation on 2026-11-05. Approved media and decoded properties are in assets/construction-scene/. This is an illustrative concept, not a KFATA project. The unavailable reference clips were not copied or used as source frames.
 
-The preview movie is 7s / 768×432 / 12fps / H.264 / 227,173 bytes. Final poster is 1280×720. It has foundations, columns, slabs, walls, glazing/mullions, timber fins, arrival steps, water, planting and linear lighting. It is a first art-direction review; materials, architectural detail and final-frame composition can be refined before a final-resolution render.
+The original running render completed 168 full-resolution frames. It was inspected and awaited after the interruption; no second render was launched. Final output is 7s/24fps, desktop 1280x720 and mobile 960x540, H.264 fast-start with no audio. Mobile is downsampled from the same original frames, keeping the complete building visible.
 
-The local artifacts live in ignored `operations/scene-preview/`: original `.blend`, rendered PNG sequence, movie, poster, 8.5s actual browser recording (`homepage-browser-preview.mp4`), timing JSON and screenshots. No generated scene imagery/movie has been uploaded to GitHub or production pending owner review. Existing approved company photographs remain in the real portfolio.
+Production code: home/templates/home/scene_hero.html, config/static/js/construction-scene.js and home/scene.py. Every fresh document starts once on every load, without session/cookie/storage gates. autoplay/muted/playsinline is present; script selects one appropriate video after reduced-motion/master-animation checks. End holds the completed poster; a small native button provides pause/resume/replay. Rejected playback, disabled scripting and reduced motion keep the poster and working HTML links. The old once/session preview code was removed.
 
-Render source with a trusted Blender 4.5 installation (this session used official portable 4.5.9, outside the repository):
+Brand settings provide activation, desktop/mobile documents, desktop/mobile posters and bilingual disclosure. Upload public MP4/H.264 fast-start files up to 6MB. Restricted collections are rejected and never exposed by the scene route. Selected videos support bounded HTTP ranges and HEAD. Public image serving/private enquiry storage remain unchanged.
 
-```powershell
-blender -b -t 4 --python tools/scene/build_concept.py -- --output D:/kfata-web/operations/scene-preview
-blender -b operations/scene-preview/kfata-concept.blend -t 4 -f 168
-```
+install_construction_scene is read-only by default. --apply --enable imports approved media once and activates both home languages, without saving home revisions or resetting old brand/SMTP settings. A marker and existing-configuration guard preserve later owner edits, including cleared fields. Subsequent changes belong in the panel.
 
-For a quick draft, open the saved scene with an offline Blender script setting `render.resolution_percentage=60`, `cycles.samples=6`, `frame_step=2`, `frame_end=167`, and the output prefix to `draft-frames/frame-`, then render animation. The optional local encoder uses imageio-ffmpeg; it is not a project/server dependency. Export the final frame as `poster.jpg`, then:
+Optional future reproduction: first confirm no Blender render is running. Build the model with build_concept.py, then load that .blend in Blender and run render_final.py -- --output ABS_FRAME_DIRECTORY. Encode using python tools/scene/encode_final.py FRAME_DIRECTORY assets/construction-scene. Blender and optional local imageio-ffmpeg/Pillow are offline authoring dependencies; no renderer/transcoder is installed on the VPS or visitor path. The encoder verifies all 168 original frames, dimensions, 24fps, 7s and zero audio. Browser recordings are captured separately from the actual site.
 
-```powershell
-python tools/scene/encode_preview.py operations/scene-preview
-python manage.py runserver 127.0.0.1:8035 --noreload --settings=tools.scene.preview_settings
-```
-
-Visit `http://127.0.0.1:8035/scene-preview/ar/` or `/en/`; `?nojs=1` adds local script-blocking CSP. These routes are absent from production URL configuration. The template uses existing Wagtail home content and shared header/footer, on the local database. Do not reseed the live database. The local snapshot has no protected owner English tower revision; production still does.
-
-The player is muted/inline, first-play once per session, pause/replay, completed-building skip/poster and no-JS/reduced-motion fallback. With actual OS reduced motion, the video src remains unset. This is preview-only integration: production CMS selection/activation and final mobile/desktop delivery formats must be completed after the scene direction is accepted. No production motion deployment is claimed.
+Local review: python manage.py runserver 127.0.0.1:8035 --noreload --settings=tools.scene.preview_settings. The /scene-preview/ar/ and /en/ routes now share the actual homepage implementation; those review routes are absent from production. Do not rerun legacy seed commands. See docs/CONSTRUCTION_DELIVERY.md for final deployment/browser evidence.

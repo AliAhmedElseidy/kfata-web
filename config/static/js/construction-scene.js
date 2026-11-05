@@ -29,6 +29,7 @@
     }catch(_){if(token===generation)completed('blocked');}
   };
   video.addEventListener('playing',()=>{
+    if(phase==='paused'){video.pause();return;}
     if(reduced.matches||masterOff){completed(masterOff?'disabled':'reduced');return;}
     setPhase('playing');player.dataset.playing='true';
     toggle.textContent=label('إيقاف مؤقت','Pause');status.textContent='';
@@ -38,7 +39,12 @@
   });
   video.addEventListener('ended',()=>completed('finished'));
   video.addEventListener('error',()=>completed('error'));
-  toggle.addEventListener('click',()=>{if(phase==='playing')video.pause();else start(phase!=='paused');});
+  toggle.addEventListener('click',()=>{
+    if(phase==='playing'||phase==='loading'){
+      ++generation;setPhase('paused');video.autoplay=false;video.pause();
+      toggle.textContent=label('متابعة','Resume');
+    }else start(phase!=='paused');
+  });
   reduced.addEventListener('change',()=>{
     if(reduced.matches){completed('reduced');video.removeAttribute('src');video.load();}
     else {controls.hidden=masterOff;if(!attempted&&!masterOff)start();}
