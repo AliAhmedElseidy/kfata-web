@@ -21,3 +21,25 @@ Keep text, navigation and quote/project actions in HTML and immediately usable. 
 The content work in CONTENT_RECONCILIATION.md is separate and should proceed without waiting for the video. Build the story from verified company capabilities and project categories: banking/headquarters, offices, schools, residential villas, cash-centre construction, industrial works, roads/landmarks, parking and fit-out. Keep the footer and policy work already delivered; no further full-site restyling is required to make the hero asset.
 
 Acceptance for the hero is an actual short preview recording showing all construction stages and a usable 360px/mobile layout, followed by targeted browser/performance checks. Do not restart database seeding or overwrite the owner’s content.
+
+## Added reference review: AMAQ and Red Sea Global
+
+References supplied by the owner:
+- https://amaqksa.com/
+- https://www.redseaglobal.com/en/
+
+AMAQ was inspected in the browser: a large photographic hero/slider with prominent headings, followed by company story, recognition, services, featured projects, contact and footer. Adopt the hierarchy and image-led presentation; do not copy its content, claims, assets or awards.
+
+Red Sea Global's readable homepage presents separate company, business/services and portfolio navigation with a rich institutional footer. It describes itself as an integrated real-estate developer, not just a contractor. Direct browser rendering returned a CloudFront 403 in this environment; its animation was not visually reviewed. Adopt information organization only, scaled to KFATA's actual capabilities. Do not invent investment, destination, subsidiary or government-affiliation sections for KFATA.
+
+## Unified delivery sequence
+
+1. Apply source-grounded content from CONTENT_RECONCILIATION.md to the actual site with the protected updater, resolving missing parents and explicitly reviewing any skipped editorial revisions.
+2. Expose that content through a focused navigation: Company / Expertise / Sectors / Projects / Contact. Keep Arabic and English connected and maintain public URLs.
+3. Use a complete architectural-video hero as specified above. Its production is a separate original-asset task; plain section fades are not acceptance evidence for the construction scene.
+4. Curate the homepage around company identity, six source-backed services, real approved selected projects, sectors, work process, quality, contact and corporate footer.
+5. Build project pages as case studies with verified scope/location, appropriate real imagery, gallery and related services. Never fill a missing project photograph with another project's photo.
+6. Preserve editable footer columns for Company, Expertise, Projects and Policies plus real contact channels. Keep only live meaningful links, including privacy, terms and cookies.
+7. Capture a real desktop/mobile preview showing content and construction motion. Run targeted checks, deploy KFATA alone, then verify the public pages and record the actual deployed commit.
+
+The supplied reference videos remain analysis references, not website assets. The approved public source photographs remain subject to their existing scope; obtain an explicit decision for additional original imagery before publishing it. Do not hold the already sourced text update while waiting for a motion asset.
