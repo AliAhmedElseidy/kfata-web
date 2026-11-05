@@ -112,4 +112,5 @@ class CompanyContentTests(TestCase):
             total=response.context['items'].paginator.count
             self.assertEqual(total,ContentPage.objects.live().public().filter(kind='project',locale=sector.locale,related_sectors=sector).count())
             self.assertEqual(response.context['sectors'].count(sector.title),1)
+            self.assertContains(response,'&amp;sector=')
             tower.refresh_from_db();self.assertEqual(tower.sector,old_label)
