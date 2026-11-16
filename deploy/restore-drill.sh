@@ -5,6 +5,8 @@ cd "$(dirname "$0")/.."
 backup="$(realpath "${1:?Pass a KFATA backup directory}")"
 project="${KFATA_DRILL_PROJECT:-kfata-restore-check}"
 port="${KFATA_DRILL_PORT:-8098}"
+image="${KFATA_DRILL_IMAGE:-kfata-web-web:latest}"
+[[ "$image" =~ ^kfata-web-web:[a-z0-9_.-]+$ ]] || { echo "Invalid drill image." >&2; exit 1; }
 [[ "$project" =~ ^kfata-restore-[a-z0-9-]+$ ]] || { echo 'Invalid isolated drill project name.' >&2; exit 1; }
 [[ "$port" =~ ^[0-9]+$ ]] && (( port > 1024 && port < 65536 )) || { echo 'Invalid drill port.' >&2; exit 1; }
 test -z "$(docker ps -a --filter "label=com.docker.compose.project=$project" -q)" || { echo 'Drill containers already exist; choose a fresh name.' >&2; exit 1; }
@@ -16,14 +18,14 @@ mkdir -p operations
 env_path="operations/$project.env"
 override_path="operations/$project.yaml"
 test ! -e "$env_path" || { echo 'Existing drill configuration found; inspect it before reusing.' >&2; exit 1; }
-python3 - "$env_path" "$override_path" "$port" <<'PY'
+python3 - "$env_path" "$override_path" "$port" "$image" <<'PY'
 from pathlib import Path
 import secrets,sys
 lines = dict(line.split('=',1) for line in Path('.env').read_text().splitlines() if line and not line.startswith('#') and '=' in line)
 password = secrets.token_urlsafe(36)
 lines.update(POSTGRES_PASSWORD=password, DATABASE_URL=f'postgres://kfata:{password}@db:5432/kfata',KFATA_LOCAL_PORT=sys.argv[3],SITE_INDEXABLE='false',EMAIL_HOST='',ENQUIRY_EMAIL='',OUTBOUND_EMAIL_DISABLED='true',SECURE_SSL_REDIRECT='false',WEB_MEMORY='512m',DB_MEMORY='256m')
 Path(sys.argv[1]).write_text('\n'.join(f'{k}={v}' for k,v in lines.items())+'\n')
-Path(sys.argv[2]).write_text('services:\n  web:\n    image: kfata-web-web:latest\n    env_file: '+sys.argv[1]+'\n')
+Path(sys.argv[2]).write_text('services:\n  web:\n    image: '+sys.argv[4]+'\n    env_file: '+sys.argv[1]+'\n')
 PY
 drill=(docker compose -p "$project" --env-file "$env_path" -f compose.yaml -f "$override_path")
 "${drill[@]}" up -d db
@@ -46,6 +48,7 @@ with tarfile.open(sys.argv[1]) as archive:
             raise SystemExit('Unsafe backup archive')
 PY
 "${drill[@]}" run --rm --no-deps -T web tar -C /app -xzf - < "$backup/files.tar.gz"
+"${drill[@]}" run --rm --no-deps -T web python manage.py migrate --noinput
 "${drill[@]}" up -d --no-build web
 "${drill[@]}" exec -T web python manage.py check
 "${drill[@]}" exec -T web python manage.py shell -c 'from home.models import ContentPage,Enquiry; print("Restored published pages:",ContentPage.objects.live().count(),"enquiries:",Enquiry.objects.count())'

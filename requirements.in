@@ -5,3 +5,6 @@ psycopg[binary]>=3.2,<4
 whitenoise>=6.9,<7
 django-environ>=0.12,<1
 cryptography>=50,<51
+Pillow>=13,<14
+wagtail-2fa>=1.8,<2
+django-otp>=1.7.5,<2

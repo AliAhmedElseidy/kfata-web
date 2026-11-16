@@ -13,9 +13,9 @@
 {% block hero_preload %}{% endblock %}
 {% if language == 'ar' %}<link rel="preload" href="{% static 'fonts/IBMPlexSansArabic-Regular.woff2' %}" as="font" type="font/woff2" crossorigin>{% endif %}
 <link rel="stylesheet" href="{% static 'css/site.css' %}"><script src="{% static 'js/site.js' %}" defer></script>
-<style>:root{--bg:{{ brand.background }};--gold:{{ brand.accent|default:'#c7a875' }}}</style>
-<script type="application/ld+json">{% organization_json brand language %}</script>
-<script type="application/ld+json">{% page_schema page %}</script>{% if brand.google_verification %}<meta name="google-site-verification" content="{{ brand.google_verification }}">{% endif %}{% if brand.bing_verification %}<meta name="msvalidate.01" content="{{ brand.bing_verification }}">{% endif %}</head><body data-font="{{ brand.font }}" data-intensity="{{ brand.motion_level }}" data-motion="{{ brand.animations|yesno:'on,off' }}" data-opening="{{ brand.opening_animation|yesno:'on,off' }}">
+<style nonce="{{ request.csp_nonce }}">:root{--bg:{{ brand.background }};--gold:{{ brand.accent|default:'#c7a875' }}}</style>
+<script nonce="{{ request.csp_nonce }}" type="application/ld+json">{% organization_json brand language %}</script>
+<script nonce="{{ request.csp_nonce }}" type="application/ld+json">{% page_schema page %}</script>{% if brand.google_verification %}<meta name="google-site-verification" content="{{ brand.google_verification }}">{% endif %}{% if brand.bing_verification %}<meta name="msvalidate.01" content="{{ brand.bing_verification }}">{% endif %}</head><body data-font="{{ brand.font }}" data-intensity="{{ brand.motion_level }}" data-motion="{{ brand.animations|yesno:'on,off' }}" data-opening="{{ brand.opening_animation|yesno:'on,off' }}">
 <a class="skip" href="#main">{% if language == 'ar' %}انتقل إلى المحتوى{% else %}Skip to content{% endif %}</a>
 {% wagtailuserbar %}
 <header class="site-header"><a class="brand" href="{% if language == 'ar' %}/ar/{% else %}/en/{% endif %}" aria-label="KFATA home">{% if brand.logo %}{% image brand.logo max-240x90 alt='KFATA' %}{% else %}<span class="wordmark">KF<span>Λ</span>TA</span>{% endif %}<small>{% if language == 'ar' %}{{ brand.company_ar }}{% else %}INTERNATIONAL CONTRACTING{% endif %}</small></a>

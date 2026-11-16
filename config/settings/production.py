@@ -14,8 +14,23 @@ if os.environ.get('TRUST_PROXY_HTTPS', 'false').lower() == 'true':
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'true').lower() == 'true'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_HSTS_PRELOAD = False
 SECURE_CONTENT_TYPE_NOSNIFF = True
 STORAGES['staticfiles'] = {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'}
+
+SESSION_COOKIE_AGE = 8 * 60 * 60
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
+# Security events contain only a fixed category and counts, without request
+# headers, submitted fields, a username or full URL.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {'security': {'format': 'KFATA_SECURITY %(levelname)s %(message)s'}},
+    'handlers': {'security': {'class': 'logging.StreamHandler', 'formatter': 'security'}},
+    'loggers': {'kfata.security': {'handlers': ['security'], 'level': 'WARNING', 'propagate': False}},
+}

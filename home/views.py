@@ -15,6 +15,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.utils.crypto import salted_hmac
+from pathlib import PurePosixPath
 from .forms import EnquiryForm
 from .models import Enquiry, BrandSettings, ContentPage
 from .mail import notification_route
@@ -55,6 +56,7 @@ def robots(request):
 
 @require_http_methods(['GET','POST'])
 @never_cache
+@sensitive_post_parameters()
 def quote(request):
     lang = request.GET.get('lang', 'ar')
     if lang not in {'ar','en'}: lang = 'ar'
@@ -113,11 +115,17 @@ def attachment(request, pk):
 def public_image(request, path):
     if not path.startswith(('images/', 'original_images/', 'avatar_images/')) or '..' in path.split('/'):
         raise Http404
+    image_types = {
+        '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
+        '.webp': 'image/webp', '.gif': 'image/gif', '.avif': 'image/avif',
+    }
+    content_type = image_types.get(PurePosixPath(path).suffix.lower())
+    if content_type is None:
+        raise Http404
     try:
         f = default_storage.open(path, 'rb')
     except (FileNotFoundError, SuspiciousFileOperation):
         raise Http404
-    content_type = "image/webp" if path.lower().endswith(".webp") else None
     response = FileResponse(f, content_type=content_type)
     response['Cache-Control'] = 'public, max-age=86400'
     response['X-Content-Type-Options'] = 'nosniff'

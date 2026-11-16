@@ -2,6 +2,12 @@
 # Run on the host from this checkout; contains private data. Store off-server securely.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+online=false
+case "${1:-}" in
+    --online) online=true ;;
+    "") ;;
+    *) echo 'Usage: backup.sh [--online]' >&2; exit 2 ;;
+esac
 umask 077
 backup_dir="${KFATA_BACKUP_DIR:-./backups}/$(date -u +%Y%m%dT%H%M%SZ)"
 mkdir -p "$backup_dir"
@@ -11,10 +17,19 @@ flock -n 9 || { echo 'A KFATA backup is already running.' >&2; exit 1; }
 was_running="$(docker compose ps --status running --services web)"
 web_image="$(docker inspect --format '{{.Image}}' "$(docker compose ps --all -q web)")"
 restore_web() { if [ "$was_running" = web ]; then docker compose start web >/dev/null; fi; }
-trap restore_web EXIT
-docker compose stop web >/dev/null
+if [ "$online" = false ]; then
+    trap restore_web EXIT
+    docker compose stop web >/dev/null
+elif [ "$was_running" != web ]; then
+    echo 'Online backup requires the KFATA web container.' >&2
+    exit 1
+fi
 docker compose exec -T db sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > "$backup_dir/database.dump"
-docker compose run --rm --no-deps -T web tar -C /app -czf - media private-media > "$backup_dir/files.tar.gz"
+if [ "$online" = true ]; then
+    docker compose exec -T web tar -C /app -czf - media private-media > "$backup_dir/files.tar.gz"
+else
+    docker compose run --rm --no-deps -T web tar -C /app -czf - media private-media > "$backup_dir/files.tar.gz"
+fi
 if [ -f operations/deployed-commit ]; then
     cat operations/deployed-commit > "$backup_dir/commit.txt"
 else
@@ -23,6 +38,10 @@ fi
 printf '%s\n' "$web_image" > "$backup_dir/image-id.txt"
 (cd "$backup_dir" && sha256sum database.dump files.tar.gz > SHA256SUMS)
 touch "$backup_dir/.complete"
+if [ "$online" = true ]; then
+    printf 'Backup completed: %s\n' "$backup_dir"
+    exit 0
+fi
 # Retain 14 days of completed local snapshots; never follow paths outside the backup root.
 python3 - <<'PY'
 from pathlib import Path

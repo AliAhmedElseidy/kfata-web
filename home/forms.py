@@ -26,20 +26,21 @@ class EnquiryForm(forms.ModelForm):
         if ext == 'pdf':
             # Public PDF upload is disabled until a sanitizer/scanner is configured.
             raise ValidationError('For now, please attach a JPEG or PNG image; request a secure channel for PDF plans.')
-        try:
-            im = Image.open(f)
-            if im.format not in {'JPEG','PNG'} or (ext=='png') != (im.format=='PNG'):
-                raise ValueError('Image format does not match its extension.')
-            im.verify()
-        except (UnidentifiedImageError, OSError, ValueError, Image.DecompressionBombError):
-            raise ValidationError('Invalid image.')
-        finally:
-            f.seek(0)
-        # Re-encode to discard metadata and any appended payload.
         from django.core.files.uploadedfile import SimpleUploadedFile
         from io import BytesIO
-        im = Image.open(f)
-        im.thumbnail((4096,4096))
+
         data = BytesIO()
-        im.convert('RGB').save(data, format='JPEG', quality=90)
+        try:
+            with Image.open(f) as image:
+                if image.format not in {'JPEG', 'PNG'} or (ext == 'png') != (image.format == 'PNG'):
+                    raise ValueError('Image format does not match its extension.')
+                if image.width * image.height > 18_000_000:
+                    raise ValueError('Image is too large to decode.')
+                image.verify()
+            f.seek(0)
+            with Image.open(f) as image:
+                image.thumbnail((4096, 4096))
+                image.convert('RGB').save(data, format='JPEG', quality=85)
+        except (UnidentifiedImageError, OSError, ValueError, Image.DecompressionBombError):
+            raise ValidationError('Invalid image or image dimensions exceed the limit.')
         return SimpleUploadedFile('attachment.jpg', data.getvalue(), content_type='image/jpeg')

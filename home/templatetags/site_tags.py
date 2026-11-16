@@ -58,7 +58,8 @@ def organization_json(brand, lang):
     address=brand.address_ar if lang=='ar' else brand.address_en
     if address: data['address']={'@type':'PostalAddress','streetAddress':address,'addressCountry':'SA'}
     if brand.logo_id: data['logo']=urljoin(settings.PUBLIC_BASE_URL,brand.logo.file.url)
-    return mark_safe(json.dumps(data, ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))
+    # The escaped JSON cannot close its application/ld+json script element.
+    return mark_safe(json.dumps(data, ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))  # nosec B308, B703
 
 @register.simple_tag
 def translated_nav(page, target):
@@ -93,7 +94,8 @@ def page_schema(page):
             '@type':'Service', 'name':page.title, 'description':page.summary,
             'url':page.full_url, 'provider':{'@id':settings.PUBLIC_BASE_URL+'/#organization'},
         }]}
-    return mark_safe(json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))
+    # The escaped JSON cannot close its application/ld+json script element.
+    return mark_safe(json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))  # nosec B308, B703
 
 @register.simple_tag
 def privacy_page(language):

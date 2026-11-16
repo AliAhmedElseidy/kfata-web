@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from wagtail.models import Page,PageViewRestriction
 from home.models import HomePage,ContentPage,BrandSettings,PresentationUpdate,SMTPSettings
 from urllib.parse import urlsplit
-from xml.etree import ElementTree
+from defusedxml import ElementTree
 
 class PresentationTests(TestCase):
     @classmethod
