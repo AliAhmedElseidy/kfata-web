@@ -1,42 +1,21 @@
-# KFATA 2026 company-profile media refresh
+# KFATA 2026 source and gallery refresh
 
-## Sources and validation
-- The 28-page `KFATA International Contracting Company Profile(1).pdf` is a **flattened-page/image** brochure. Project photographs are therefore cropped from pages, not independently embedded at original camera resolution.
-- The supplied 13-page `kfata(1).pdf` is byte-identical to `kfata.pdf` (SHA-256 `c3e2a3c174f3db071659b13f4dc6e0e00f696cab2b4f8ffba885e149b8e27324`).
-- The 13-page brochure includes additional operational subjects: civil works, infrastructure, electromechanical works, electrical, HVAC/plumbing and temporary fencing on p5; residential villa photographs on pp6–7 (the same photos repeated); Al Wadi company project photos p8; organization chart p9; letters/certificates pp10–12 and third-party logos p13.
-- The old 28-page brochure adds distinct banking, commercial, retail, school, roads, industrial and residential photo groups, mainly pp6–22.
-- The existing content enrichment remains untouched. Avoid claiming the source material demonstrates additional unique contracts, verified certificate validity or permission to use others' trademarks.
+- The supplied 28-page company profile and 13-page brochure were checked against the archive manifest and the project images. The 13-page brochure covers company background and values (pp. 3–4), work categories (p. 5), repeated villa examples (pp. 6–7), Al Wadi offices (p. 8), the organization chart (p. 9), historic documents (pp. 10–12) and a mixed logo wall (p. 13).
+- The previous bilingual reconciliation remains in place. This update adds six service topics, the organization chart in editable text, a page linking named organizations to documented portfolio work, and an Al Wadi case study connected to fit-out and the commercial sector. Construction and landscaping already have public service topics.
+- 58 selected WebP photographs cover 14 project topics. The allowlist records the brochure, source page, SHA-256 and bilingual description for each derivative. Montage edges were trimmed. Existing ANB tower and villa photographs, repeated views, an ambiguous ATM sign, the mixed branch/landmark groups, identifying technical-room images, and unverified documents or isolated marks were excluded. Al Hizam remains unpublished. Certifications remain in Wagtail pending verification.
+- Galleries are editable in each language. The image's alt text is independent from the optional visible caption. Mobile thumbnails use a compact WebP; click, touch and keyboard navigation use the existing accessible gallery dialog. The approved bilingual construction scene stays under Wagtail Brand settings.
 
-## Current repository state
-The active application code is in `feat/kfata-source-enrichment`, **not** the minimal `main` branch. This enhancement branch is based on it. Existing Wagtail project structure, live case studies and hero/scene controls are preserved.
+## Apply to the existing KFATA project
 
-## What changed
-- `home/content/kfata_2026_additions.json` adds **nine** traceable bilingual content topics (six services, the organization page, a review-only clients/partners page, and Al Wadi project). It maps 15 project photo group slugs conservatively.
-- `home/management/commands/import_kfata_2026.py` imports only images from `assets/source-2026`, creates missing bilingual pages and appends project galleries without replacing any gallery or hero photo. Imported images use source IDs, and one-time gallery markers protect against duplicate insertion.
-- Extra third-party logos, raw certificates, commercial-registration IDs, and ambiguous project group imagery remain outside the automatic public path. The partners page is deliberately kept draft.
-- `home/test_kfata_2026.py` exercises dry-run, bilingual pages, gallery creation, idempotence, protected owner revisions and publication flags.
+Keep originals, ZIP files and the reviewed WebP directory outside Git. Supply only the derivatives matching the checked-in allowlist. The import rejects any extra recognized image name, changed checksum, invalid WebP or duplicate checksum. Preview reports preserve/create/attach counts and writes nothing. Application appends galleries to eligible projects, preserving existing covers, blocks, drafts and owner revisions. A repeated import skips applied galleries and existing pages.
 
-## Important: no automatic deployment
-PDF files, certificate scans, raw partner marks and private materials must not be committed. The website currently runs a Docker-hosted Django/Wagtail service; merging this branch alone does **not** update the running Docker image, Wagtail database or media storage.
-
-Before running any import:
-1. Review **every** candidate crop from the separately delivered `KFATA_PDF_photo_assets_2026.zip`; the cropped images are candidate assets and may include headings/borders/background or represent overlapping contracts.
-2. Select only photos eligible for publication, and copy the selected `.webp` files from ZIP's `assets/source-2026` directory to the corresponding folder in the private build checkout, or a reviewed media upload route. Avoid the ZIP's `review-only` directory entirely.
-3. Take a consistent production backup, inspect the actual deployed commit and current Wagtail revisions. Preserve all owner changes, contact/SMTP settings, enquiry records, and other services.
-4. Run a full test suite (including PostgreSQL integration), migration drift checks and representative page QA on a staging build. Do not run legacy `seed_content` on production.
-5. Preview, then explicitly apply. **Keep publication off until photo/copy review is completed.**
+After a consistent KFATA-only backup, run the state-only Wagtail migration and preview with the reviewed files mounted read-only into a one-shot Compose web container:
 
 ```sh
-python manage.py import_kfata_2026
-python manage.py import_kfata_2026 --apply
-# Only after editorial approval of the pages and photographs:
-python manage.py import_kfata_2026 --apply --publish
+docker compose run --rm --no-deps -v /private/reviewed-photos:/reviewed-photos:ro web \
+  python manage.py import_kfata_2026 --asset-dir /reviewed-photos
+docker compose run --rm --no-deps -v /private/reviewed-photos:/reviewed-photos:ro web \
+  python manage.py import_kfata_2026 --asset-dir /reviewed-photos --apply --publish
 ```
 
-**Publication caveat:** If the first import was draft-only, the one-time image marker prevents duplicate insertion. Publish approved draft revisions from Wagtail deliberately; rerunning `--publish` should not override an owner/editor revision.
-
-## Project attribution
-Photo-group mapping is curated, not an assertion that similarly branded pages are one contract. The **Al Wadi** photographs form a new topic with no invented location, area, date or monetary amount. The source lists no certified current year/size/team count in this new brochure. `anb-alhizam`, `anb-branches` and `landmarks` are marked review-only: they should be sorted into correctly attributed project pages before attaching.
-
-## Runtime risk
-The JPEG/WEBP extraction may produce unsuitable rectangular crops due to different montage layouts between source pages; check before public use. Uploading a ZIP to the chat is not the same as committing images to GitHub or uploading Wagtail media. No real production changes or performance improvements are claimed.
+The public repository contains the source code and attribution manifest. The website serves the reviewed image derivatives through Wagtail media. Private documents and third-party brand assets stay out of both.

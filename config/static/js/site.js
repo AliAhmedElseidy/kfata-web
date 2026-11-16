@@ -68,8 +68,8 @@
         const token=++loadToken,link=links[index];
         const preview=link.querySelector('img');
         image.src=preview?.currentSrc||preview?.src||link.href;
-        image.alt=link.dataset.caption||'';
-        caption.textContent=(index+1)+' / '+links.length+' — '+image.alt;
+        image.alt=link.dataset.alt||link.dataset.caption||'';
+        caption.textContent=(index+1)+' / '+links.length+' — '+(link.dataset.caption||image.alt);
         figure.setAttribute('aria-busy','true');prev.disabled=next.disabled=links.length<2;
         const full=new Image();full.src=link.href;
         const loaded=()=>{

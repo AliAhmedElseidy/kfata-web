@@ -1,0 +1,408 @@
+{
+  "al-wadi-offices-02.webp": {
+    "ar": "ردهة استقبال بمكاتب شركة الوادي",
+    "en": "Reception lobby in the Al Wadi offices",
+    "source": "kfata-13",
+    "page": 8,
+    "sha256": "494eeb8cc398ad298e4cfbd6349f108d2b3d09d9b3cc6c728f076e70d336ca5a"
+  },
+  "al-wadi-offices-03.webp": {
+    "ar": "غرفة فاتحة بسقف وإضاءة مدمجة",
+    "en": "Light interior with recessed ceiling lights",
+    "source": "kfata-13",
+    "page": 8,
+    "sha256": "ffbdc14ca9469c488b466f23db02899475f70c4a79591bfdf8985da5af1c28d6"
+  },
+  "al-wadi-offices-04.webp": {
+    "ar": "درج داخلي بدرابزين زجاجي",
+    "en": "Interior staircase with a glass balustrade",
+    "source": "kfata-13",
+    "page": 8,
+    "sha256": "aff931a73ff72a0a74dba54dd94bb526d4cb68c52a2b35068b8b30fe37a6ae37"
+  },
+  "al-wadi-offices-06.webp": {
+    "ar": "فواصل زجاجية في المكاتب",
+    "en": "Glass partitions in the office interior",
+    "source": "kfata-13",
+    "page": 8,
+    "sha256": "211ea636ba829a6694ba042687a88dc31dc0b8907f191e2ee796bf043dde670b"
+  },
+  "al-wadi-offices-08.webp": {
+    "ar": "غرفة اجتماع بمقاعد زرقاء",
+    "en": "Meeting room with blue chairs",
+    "source": "kfata-13",
+    "page": 8,
+    "sha256": "ead549d16e8d75feadea3195d90ff080fe85b3bf622c154171e75e45f928787b"
+  },
+  "amnco-01.webp": {
+    "ar": "شبكة حديد التسليح قبل الصب",
+    "en": "Reinforcement grid before concrete placement",
+    "source": "company-profile-28",
+    "page": 15,
+    "sha256": "241210ecb7cf18e83313aa2f05e84cc9f37c6f5a1271f0e6be8b044d5e1361a3"
+  },
+  "amnco-02.webp": {
+    "ar": "واجهة مبنى مركز أمنكو",
+    "en": "Exterior of the AMNCO centre",
+    "source": "company-profile-28",
+    "page": 15,
+    "sha256": "6ccee110bc207c4b85c977344a24349a79b569f859cd14139125498869ef3fe8"
+  },
+  "amnco-03.webp": {
+    "ar": "قوالب خشبية لأعمال الخرسانة",
+    "en": "Timber formwork for concrete construction",
+    "source": "company-profile-28",
+    "page": 15,
+    "sha256": "f00f53dbe4886c441423110c6a401183fe43f6a5466121f4fed78709e7197708"
+  },
+  "amnco-04.webp": {
+    "ar": "قوالب وإنشاءات في موقع أمنكو",
+    "en": "Formwork at the AMNCO construction site",
+    "source": "company-profile-28",
+    "page": 15,
+    "sha256": "c5fdffd048b22b6e93fe4899b5a805dd7aeda7643332371a9dec77d5220729b7"
+  },
+  "amnco-05.webp": {
+    "ar": "مبنى خرساني في مرحلة الإنشاء",
+    "en": "Concrete structure under construction",
+    "source": "company-profile-28",
+    "page": 15,
+    "sha256": "0c4cdca816de8372651528d5a72e7ecb43f5b901035680ca3a12116f059d5b2e"
+  },
+  "anb-al-awali-01.webp": {
+    "ar": "ردهة فرع العوالي بإضاءة سقفية",
+    "en": "Al Awali branch lobby with overhead lighting",
+    "source": "company-profile-28",
+    "page": 9,
+    "sha256": "784c8bb737d18a557bdd522e8254bcd73cb196074b18473e31f7c86c7776cba0"
+  },
+  "anb-al-awali-02.webp": {
+    "ar": "واجهة فرع العوالي ومدخلاه",
+    "en": "Al Awali branch façade and entrances",
+    "source": "company-profile-28",
+    "page": 9,
+    "sha256": "4a46cc94ef010c70de23d96cbd1a3bdda6bba6d706867b62006339a81c0b35fc"
+  },
+  "anb-al-awali-04.webp": {
+    "ar": "منطقة انتظار بمقاعد زرقاء في فرع العوالي",
+    "en": "Blue seating in the Al Awali branch waiting area",
+    "source": "company-profile-28",
+    "page": 9,
+    "sha256": "2df3ebf60e37fc2aa76465eaca435046359fdcceb439363013cb989cf1da15c5"
+  },
+  "anb-al-majmaah-01.webp": {
+    "ar": "مساحة خدمة العملاء في فرع المجمعة",
+    "en": "Customer service area at the Al Majmaah branch",
+    "source": "company-profile-28",
+    "page": 10,
+    "sha256": "7e95bf3f253c23b5bb7e88007799770ba55b270e0fd9bd139f91aa6d6f610ea7"
+  },
+  "anb-al-majmaah-02.webp": {
+    "ar": "واجهة فرع المجمعة ومنحدر المدخل",
+    "en": "Al Majmaah branch façade and entrance ramp",
+    "source": "company-profile-28",
+    "page": 10,
+    "sha256": "966fac97a92fa7986a35e7e19c5ca6fbc18169c58eb937382e807f0f603e4cf9"
+  },
+  "anb-al-majmaah-03.webp": {
+    "ar": "تشطيبات دورة المياه في فرع المجمعة",
+    "en": "Restroom finishes at the Al Majmaah branch",
+    "source": "company-profile-28",
+    "page": 10,
+    "sha256": "df3cf11b2efaeb59ec07e44f9182dc1a423d91dafa8b7202870c57d4755c404d"
+  },
+  "anb-al-majmaah-04.webp": {
+    "ar": "مدخل أجهزة الصراف في فرع المجمعة",
+    "en": "Entrance to the Al Majmaah branch cash machines",
+    "source": "company-profile-28",
+    "page": 10,
+    "sha256": "368d4216326478ec481017e25960030bfaafd57b39640c7b0d4651d091024f7a"
+  },
+  "anb-al-majmaah-05.webp": {
+    "ar": "مكتب زجاجي داخل فرع المجمعة",
+    "en": "Glazed office at the Al Majmaah branch",
+    "source": "company-profile-28",
+    "page": 10,
+    "sha256": "07fb4ab0d0f1e0f031b96f34282da58729d41be9a336e64f99e2f007afe6a98c"
+  },
+  "anb-atm-01.webp": {
+    "ar": "أجهزة صراف مستقلة في ساحة مفتوحة",
+    "en": "Freestanding cash machines in an open plaza",
+    "source": "company-profile-28",
+    "page": 12,
+    "sha256": "633cd6256a7c59ca3ebb1f60bd59c49e85ff1833579e195fadda72d74fe22e0f"
+  },
+  "anb-atm-02.webp": {
+    "ar": "مظلة حمراء لأجهزة الصراف",
+    "en": "Red canopy over cash machines",
+    "source": "company-profile-28",
+    "page": 12,
+    "sha256": "bba053bb03133f50208bc8168d39a6b508fe108003dda58f6024daf199df4d05"
+  },
+  "anb-atm-04.webp": {
+    "ar": "واجهة زجاجية لموقع صراف البنك العربي الوطني",
+    "en": "Glazed ANB cash machine frontage",
+    "source": "company-profile-28",
+    "page": 12,
+    "sha256": "613ec3077a22fdb8bc4aadf181f01c8992b7ecab7c955b8064cc1081948d16ef"
+  },
+  "anb-atm-05.webp": {
+    "ar": "كابينة صراف زجاجية ولافتة زرقاء",
+    "en": "Glazed cash machine kiosk with blue signage",
+    "source": "company-profile-28",
+    "page": 12,
+    "sha256": "2c877586624d4b9a2e4064ffd6533decdfc513cfb868a502b5569482456d7309"
+  },
+  "anb-old-head-office-01.webp": {
+    "ar": "مساحة عمل داخل المقر القديم للبنك",
+    "en": "Workspace inside the bank’s former headquarters",
+    "source": "company-profile-28",
+    "page": 7,
+    "sha256": "1c6466ccdbcea3367cc864ae91630d063d683421ace5031521f5f86e3e31aaf1"
+  },
+  "anb-old-head-office-02.webp": {
+    "ar": "منطقة جلوس وطاولات في المقر القديم",
+    "en": "Tables and seating at the former headquarters",
+    "source": "company-profile-28",
+    "page": 7,
+    "sha256": "657d45e7bcec7d779f87687c1372c65c2814e27c99c2a518e00a376901a189fd"
+  },
+  "anb-old-head-office-03.webp": {
+    "ar": "ممر خارجي ومقاعد في المقر القديم",
+    "en": "Outdoor walkway and seating at the former headquarters",
+    "source": "company-profile-28",
+    "page": 7,
+    "sha256": "191e2c88ae6d504452ed7909387ee65f1e81c5e70fd8e368bf31bd98908f8653"
+  },
+  "anb-outdoor-01.webp": {
+    "ar": "مساحة مزروعة في فناء البنك",
+    "en": "Landscaped courtyard at the bank",
+    "source": "company-profile-28",
+    "page": 14,
+    "sha256": "6be90dfaaac2a9532593c82737b20dd8be6285d73e761aef454c6254e3120618"
+  },
+  "anb-outdoor-02.webp": {
+    "ar": "أعمال الحفر في فناء البنك",
+    "en": "Excavation in the bank courtyard",
+    "source": "company-profile-28",
+    "page": 14,
+    "sha256": "ab5baf8ec77a279f42ab6b73d1237462f03f7a9acd271f45718851e6efc11452"
+  },
+  "anb-outdoor-03.webp": {
+    "ar": "جلسات خارجية تحت مظلة شرائحية",
+    "en": "Outdoor seating beneath a slatted canopy",
+    "source": "company-profile-28",
+    "page": 14,
+    "sha256": "71b292e1b79e913aa0e3ad9cbfd12ed3a50e3e963818610288520ca1595bfdc4"
+  },
+  "anb-outdoor-04.webp": {
+    "ar": "ممرات الفناء ومظلاته القماشية",
+    "en": "Courtyard paths and fabric shade canopies",
+    "source": "company-profile-28",
+    "page": 14,
+    "sha256": "9405980e82cf6a920362219e178a5ce9a15231487eba2679d73831b5c58ad191"
+  },
+  "industrial-01.webp": {
+    "ar": "قاعة صناعية بسقف معدني مرتفع",
+    "en": "Industrial hall with a high metal roof",
+    "source": "company-profile-28",
+    "page": 21,
+    "sha256": "35f01d3026e67a3ea20cde3037c549e566d3de1ec21eed77969bee5741ac9cdd"
+  },
+  "industrial-02.webp": {
+    "ar": "مساحة داخلية مفتوحة في المنشأة الصناعية",
+    "en": "Open interior of the industrial facility",
+    "source": "company-profile-28",
+    "page": 21,
+    "sha256": "cc301f60af58eaf6f94273a9578acc2c9286bc23a5fb74b32a7967fa55ebcfec"
+  },
+  "industrial-03.webp": {
+    "ar": "درج ومنصة معدنية داخل المنشأة",
+    "en": "Metal staircase and platform inside the facility",
+    "source": "company-profile-28",
+    "page": 21,
+    "sha256": "ca7c3d877b51bb3bc12305bc0c2675fec407e51319a2d424d2d2684e7ab6d814"
+  },
+  "industrial-04.webp": {
+    "ar": "تفاصيل سقف ومدخل مقوّس",
+    "en": "Ceiling details and an arched doorway",
+    "source": "company-profile-28",
+    "page": 21,
+    "sha256": "402becb5515b8664d52ab86e869121f4795a631980373ee2392f5be80039d29d"
+  },
+  "industrial-05.webp": {
+    "ar": "مغاسل وتشطيبات حجرية",
+    "en": "Washbasins with stone finishes",
+    "source": "company-profile-28",
+    "page": 21,
+    "sha256": "ee1416065054312e178a58861aac4d6d49f6db6786c99dacb1c0bcb52aee9944"
+  },
+  "industrial-06.webp": {
+    "ar": "مغسلة وإضاءة دائرية",
+    "en": "Washbasin and a circular light fixture",
+    "source": "company-profile-28",
+    "page": 21,
+    "sha256": "e2783d3b8c9aaf90541b75e7e4d8cb8fcbbababec881e246bc3f759f059ff1e6"
+  },
+  "office-fitout-01.webp": {
+    "ar": "مكاتب بحواجز زرقاء وكسوة خشبية",
+    "en": "Workstations with blue partitions and timber panelling",
+    "source": "company-profile-28",
+    "page": 16,
+    "sha256": "dbf0fb1c7ca9daaf4eead0ebc338c7d8a79dd67b7948b99935fb72a068deaa82"
+  },
+  "office-fitout-02.webp": {
+    "ar": "غرفة اجتماعات بإضاءة خطية",
+    "en": "Meeting room with linear lighting",
+    "source": "company-profile-28",
+    "page": 16,
+    "sha256": "e844c2eea44751b5762a7d0603e4b9f41dc88e2f3485b7e1c902cc1e81725300"
+  },
+  "office-fitout-03.webp": {
+    "ar": "مغسلة ومرآة دائرية ضمن التشطيبات المكتبية",
+    "en": "Washbasin and round mirror in the office fit-out",
+    "source": "company-profile-28",
+    "page": 16,
+    "sha256": "e5ad372c318dea93701f1c151763a182eb698fcf6b41996177e321a0d980d8ef"
+  },
+  "office-fitout-04.webp": {
+    "ar": "منطقة جلوس وبرفوف مفتوحة",
+    "en": "Office seating beside open shelving",
+    "source": "company-profile-28",
+    "page": 16,
+    "sha256": "5616ba683a2052cd066b7f0bfa9c129eb7528491555fca605a30b3f4d87cf11f"
+  },
+  "residential-02.webp": {
+    "ar": "واجهة فيلا مائلة السقف أمامها نخلة",
+    "en": "Villa exterior with a pitched roof and palm tree",
+    "source": "company-profile-28",
+    "page": 22,
+    "sha256": "cd571cfb0fdba834a224bdba54a9c3ad1258e9e0d4188506c18b0d501513a63d"
+  },
+  "residential-04.webp": {
+    "ar": "فناء فيلا بأبواب زجاجية واسعة",
+    "en": "Villa courtyard with wide glass doors",
+    "source": "company-profile-28",
+    "page": 22,
+    "sha256": "832e61c28d3dbe6360b5b2e0973c216f167b55c45c5185cd248c2dd678273d01"
+  },
+  "restaurant-fitout-01.webp": {
+    "ar": "منطقة طلبات بتشطيبات خشبية",
+    "en": "Restaurant ordering counter with timber finishes",
+    "source": "company-profile-28",
+    "page": 17,
+    "sha256": "35b451cec43f8e4907469b860689ab700b01f2e482463f17c1a1df1ad0edf3eb"
+  },
+  "restaurant-fitout-02.webp": {
+    "ar": "واجهة مطعم مضاءة مساءً",
+    "en": "Restaurant frontage illuminated at night",
+    "source": "company-profile-28",
+    "page": 17,
+    "sha256": "3e2d541973ef79470be2ed17166485a0594c3237eb664e00edec4c584dcb1127"
+  },
+  "restaurant-fitout-03.webp": {
+    "ar": "واجهة مطعم بيتزا زجاجية",
+    "en": "Glazed pizza restaurant storefront",
+    "source": "company-profile-28",
+    "page": 17,
+    "sha256": "44e118caa2419a20fe98794fb70465fdb7854a3332b139430800f1d1f27dafe4"
+  },
+  "restaurant-fitout-04.webp": {
+    "ar": "جلسات داخل مطعم بواجهة زجاجية",
+    "en": "Restaurant seating behind a glazed frontage",
+    "source": "company-profile-28",
+    "page": 17,
+    "sha256": "7a31f9f7816c8700716b926ffab5f314fee9d5bf3fb043f5dc3a29785d37d244"
+  },
+  "restaurant-fitout-05.webp": {
+    "ar": "صالة طعام بأطقم جلوس خضراء",
+    "en": "Dining room with green seating",
+    "source": "company-profile-28",
+    "page": 17,
+    "sha256": "2a85a8e6c23c9b7e4eb6af3b5b8c0c5ee4e1f42f16a7ffd2b9fec3c3d5aa37e9"
+  },
+  "roads-02.webp": {
+    "ar": "ممشى مرصوف بمحاذاة المسطحات الخضراء",
+    "en": "Paved walkway beside a lawn",
+    "source": "company-profile-28",
+    "page": 20,
+    "sha256": "fa23f42e7a001a49c1e912a5e6ad5b63d58eb8237cc2a5fed33f129493884e29"
+  },
+  "roads-03.webp": {
+    "ar": "حافة طريق بمحاذاة شريط أخضر",
+    "en": "Road edge alongside a landscaped strip",
+    "source": "company-profile-28",
+    "page": 20,
+    "sha256": "f4044fe7371dbb496b984e7cd300ba84f82ec6e08d0563bf610a8c4fd6d07d4f"
+  },
+  "roads-04.webp": {
+    "ar": "فريق يعمل على رصف الطريق",
+    "en": "Crew laying a road surface",
+    "source": "company-profile-28",
+    "page": 20,
+    "sha256": "7d3013e4ac4441c8a721514d6225616d12b7708931d5e7917ea446f71a63ddb9"
+  },
+  "roads-05.webp": {
+    "ar": "أعمال تجهيز السطح في موقع مفتوح",
+    "en": "Surface preparation at an outdoor work site",
+    "source": "company-profile-28",
+    "page": 20,
+    "sha256": "ad63b08080ae225be91a7c78bb98538b133a11a8eab7708012eaa69d18ff49bd"
+  },
+  "roads-06.webp": {
+    "ar": "أعمال تركيب بلاط الرصف",
+    "en": "Paving blocks being laid",
+    "source": "company-profile-28",
+    "page": 20,
+    "sha256": "976e15311d00295559449fc3f2c1e8d0557e47368531cb89fc38d6722708d9bb"
+  },
+  "school-01.webp": {
+    "ar": "واجهة مبنى المدرسة تحت الإنشاء",
+    "en": "School façade under construction",
+    "source": "company-profile-28",
+    "page": 18,
+    "sha256": "28134680a65491dcfd0cbc62da78ab1e3d39b6d63a41f3e371bd14ec877d1eed"
+  },
+  "school-03.webp": {
+    "ar": "قواعد مبنى المدرسة خلال التنفيذ",
+    "en": "School foundations during construction",
+    "source": "company-profile-28",
+    "page": 18,
+    "sha256": "e2833b86a16baa6c2deb7a7ed113b0c18c3caf8796d59aa94dc94a23dd077c33"
+  },
+  "school-04.webp": {
+    "ar": "مبنى المدرسة وممره الجانبي",
+    "en": "School building and side walkway",
+    "source": "company-profile-28",
+    "page": 18,
+    "sha256": "0f680e7861ccf33effb920d9ebc029b1a642c418b7ed4e2b7264fc90dea41045"
+  },
+  "telemoney-01.webp": {
+    "ar": "مدخل مركز تلي موني من الممر التجاري",
+    "en": "TeleMoney entrance from a shopping arcade",
+    "source": "company-profile-28",
+    "page": 13,
+    "sha256": "08db52b2b9c3a7d64b9e1fe3e5216e2394aa076fa7454a285644b0a1a35bf731"
+  },
+  "telemoney-02.webp": {
+    "ar": "واجهة مركز تلي موني الزجاجية",
+    "en": "Glazed TeleMoney centre frontage",
+    "source": "company-profile-28",
+    "page": 13,
+    "sha256": "98184608d2c7d6cfd6ab165f2ab4a3e0eeea850eaee78974b614154b1e14facf"
+  },
+  "telemoney-03.webp": {
+    "ar": "منطقة انتظار داخل مركز تلي موني",
+    "en": "Waiting area inside a TeleMoney centre",
+    "source": "company-profile-28",
+    "page": 13,
+    "sha256": "fa7480b378e30c177ef22c4dc7bc4c3d8cc4dabaed0afb06cda304139c4cbdde"
+  },
+  "telemoney-04.webp": {
+    "ar": "ردهة مركز تلي موني بإضاءة سقفية",
+    "en": "TeleMoney lobby with overhead lighting",
+    "source": "company-profile-28",
+    "page": 13,
+    "sha256": "927f9d32b570042ae5697f33ccfea72094423473b2e447e48106a471bd20e78a"
+  }
+}

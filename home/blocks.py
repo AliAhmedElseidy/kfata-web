@@ -29,7 +29,9 @@ class ImageText(SectionBlock):
 class Gallery(SectionBlock):
     title = blocks.CharBlock(required=False)
     images = blocks.ListBlock(blocks.StructBlock([
-        ('image', ImageChooserBlock()), ('caption', blocks.CharBlock(required=False)),
+        ('image', ImageChooserBlock()),
+        ('alt', blocks.CharBlock(required=False, label='وصف الصورة البديل / Image alt text')),
+        ('caption', blocks.CharBlock(required=False)),
     ]))
     class Meta:
         template = 'home/blocks/gallery.html'

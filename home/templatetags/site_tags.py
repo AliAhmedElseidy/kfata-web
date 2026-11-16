@@ -25,6 +25,23 @@ def curated_cards(locale, value):
     return cards(locale,value['kind'],value['count'])
 
 @register.simple_tag
+def company_connections(page):
+    links = {
+        "about": ("organization", "clients-partners", "quality-safety", "certifications"),
+        "clients-partners": ("anb-new-tower", "amnco-cash-centre", "al-wadi-offices"),
+    }.get(page.slug)
+    if not links:
+        return []
+    pages = {
+        target.slug: target
+        for target in ContentPage.objects.live().public().filter(
+            locale=page.locale, slug__in=links,
+        )
+    }
+    return [pages[slug] for slug in links if slug in pages]
+
+
+@register.simple_tag
 def policy_pages(language):
     return ContentPage.objects.live().public().filter(slug__in=['privacy','terms','cookies'],locale__language_code=language).order_by('slug')
 
@@ -35,7 +52,7 @@ def organization_json(brand, lang):
     if brand.email: data['email'] = brand.email
     if brand.linkedin: data['sameAs'] = [brand.linkedin]
     address=brand.address_ar if lang=='ar' else brand.address_en
-    if address: data['address']=address
+    if address: data['address']={'@type':'PostalAddress','streetAddress':address,'addressCountry':'SA'}
     if brand.logo_id: data['logo']=urljoin(settings.PUBLIC_BASE_URL,brand.logo.file.url)
     return mark_safe(json.dumps(data, ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))
 
@@ -67,6 +84,11 @@ def page_schema(page):
     ]}
     if getattr(page,'kind',None) == 'article':
         data = {'@context':'https://schema.org','@graph':[data,{'@type':'Article','headline':page.title,'datePublished':page.first_published_at.isoformat() if page.first_published_at else '', 'dateModified':page.last_published_at.isoformat() if page.last_published_at else '', 'mainEntityOfPage':page.full_url}]}
+    if getattr(page, 'kind', None) == 'service' and page.full_url:
+        data = {'@context':'https://schema.org', '@graph':[data, {
+            '@type':'Service', 'name':page.title, 'description':page.summary,
+            'url':page.full_url, 'provider':{'@id':settings.PUBLIC_BASE_URL+'/#organization'},
+        }]}
     return mark_safe(json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026'))
 
 @register.simple_tag

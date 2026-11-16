@@ -1,8 +1,8 @@
 {
   "version": "2026-11-17-v1",
   "sources": [
-    "KFATA International Contracting Company Profile(1).pdf, 28 pages",
-    "kfata(1).pdf, 13 pages (byte-identical to kfata.pdf)"
+    "KFATA International Contracting Company Profile.pdf, 28 pages",
+    "kfata.pdf, 13 pages"
   ],
   "notes": [
     "Existing published source enrichment must be preserved.",
@@ -115,28 +115,48 @@
       "ar": {
         "title": "الهيكل التنظيمي",
         "summary": "الإدارة والفرق الفنية والهندسية في شركة كفاتا.",
-        "body": "يعرض الملف الهيكل التنظيمي بدءًا من المدير العام والرئيس التنفيذي، وصولًا إلى أقسام الإدارة والموارد البشرية والمالية والمشروعات. وتشمل فرق المشروعات إدارة المشاريع، المكتب الفني، الهندسة المعمارية، الهندسة الكهربائية والميكانيكية، والمشرفين والفنيين."
+        "body": "يقود المدير العام والرئيس التنفيذي الهيكل الموضح في ملف الشركة، وتتوزع المهام على الإدارة والموارد البشرية والمشروعات والمالية.",
+        "sections": [
+          {
+            "title": "المشروعات والمكتب الفني",
+            "body": "تشمل إدارة المشروعات مديري المشاريع والمكتب الفني والإشراف على التنفيذ، وتضم فرق الهندسة المعمارية والكهربائية والميكانيكية والمشرفين والفنيين."
+          },
+          {
+            "title": "الإدارة والموارد البشرية والمالية",
+            "body": "يضم قسم الإدارة مهام المشتريات والمبيعات والتسويق. ويتولى قسم الموارد البشرية شؤون الموظفين، فيما تضم المالية الإدارة المالية والمحاسبة."
+          }
+        ]
       },
       "en": {
         "title": "Organization & teams",
         "summary": "KFATA's management, technical and engineering teams.",
-        "body": "The company profile shows general management and executive leadership, with administration, human resources, finance and project departments. Project teams include project management, technical office, architectural, electrical and mechanical engineering, supervisors and site technicians."
+        "body": "The company profile shows the general manager and chief executive at the head of four departments: administration, human resources, projects and finance.",
+        "sections": [
+          {
+            "title": "Projects and technical office",
+            "body": "Project management includes project managers, the technical office and site supervision. The department includes architectural, electrical and mechanical teams, supervisors and technicians."
+          },
+          {
+            "title": "Administration, human resources and finance",
+            "body": "Administration covers procurement, sales and marketing. Human resources manages personnel, while the finance department includes financial management and accounting."
+          }
+        ]
       }
     },
     {
       "slug": "clients-partners",
       "parent": null,
       "kind": "page",
-      "source": "kfata(1).pdf p.13; company profile p.27",
+      "source": "28-page company profile pp.6–15; 13-page kfata.pdf p.8",
       "ar": {
-        "title": "جهات وشركاء وردوا في ملف الشركة",
-        "summary": "شعارات جهات وعلامات تجارية ضمن الملف التعريفي، دون افتراض طبيعة العلاقة.",
-        "body": "يتضمن الملف التعريفي شعارات لجهات وعلامات تجارية متعددة. يخضع تصنيف كل جهة كعميل أو شريك أو مورد للمراجعة قبل عرض الاسم أو الشعار على الموقع."
+        "title": "جهات في دراسات المشاريع",
+        "summary": "جهات ترد أسماؤها في دراسات أعمال كفاتا المنشورة.",
+        "body": "توثّق دراسات المشاريع أعمالًا للبنك العربي الوطني وأمنكو، وتعرض أعمالًا داخلية في مشروع شركة الوادي."
       },
       "en": {
-        "title": "Organizations featured in the profile",
-        "summary": "Organizations and brands pictured in the company profile; relationships pending verification.",
-        "body": "The corporate brochure contains third-party logos. Each organization must be verified as a client, partner or supplier before being presented on the public website."
+        "title": "Organizations in our case studies",
+        "summary": "Organizations named in KFATA’s published project case studies.",
+        "body": "Our case studies cover work for Arab National Bank and AMNCO, and document interiors in the Al Wadi company project."
       }
     },
     {
@@ -147,13 +167,19 @@
       "ar": {
         "title": "مشروع شركة الوادي",
         "summary": "مجموعة صور لأعمال داخلية ومساحات عمل ومرافق فنية موثقة في ملف كفاتا.",
-        "body": "يعرض الملف صورًا لمساحات مكتبية وغرف اجتماعات وتجهيزات فنية داخل مشروع شركة الوادي. لم يذكر الملف تاريخًا أو مساحة أو موقعًا تفصيليًا للمشروع."
+        "body": "يعرض ملف كفاتا أعمالًا داخلية في مشروع شركة الوادي، تشمل منطقة الاستقبال والممرات ذات الفواصل الزجاجية وغرفة الاجتماعات."
       },
       "en": {
         "title": "Al Wadi company project",
         "summary": "Interior office, meeting and technical-space photographs shown in KFATA's brochure.",
-        "body": "The portfolio features office interiors, meeting rooms and technical facilities associated with the Al Wadi company project. No verified project date, area or precise location is supplied."
-      }
+        "body": "KFATA’s portfolio shows interiors in the Al Wadi company project, including the reception, glass-partitioned corridors and a meeting room."
+      },
+      "services": [
+        "renovation"
+      ],
+      "sectors": [
+        "commercial"
+      ]
     }
   ],
   "photo_groups": {
