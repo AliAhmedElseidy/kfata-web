@@ -117,7 +117,8 @@ def public_image(request, path):
         f = default_storage.open(path, 'rb')
     except (FileNotFoundError, SuspiciousFileOperation):
         raise Http404
-    response = FileResponse(f)
+    content_type = "image/webp" if path.lower().endswith(".webp") else None
+    response = FileResponse(f, content_type=content_type)
     response['Cache-Control'] = 'public, max-age=86400'
     response['X-Content-Type-Options'] = 'nosniff'
     return response

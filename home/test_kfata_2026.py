@@ -85,6 +85,10 @@ class Kfata2026SourceTests(TestCase):
             self.assertContains(self.client.get(about.url), organizations.url)
             self.assertContains(self.client.get(ar.url), 'alt="وصف الصورة"')
             self.assertContains(self.client.get(en.url), 'alt="Photo description"')
+            photo = ImportedImage.objects.get(source_key="kfata26-al-wadi-offices-02").image
+            response = self.client.get(photo.file.url)
+            self.assertEqual(response["Content-Type"], "image/webp")
+            self.assertEqual(b"".join(response.streaming_content)[8:12], b"WEBP")
             self.assertContains(self.client.get(en.url), 'hreflang="x-default"')
             villa = ContentPage.objects.get(slug="residential-villas", locale__language_code="ar")
             self.assertTrue(villa.hero_image_id)
