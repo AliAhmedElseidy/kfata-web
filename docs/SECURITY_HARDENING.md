@@ -1,5 +1,7 @@
 # KFATA security hardening
 
+See [security operations follow-up](SECURITY_OPERATIONS.md) for current SSH, Fail2ban, off-host backup and PostgreSQL readiness.
+
 Application release `3e8dbc8ea4bff66d3181a407ae29861d8d7b757d` is deployed on kfata.elsaidy.org. [Application PR](https://github.com/AliAhmedElseidy/kfata-web/pull/4) and [weekly workflow](https://github.com/AliAhmedElseidy/kfata-web/actions/workflows/kfata-security-scheduled.yml).
 
 - Pillow 13.0.0 replaces the affected 12.3.0. Pip-audit and the configured medium-and-higher Bandit checks passed. The release keeps Django 5.2 and Wagtail 7.4 on their installed security-supported patch series.
