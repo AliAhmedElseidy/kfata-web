@@ -1,3 +1,5 @@
+> Active production release: [2026 content and media refresh](KFATA_2026_MEDIA_REFRESH.md#production-release). Earlier release and presentation records follow.
+
 > Current owner-authorized source enrichment: see [CONTENT_DELIVERY.md](CONTENT_DELIVERY.md).94 public routes;24 case-study topics per language. Earlier draft counts below are historical. Golden Belt remains draft; owner English tower pending revision is protected. No new photo permission was inferred.
 
 # Content status — 2026-11-04
