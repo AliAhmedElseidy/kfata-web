@@ -3,10 +3,12 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.admin.auth import require_admin_access
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from home import views
+from home.mfa import DeviceLoginView
 from home.scene import scene_video
 from home.sitemaps import PublicSitemap
 
@@ -20,6 +22,7 @@ urlpatterns = [
     path('quote/', views.quote, name='quote'),
     path('private/enquiry/<int:pk>/', views.attachment, name='private_attachment'),
     path('django-admin/', admin.site.urls),
+    path('admin/2fa/auth', require_admin_access(DeviceLoginView.as_view()), name='kfata_otp_challenge'),
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
 ]

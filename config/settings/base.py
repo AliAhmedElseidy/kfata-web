@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django_otp",
+    "django_otp.plugins.otp_totp",
+    "wagtail_2fa",
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
@@ -54,6 +57,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_otp.middleware.OTPMiddleware",
+    "home.security.SecurityPolicyMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
@@ -211,6 +216,10 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 6 * 1024 * 1024
 DATA_UPLOAD_MAX_MEMORY_SIZE = 7 * 1024 * 1024
 WAGTAILDOCS_EXTENSIONS = ['pdf', 'docx', 'xlsx', 'mp4', 'webm']
 WAGTAILDOCS_SERVE_METHOD = 'serve_view'
+WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'avif']
+WAGTAIL_2FA_REQUIRED = False
+OTP_TOTP_ISSUER = 'KFATA'
+OTP_TOTP_THROTTLE_FACTOR = 2
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 MIDDLEWARE += ['home.middleware.IndexingMiddleware']
 CACHES = {'default': {'BACKEND': 'django.core.cache.backends.db.DatabaseCache', 'LOCATION': 'kfata_cache'}}

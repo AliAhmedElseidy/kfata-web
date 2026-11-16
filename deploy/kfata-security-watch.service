@@ -1,0 +1,11 @@
+[Unit]
+Description=KFATA local security event monitor
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/kfata-web
+ExecStart=/usr/bin/bash /opt/kfata-web/deploy/security-watch.sh
+SyslogIdentifier=kfata-security-watch
+StandardError=journal
+SyslogLevel=warning
