@@ -1,0 +1,207 @@
+{
+  "version": "2026-11-17-v1",
+  "sources": [
+    "KFATA International Contracting Company Profile.pdf, 28 pages",
+    "kfata.pdf, 13 pages"
+  ],
+  "notes": [
+    "Existing published source enrichment must be preserved.",
+    "New category headings are sourced from p.5 of the 13-page company PDF; supporting text does not assert unprovided technical specifications.",
+    "Al Wadi project is shown on p.8 and must not be merged with the separate residential villas photographs.",
+    "Do not publish third-party logos or historical certificates without verification."
+  ],
+  "pages": [
+    {
+      "slug": "civil-works",
+      "parent": "services",
+      "kind": "service",
+      "source": "kfata(1).pdf p.5",
+      "ar": {
+        "title": "الأعمال المدنية",
+        "summary": "أعمال مدنية ضمن نطاق المقاولات والمشاريع الإنشائية.",
+        "body": "تضم طبيعة أعمال كفاتا الأعمال المدنية المرتبطة بالمشروعات، مع تحديد نطاق التنفيذ وفق متطلبات الموقع والرسومات المعتمدة لكل مشروع."
+      },
+      "en": {
+        "title": "Civil works",
+        "summary": "Civil works within construction and contracting projects.",
+        "body": "KFATA lists civil works among its areas of work. Delivery scope depends on the site requirements and the project's approved drawings."
+      }
+    },
+    {
+      "slug": "infrastructure",
+      "parent": "services",
+      "kind": "service",
+      "source": "kfata(1).pdf p.5",
+      "ar": {
+        "title": "البنية التحتية",
+        "summary": "تنفيذ أعمال البنية التحتية ضمن نطاق المشروع.",
+        "body": "تتضمن خدمات كفاتا أعمال البنية التحتية كما وردت في ملف الشركة، وتُحدد تفاصيل المشروع ومراحله ومتطلبات التنفيذ قبل البدء."
+      },
+      "en": {
+        "title": "Infrastructure",
+        "summary": "Infrastructure work within the agreed project scope.",
+        "body": "Infrastructure is listed in KFATA's company profile. Detailed scope, phases and delivery requirements are established for each project."
+      }
+    },
+    {
+      "slug": "electromechanical",
+      "parent": "services",
+      "kind": "service",
+      "source": "kfata(1).pdf p.5",
+      "ar": {
+        "title": "الأعمال الكهروميكانيكية",
+        "summary": "تنسيق وتنفيذ الأعمال الكهروميكانيكية للمباني.",
+        "body": "تشمل طبيعة أعمال الشركة الأعمال الكهروميكانيكية المرتبطة بالمباني والمرافق؛ وتُراجع متطلبات كل موقع للتكامل مع الأعمال المعمارية والإنشائية."
+      },
+      "en": {
+        "title": "Electromechanical works",
+        "summary": "Electromechanical works for buildings and facilities.",
+        "body": "KFATA lists electromechanical works among its services, coordinated with the relevant building and construction requirements."
+      }
+    },
+    {
+      "slug": "electrical-works",
+      "parent": "services",
+      "kind": "service",
+      "source": "kfata(1).pdf p.5",
+      "ar": {
+        "title": "الأعمال الكهربائية",
+        "summary": "الأعمال الكهربائية للمشروعات وفق نطاقها الفني.",
+        "body": "تُدرج الأعمال الكهربائية ضمن طبيعة الأعمال الموضحة في ملف الشركة، على أن يحدد كل مشروع المواصفات والأعمال المطلوبة."
+      },
+      "en": {
+        "title": "Electrical works",
+        "summary": "Project electrical works according to technical scope.",
+        "body": "Electrical work is identified among KFATA's services, with technical specifications and execution requirements defined per project."
+      }
+    },
+    {
+      "slug": "hvac-plumbing",
+      "parent": "services",
+      "kind": "service",
+      "source": "kfata(1).pdf p.5",
+      "ar": {
+        "title": "التكييف والتهوية والسباكة",
+        "summary": "أعمال أنظمة التكييف والتهوية والسباكة للمباني.",
+        "body": "يذكر ملف الشركة أنظمة التكييف والتهوية والسباكة ضمن مجالات العمل. ويُحدّد نطاق كل نظام وفق متطلبات المبنى والمخططات الفنية."
+      },
+      "en": {
+        "title": "HVAC, ventilation & plumbing",
+        "summary": "Building HVAC, ventilation and plumbing works.",
+        "body": "The company profile lists HVAC, ventilation and plumbing among KFATA's work areas. Scope is specified for each building and set of technical drawings."
+      }
+    },
+    {
+      "slug": "temporary-fencing",
+      "parent": "services",
+      "kind": "service",
+      "source": "kfata(1).pdf p.5",
+      "ar": {
+        "title": "الأسوار الأمنية المؤقتة",
+        "summary": "تنفيذ وتركيب الأسوار الأمنية المؤقتة لمواقع الأعمال.",
+        "body": "يُدرج الملف أعمال تركيب الأسوار الأمنية المؤقتة ضمن طبيعة أعمال الشركة، بحسب احتياج الموقع والاشتراطات المتصلة به."
+      },
+      "en": {
+        "title": "Temporary security fencing",
+        "summary": "Installation of temporary security fencing for work sites.",
+        "body": "Temporary security fencing installation is listed in KFATA's profile, subject to site needs and relevant requirements."
+      }
+    },
+    {
+      "slug": "organization",
+      "parent": null,
+      "kind": "page",
+      "source": "kfata(1).pdf p.9",
+      "ar": {
+        "title": "الهيكل التنظيمي",
+        "summary": "الإدارة والفرق الفنية والهندسية في شركة كفاتا.",
+        "body": "يقود المدير العام والرئيس التنفيذي الهيكل الموضح في ملف الشركة، وتتوزع المهام على الإدارة والموارد البشرية والمشروعات والمالية.",
+        "sections": [
+          {
+            "title": "المشروعات والمكتب الفني",
+            "body": "تشمل إدارة المشروعات مديري المشاريع والمكتب الفني والإشراف على التنفيذ، وتضم فرق الهندسة المعمارية والكهربائية والميكانيكية والمشرفين والفنيين."
+          },
+          {
+            "title": "الإدارة والموارد البشرية والمالية",
+            "body": "يضم قسم الإدارة مهام المشتريات والمبيعات والتسويق. ويتولى قسم الموارد البشرية شؤون الموظفين، فيما تضم المالية الإدارة المالية والمحاسبة."
+          }
+        ]
+      },
+      "en": {
+        "title": "Organization & teams",
+        "summary": "KFATA's management, technical and engineering teams.",
+        "body": "The company profile shows the general manager and chief executive at the head of four departments: administration, human resources, projects and finance.",
+        "sections": [
+          {
+            "title": "Projects and technical office",
+            "body": "Project management includes project managers, the technical office and site supervision. The department includes architectural, electrical and mechanical teams, supervisors and technicians."
+          },
+          {
+            "title": "Administration, human resources and finance",
+            "body": "Administration covers procurement, sales and marketing. Human resources manages personnel, while the finance department includes financial management and accounting."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "clients-partners",
+      "parent": null,
+      "kind": "page",
+      "source": "28-page company profile pp.6–15; 13-page kfata.pdf p.8",
+      "ar": {
+        "title": "جهات في دراسات المشاريع",
+        "summary": "جهات ترد أسماؤها في دراسات أعمال كفاتا المنشورة.",
+        "body": "توثّق دراسات المشاريع أعمالًا للبنك العربي الوطني وأمنكو، وتعرض أعمالًا داخلية في مشروع شركة الوادي."
+      },
+      "en": {
+        "title": "Organizations in our case studies",
+        "summary": "Organizations named in KFATA’s published project case studies.",
+        "body": "Our case studies cover work for Arab National Bank and AMNCO, and document interiors in the Al Wadi company project."
+      }
+    },
+    {
+      "slug": "al-wadi-offices",
+      "parent": "projects",
+      "kind": "project",
+      "source": "kfata(1).pdf p.8",
+      "ar": {
+        "title": "مشروع شركة الوادي",
+        "summary": "مجموعة صور لأعمال داخلية ومساحات عمل ومرافق فنية موثقة في ملف كفاتا.",
+        "body": "يعرض ملف كفاتا أعمالًا داخلية في مشروع شركة الوادي، تشمل منطقة الاستقبال والممرات ذات الفواصل الزجاجية وغرفة الاجتماعات."
+      },
+      "en": {
+        "title": "Al Wadi company project",
+        "summary": "Interior office, meeting and technical-space photographs shown in KFATA's brochure.",
+        "body": "KFATA’s portfolio shows interiors in the Al Wadi company project, including the reception, glass-partitioned corridors and a meeting room."
+      },
+      "services": [
+        "renovation"
+      ],
+      "sectors": [
+        "commercial"
+      ]
+    }
+  ],
+  "photo_groups": {
+    "anb-tower": "anb-new-tower",
+    "anb-old-head-office": "anb-old-head-office",
+    "anb-al-awali": "anb-al-awali",
+    "anb-al-majmaah": "anb-al-majmaah",
+    "anb-atm": "anb-atm-sites",
+    "telemoney": "telemoney-centres",
+    "anb-outdoor": "anb-courtyard",
+    "amnco": "amnco-cash-centre",
+    "office-fitout": "office-fitout",
+    "restaurant-fitout": "restaurant-fitout",
+    "school": "school-muzahmiyah",
+    "roads": "road-works",
+    "industrial": "warehouse-finishing",
+    "residential": "residential-villas",
+    "al-wadi-offices": "al-wadi-offices"
+  },
+  "review_only_photo_groups": [
+    "anb-alhizam",
+    "anb-branches",
+    "landmarks"
+  ]
+}

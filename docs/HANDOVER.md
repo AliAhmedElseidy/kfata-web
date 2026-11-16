@@ -1,3 +1,5 @@
+> Active production release: [2026 content and media refresh](KFATA_2026_MEDIA_REFRESH.md#production-release). Earlier release and presentation records follow.
+
 # KFATA operational handover — 2026-11-05 (Asia/Riyadh)
 
 ## Live service

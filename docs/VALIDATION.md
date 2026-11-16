@@ -1,3 +1,5 @@
+> Active production release: [2026 content and media refresh](KFATA_2026_MEDIA_REFRESH.md#production-release). Earlier release and presentation records follow.
+
 > Latest content/application delivery: [CONTENT_DELIVERY.md](CONTENT_DELIVERY.md), application e3b8886.94 public routes, source enrichment/preservation and original-scene preview evidence. The motion measurements below concern their recorded earlier build.
 
 > Current delivery: [MOTION_VALIDATION.md](MOTION_VALIDATION.md), 2026-11-05. The earlier browser interruption and pending responsive/keyboard/reduced-motion/script-blocked checks described below are historical; those checks now have actual browser evidence. Other limits remain as stated.
