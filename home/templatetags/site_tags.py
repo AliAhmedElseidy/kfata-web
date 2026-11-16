@@ -13,7 +13,11 @@ def cards(locale, kind, count=6):
 @register.simple_tag
 def navigation(page=None, language='ar'):
     locale = {'locale':page.locale} if page else {'locale__language_code':language}
-    return ContentPage.objects.live().public().filter(depth=3, **locale).exclude(slug__in=['privacy','terms','cookies']).order_by('path')
+    return (
+        ContentPage.objects.live().public().filter(depth=3, **locale)
+        .exclude(slug__in=['privacy', 'terms', 'cookies', 'organization', 'clients-partners'])
+        .order_by('path')
+    )
 
 @register.simple_tag
 def curated_cards(locale, value):

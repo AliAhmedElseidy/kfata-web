@@ -14,6 +14,7 @@ from PIL import Image
 
 from home.management.commands.import_kfata_2026 import load_source_pack
 from home.models import ContentPage, ImportedImage
+from home.templatetags.site_tags import navigation
 
 
 class Kfata2026SourceTests(TestCase):
@@ -79,6 +80,9 @@ class Kfata2026SourceTests(TestCase):
             self.assertTrue(any(block.block_type == "gallery" for block in ar.body))
             organizations = ContentPage.objects.get(slug="clients-partners", locale__language_code="ar")
             self.assertTrue(organizations.live)
+            self.assertNotIn(organizations, navigation(language="ar"))
+            about = ContentPage.objects.get(slug="about", locale=ar.locale)
+            self.assertContains(self.client.get(about.url), organizations.url)
             self.assertContains(self.client.get(ar.url), 'alt="وصف الصورة"')
             self.assertContains(self.client.get(en.url), 'alt="Photo description"')
             self.assertContains(self.client.get(en.url), 'hreflang="x-default"')
