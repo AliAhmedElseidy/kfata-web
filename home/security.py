@@ -26,7 +26,8 @@ class SecurityPolicyMiddleware:
         if is_private and request.method == "POST":
             request.sensitive_post_parameters = "__ALL__"
         response = self.get_response(request)
-        if is_private:
+        directives = {value.strip().lower() for value in response.get("Cache-Control", "").split(",")}
+        if is_private and not {"private", "no-store"}.issubset(directives):
             add_never_cache_headers(response)
         response["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
         if response.get("Content-Type", "").startswith("text/html"):
